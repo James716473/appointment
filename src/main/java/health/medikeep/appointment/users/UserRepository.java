@@ -33,16 +33,16 @@ public class UserRepository {
     }
 
     public void create(UserInfo user){
-        var updated = jdbcClient.sql("INSERT INTO USERS(name, email, password) values(?, ?, ?)")
-            .params(List.of(user.name(), user.email(), user.password()))
+        var updated = jdbcClient.sql("INSERT INTO USERS(last_name, first_name, middle_name, email, password, sex, birth_date) values(?, ?, ?, ?, ?, ?, ?)")
+            .params(List.of(user.last_name(), user.first_name(), user.middle_name(), user.email(), user.password(), user.sex().name(), user.birth_date()))
             .update();
         
         Assert.state(updated == 1, "Failed to insert user id " + user.id());
     }
 
     public void update(UserInfo user, Integer id){
-        var updated = jdbcClient.sql("UPDATE USERS SET name = ?, email = ?, password = ? WHERE id = ?")
-            .params(List.of(user.name(), user.email(), user.password(), id))
+        var updated = jdbcClient.sql("UPDATE USERS SET last_name = ?, first_name = ?, middle_name = ?, email = ?, password = ?, sex = ?, birth_date = ? WHERE id = ?")
+            .params(List.of(user.last_name(), user.first_name(), user.middle_name(), user.email(), user.password(), user.sex(), user.birth_date(), id))
             .update();
         
         Assert.state(updated == 1, "Failed to update user id " + id);
@@ -54,6 +54,13 @@ public class UserRepository {
             .update();
         
         Assert.state(updated == 1, "Failed to delete user id " + id);
+    }
+
+    public boolean verify(String email, String password){
+        return jdbcClient.sql("SELECT COUNT(*) FROM users WHERE email = ? AND password = ?")
+            .params(List.of(email, password))
+            .query(Integer.class)
+            .single() > 0;
     }
 
     public int count(){

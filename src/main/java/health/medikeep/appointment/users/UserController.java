@@ -50,6 +50,16 @@ public class UserController {
         return "user successfully created";
     }
 
+    @PostMapping("/login")
+    public String verify_credentials(@ModelAttribute UserInfo user) {
+        boolean isValid = userRepository.verify(user.email(), user.password());
+        if (isValid) {
+            return "Login successful";
+        } else {
+            return "Invalid email or password";
+        }
+    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     void update(@RequestBody UserInfo user, @PathVariable Integer id) {
