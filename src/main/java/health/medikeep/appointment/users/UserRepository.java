@@ -32,6 +32,13 @@ public class UserRepository {
             .optional();
     }
 
+    public String findNameByEmail(String email){
+        return jdbcClient.sql("select first_name from users where email = :email")
+            .param("email", email)
+            .query(String.class)
+            .single();           
+    }
+
     public void create(UserInfo user){
         var updated = jdbcClient.sql("INSERT INTO USERS(last_name, first_name, middle_name, email, password, sex, birth_date) values(?, ?, ?, ?, ?, ?, ?)")
             .params(List.of(user.last_name(), user.first_name(), user.middle_name(), user.email(), user.password(), user.sex().name(), user.birth_date()))

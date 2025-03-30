@@ -54,7 +54,7 @@ public class UserController {
     public String verify_credentials(@ModelAttribute UserInfo user) {
         boolean isValid = userRepository.verify(user.email(), user.password());
         if (isValid) {
-            return "Login successful";
+            return "Login successful, welcome " + userRepository.findNameByEmail(user.email()) + "!";
         } else {
             return "Invalid email or password";
         }
