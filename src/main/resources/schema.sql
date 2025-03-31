@@ -2,23 +2,15 @@ CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   last_name VARCHAR(255) NOT NULL,
   first_name VARCHAR(255) NOT NULL,
-  middle_name VARCHAR(255) NOT NULL,
+  middle_name VARCHAR(255),
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   sex ENUM('M', 'F') NOT NULL,
-  birth_date DATE NOT NULL
+  birth_date DATE NOT NULL,
+  role ENUM('User', 'Doctor') NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS doctors (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  last_name VARCHAR(255) NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  middle_name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  sex ENUM('M', 'F') NOT NULL,
-  birth_date DATE NOT NULL
-);
+
 
 CREATE TABLE IF NOT EXISTS records (
   record_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +28,6 @@ CREATE TABLE IF NOT EXISTS appointments (
   appointment_time TIME NOT NULL,
   doctor_id INT NOT NULL,
   user_id INT NOT NULL,
-  FOREIGN KEY (doctor_id) REFERENCES doctors(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -49,6 +40,5 @@ CREATE TABLE IF NOT EXISTS payments (
   doctor_id INT NOT NULL,
   appointment_id INT NOT NULL,
   FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id), 
-  FOREIGN KEY (doctor_id) REFERENCES doctors(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
