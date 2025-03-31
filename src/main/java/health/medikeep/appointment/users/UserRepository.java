@@ -32,9 +32,25 @@ public class UserRepository {
             .optional();
     }
 
+    public Optional<UserInfo> showUsers(){
+        return jdbcClient.sql("select * from users where role = :role")
+        .param("role", "User")
+        .query(UserInfo.class)
+        .optional();
+        
+    }
+
+    public Optional<UserInfo> showDoctors(){
+        return jdbcClient.sql("select * from users where role = :role")
+        .param("role", "Doctor")
+        .query(UserInfo.class)
+        .optional();
+        
+    }
+
     public void create(UserInfo user){
-        var updated = jdbcClient.sql("INSERT INTO USERS(last_name, first_name, middle_name, email, password, sex, birth_date) values(?, ?, ?, ?, ?, ?, ?)")
-            .params(List.of(user.last_name(), user.first_name(), user.middle_name(), user.email(), user.password(), user.sex().name(), user.birth_date()))
+        var updated = jdbcClient.sql("INSERT INTO USERS(last_name, first_name, middle_name, email, password, sex, birth_date, role) values(?, ?, ?, ?, ?, ?, ?, ?)")
+            .params(List.of(user.last_name(), user.first_name(), user.middle_name(), user.email(), user.password(), user.sex().name(), user.birth_date(), user.role().name()))
             .update();
         
         Assert.state(updated == 1, "Failed to insert user id " + user.id());
