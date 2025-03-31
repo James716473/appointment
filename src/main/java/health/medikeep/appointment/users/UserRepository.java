@@ -32,13 +32,6 @@ public class UserRepository {
             .optional();
     }
 
-<<<<<<< HEAD
-    public String findNameByEmail(String email){
-        return jdbcClient.sql("select first_name from users where email = :email")
-            .param("email", email)
-            .query(String.class)
-            .single();           
-=======
     public Optional<UserInfo> showUsers(){
         return jdbcClient.sql("select * from users where role = :role")
         .param("role", "User")
@@ -47,13 +40,26 @@ public class UserRepository {
         
     }
 
+    public String roleByEmail(String email){
+        return jdbcClient.sql("select role from users where email = :email")
+            .param("email", email)
+            .query(String.class)
+            .single();
+    }
+
     public Optional<UserInfo> showDoctors(){
         return jdbcClient.sql("select * from users where role = :role")
         .param("role", "Doctor")
         .query(UserInfo.class)
         .optional();
         
->>>>>>> test-branch
+    }
+
+    public String findNameByEmail(String email){
+        return jdbcClient.sql("select first_name from users where email = :email")
+            .param("email", email)
+            .query(String.class)
+            .single();           
     }
 
     public void create(UserInfo user){
