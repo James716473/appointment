@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS appointments (
   appointment_time TIME NOT NULL,
   doctor_id INT NOT NULL,
   user_id INT NOT NULL,
-  FOREIGN KEY (doctor_id) REFERENCES doctors(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -41,6 +40,5 @@ CREATE TABLE IF NOT EXISTS payments (
   doctor_id INT NOT NULL,
   appointment_id INT NOT NULL,
   FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id), 
-  FOREIGN KEY (doctor_id) REFERENCES doctors(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
