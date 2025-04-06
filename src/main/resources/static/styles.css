@@ -105,4 +105,120 @@
   transition: all 0.3s ease;
 }
 
+.main {
+  background-color: #f9f7f7;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+  margin-bottom: 10rem;
+}
+
+#main_img1 {
+  width: 100%;
+  height: 80%;
+  opacity: 80%;
+}
+
+.main__container--box {
+  position: absolute;
+  height: 500px;
+  width: 700px;
+  top: 220px;
+  right: 64px;
+  background-color: #fff;
+  padding: 40px 40px;
+  border-radius: 20px;
+  opacity: 80%;
+}
+
+.container__box--text {
+  font-size: 3.5rem;
+  color: #112D4E;
+  position: absolute;
+  font-weight: 600;
+  outline: black;
+  line-height: 60px;
+}
+
+.container__box--subtext {
+  font-size: 1rem;
+  color: #7590c4;
+  position: absolute;
+  font-weight: 400;
+  line-height: 60px;
+}
+
+.main__services--text {
+  color: #3F72AF;
+  font-size: 4rem;
+  margin: 2rem;
+  text-align: center;
+}
+
+.main__services--boxes {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 2rem 14rem;
+}
+.main__services--boxes .main__services_box1 {
+  height: 400px;
+  width: 500px;
+  left: 10%;
+  background-color: #DBE2EF;
+  padding: 40px 40px;
+  border-radius: 20px;
+  opacity: 80%;
+}
+.main__services--boxes .main__services_box2 {
+  height: 400px;
+  width: 500px;
+  right: 10%;
+  background-color: #DBE2EF;
+  padding: 40px 40px;
+  border-radius: 20px;
+  opacity: 80%;
+}
+
+#service__logo1 {
+  background-color: #112D4E;
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+#service__logo2 {
+  background-color: #112D4E;
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.services__text {
+  color: #104a61;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.services__subtext {
+  color: #104a61;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: justify;
+}
+
 /*# sourceMappingURL=styles.css.map */
