@@ -40,6 +40,13 @@ public class UserRepository {
         
     }
 
+    public Integer getUid(String email){
+        return jdbcClient.sql("select id from users where email = :email")
+            .param("email", email)
+            .query(Integer.class)
+            .single();
+    }
+
     public String roleByEmail(String email){
         return jdbcClient.sql("select role from users where email = :email")
             .param("email", email)
