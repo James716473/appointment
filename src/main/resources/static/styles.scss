@@ -108,7 +108,6 @@
 // Body Section
 .main {
     background-color: #f9f7f7;
-    padding-top: 2rem;
     padding-bottom: 5rem;
     margin-bottom: 10rem;
 }
@@ -117,6 +116,7 @@
     width: 100%;
     height: 80%;
     opacity: 80%;
+    mask-image: linear-gradient(rgba(0, 0, 0, 1) 70%, transparent);
 }
 
 .main__container--box {
@@ -161,6 +161,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     margin: 2rem 14rem;
+    margin-bottom: 10rem;
 
     .main__services_box1 {
         height: 400px;
@@ -224,4 +225,17 @@
     font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;
+}
+
+.main__appointment {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin: 2rem 15rem;
+    align-items: center;
+    justify-self: center;
+}
+
+.appointment__img {
+    height: 100%;
+    width: 100%;
 }
