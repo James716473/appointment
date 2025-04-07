@@ -248,11 +248,12 @@
 }
 
 .main__appointment--btn {
-  font-size: 1.1rem;
+  display: flex;
+  font-size: 1.3rem;
   justify-content: center;
-  padding: 10px 20px;
+  padding: 10px 0;
   height: 100%;
-  width: auto;
+  width: wrap;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -262,14 +263,16 @@
 
 .main__appointment--btn:hover {
   background: #f9f7f7;
+  color: #112d4e;
   transition: all 0.3s ease;
 }
 
 .appointment__links {
   color: #fff;
   text-decoration: none;
-  padding: 0 1.4rem;
-  height: 100;
+  padding: 0 1.3rem;
+  height: 100%;
+  position: wrap;
 }
 
 .appointment__links:hover {
