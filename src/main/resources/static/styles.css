@@ -96,7 +96,7 @@
 
 .button:hover {
   background: #3F72AF;
-  color: #fff;
+  color: #112D4E;
   transition: all 0.3s ease;
 }
 
@@ -225,7 +225,7 @@
 .main__appointment {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  margin: 2rem 15rem;
+  margin: 2rem 13rem;
   align-items: center;
   justify-self: center;
 }
@@ -233,6 +233,48 @@
 .appointment__img {
   height: 100%;
   width: 100%;
+  border-radius: 15px;
+}
+
+.main__appointment--heading {
+  color: #112D4E;
+  font-weight: 700;
+}
+
+.main__appointment--text {
+  color: #112d4E;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.main__appointment--btn {
+  font-size: 1.1rem;
+  justify-content: center;
+  padding: 10px 20px;
+  height: 100%;
+  width: auto;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: #112D4E;
+  color: #fff;
+}
+
+.main__appointment--btn:hover {
+  background: #f9f7f7;
+  transition: all 0.3s ease;
+}
+
+.appointment__links {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 1.4rem;
+  height: 100;
+}
+
+.appointment__links:hover {
+  color: #112d4e;
+  transition: all 0.3s ease;
 }
 
 /*# sourceMappingURL=styles.css.map */
