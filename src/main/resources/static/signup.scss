@@ -68,5 +68,45 @@
     border-color: #0366d6;
     outline: none;
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease-in;
+}
+
+::-webkit-calendar-picker-indicator{
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.signup__form--submit {
+    width: auto;
+    height: auto;
+    background-color: #112D4E;
+    color: #f9f7f7;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid #112D4E;
+}
+
+.signup__form--submit:hover {
+    background-color: #f9f7f7;
+    color: #112d4E;
+    transition: all 0.3s ease;
+}
+
+.radio__btn--male, .radio__btn--female {
+    text-align: center;
+    align-content: center;
+    height: 38px;
+    width: 198px;
+    padding: 0 4rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+}
+
+.radio__btn--male:focus, #male:focus {
+    background-color: #DBE2EF;
+    color: #f9f7f7;
     transition: all 0.3s ease;
 }
