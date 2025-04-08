@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,14 +43,14 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/")
-    public String create(@ModelAttribute UserInfo user) {
+    public String create(@RequestBody UserInfo user) {
         userRepository.create(user);
 
         return "user successfully created";
     }
 
     @PostMapping("/login")
-    public String verify_credentials(@ModelAttribute UserInfo user) {
+    public String verify_credentials(@RequestBody UserInfo user) {
         boolean isValid = userRepository.verify(user.email(), user.password());
         if (isValid) {
             return "Login successful, welcome " + ((userRepository.roleByEmail(user.email()).equals("Doctor")) ? "Dr. " : "") + userRepository.findNameByEmail(user.email()) + "!";
