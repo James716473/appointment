@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="signup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,7 @@
     <script src="js/user_functions.js" defer></script>
 </head>
 <body>
-    <form id="user_form" onsubmit="create_user(event)">
+    <form action="/api/users/" method="post">
         <label for="last_name">Last Name:</label>
         <input type="text" id="last_name" name="last_name" required>
         <br><br>
@@ -20,7 +21,7 @@
         <input type="text" id="first_name" name="first_name" required>
         <br><br>
         <label for="middle_name">Middle Name:</label>
-        <input type="text" id="middle_name" name="middle_name">
+        <input type="text" id="middle_name" name="middle_name" required>
         <br><br>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>

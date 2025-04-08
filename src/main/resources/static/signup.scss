@@ -1,0 +1,112 @@
+@use 'sass:color';
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signup__form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: auto;
+    padding: 2rem 2rem;
+    background-color: #f9f7f7;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px color.adjust($color: black, $lightness: 78%);
+}
+
+.signup__form--wrapper {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.form__text {
+    width: 400px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    background-color: #ffffffe1;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.form__text:focus{
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease;
+}
+
+.form__date:after, .form__date::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.form__date {
+    background-color: #ffffffe1;
+    padding: 0.5rem 1rem;
+    color: black;
+    border: 1px solid #e1e4e8;
+    outline: none;
+    border-radius: 6px;
+}
+
+.form__date:focus {
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease-in;
+}
+
+::-webkit-calendar-picker-indicator{
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.signup__form--submit {
+    width: auto;
+    height: auto;
+    background-color: #112D4E;
+    color: #f9f7f7;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid #112D4E;
+}
+
+.signup__form--submit:hover {
+    background-color: #f9f7f7;
+    color: #112d4E;
+    transition: all 0.3s ease;
+}
+
+.radio__btn--male, .radio__btn--female {
+    text-align: center;
+    align-content: center;
+    height: 38px;
+    width: 198px;
+    padding: 0 4rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+}
+
+.radio__btn--male:focus, #male:focus {
+    background-color: #DBE2EF;
+    color: #f9f7f7;
+    transition: all 0.3s ease;
+}
