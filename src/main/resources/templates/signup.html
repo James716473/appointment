@@ -11,37 +11,40 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/api/users/" method="post">
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" required>
-        <br><br>
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" required>
-        <br><br>
-        <label for="middle_name">Middle Name:</label>
-        <input type="text" id="middle_name" name="middle_name" required>
-        <br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
-        <label for="sex">Sex:</label>
-        <label for="male">Male:</label>
-        <input type="radio" name="sex" id="male" value="M" required>
-        <label for="female">Female:</label>
-        <input type="radio" name="sex" id="female" value="F" required>
-        <br><br>
-        <label for="birth_date">Birth Date:</label>
-        <input type="date" id="birth_date" name="birth_date" required>
-        <br><br>
-        <label for="role">Role</label>
-        <select name="role" id="role">
-            <option value="User">User</option>
-            <option value="Doctor">Doctor</option>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="signup__form">
+        <form action="/api/users/" method="post" class = "signup__form--wrapper">
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" id="last_name" name="last_name" class="form__text" required>
+            <br><br>
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" name="first_name" class="form__text" required>
+            <br><br>
+            <label for="middle_name">Middle Name:</label><br>
+            <input type="text" id="middle_name" name="middle_name" class="form__text" required>
+            <br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" class="form__text" required>
+            <br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" class="form__text" required>
+            <br><br>
+            <label for="sex">Sex:</label><br>
+            <label for="male">Male:</label>
+            <input type="radio" name="sex" id="male" value="M" required>
+            <label for="female">Female:</label>
+            <input type="radio" name="sex" id="female" value="F" required>
+            <br><br>
+            <label for="birth_date">Birth Date:</label><br>
+            <input type="date" id="birth_date" name="birth_date" class="form__date" required>
+            <br><br>
+            <label for="role">Role</label>
+            <select name="role" id="role">
+                <option value="User">User</option>
+                <option value="Doctor">Doctor</option>
+            </select><br><br>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
