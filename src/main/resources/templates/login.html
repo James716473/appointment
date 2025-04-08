@@ -3,18 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="js/user_functions.js" defer></script>
+    <link rel="stylesheet" href="../static/signup.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Document</title>
 </head>
 <body>
-    <form onsubmit="verify_user(event)">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
-        <input type="submit">Login</input>
-    </form>
+    <div class="signup__form">
+        <form action="/api/users/" method="post" class = "signup__form--wrapper">
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" id="last_name" name="last_name" class="form__text" required>
+            <br><br>
+
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" name="first_name" class="form__text" required>
+            <br><br>
+
+            <label for="middle_name">Middle Name:</label><br>
+            <input type="text" id="middle_name" name="middle_name" class="form__text" required>
+            <br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" class="form__text" required>
+            <br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" class="form__text" required>
+            <br><br>
+
+            <label for="sex">Sex:</label><br>
+            <input type="radio" class="btn-check" name="options-outlined" id="male" value="M" autocomplete="off" required>
+            <label class="radio__btn--male" for="male">Male</label>
+            <input type="radio" class="btn-check" name="options-outlined" id="female" value="F" autocomplete="off" required>
+            <label class="btn btn-outline-danger" for="female">Female</label>
+            <br><br>
+
+            <label for="birth_date">Birth Date:</label><br>
+            <input type="date" id="birth_date" name="birth_date" class="form__date" required>
+            <br><br>
+
+            <label for="role">Role</label><br>
+            <label for="user">User:</label>
+            <input type="radio" name="role" id="user" value="User" required>
+            <label for="doctor">Doctor:</label>
+            <input type="radio" name="role" id="doctor" value="Doctor" required>
+            <br><br>
+            
+            <input type="submit" class="signup__form--submit">
+
+            
+            
+        </form>
+    </div>
 </body>
 </html>
