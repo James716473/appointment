@@ -108,8 +108,7 @@
 // Body Section
 .main {
     background-color: #f9f7f7;
-    padding-bottom: 5rem;
-    margin-bottom: 10rem;
+    padding-bottom: 12rem;
 }
 
 #main_img1 {
@@ -249,15 +248,12 @@
 .main__appointment--text {
     color: #112d4E;
     font-weight: 400;
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.3rem;
 }
 
-.main__appointment--btn {
-    font-size: 1.1rem;
-    justify-content: center;
-    padding: 10px 20px;
-    height: 100%;
+.appointment__links--btn {
     width: auto;
+<<<<<<< HEAD:src/main/resources/static/styles.scss
     border: none;
     outline: none;
     border-radius: 10px;
@@ -272,13 +268,88 @@
 }
 
 .appointment__links {
+=======
+    height: 100px;
+    background-color: #112D4E;
+>>>>>>> 6b978637e32318815757b59a89d2df43dcdca30e:src/main/resources/static/landing.scss
     color: #fff;
     text-decoration: none;
-    padding: 0 1.4rem;
-    height: 100;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
-.appointment__links:hover {
-    color: #112d4e;
+.appointment__links--btn:hover {
+    background-color: #f9f7f7;
+    color: #112d4E;
     transition: all 0.3s ease;
+}
+
+// Footer Section
+
+.footer__container {
+    background-color: #112D4E;
+    padding: 5rem 0;
+    display: grid;
+    
+}
+
+.footer__link--wrapper {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin: 2rem 10rem;
+}
+
+.footer__link--items1 {
+    text-decoration: none;
+    color: #f9f7f7;
+    margin-right: 5rem;
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.footer__logos {
+    color: #f9f7f7;
+    font-size: 2rem;
+    letter-spacing: 1.5rem;
+}
+
+.footer__link--items2 {
+    padding-left: 7rem;
+    color: #f9f7f7;
+    line-height: 4.5rem;
+    h2 {
+        font-size: 3rem;
+    }
+}
+
+#phone_logo {
+    display: flex;
+    font-size: 2.5rem;
+    
+    p {
+        padding-left: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        align-self: center;
+    }
+}
+
+#envelope_logo {
+    margin: 1rem 0;
+    display: flex;
+    font-size: 2.5rem;
+    
+    p {
+        padding-left: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        align-self: center;
+    }
 }
