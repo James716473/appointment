@@ -6,6 +6,31 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.logo {
+    position: absolute;
+    padding: 1.5rem 2rem;
+    
+    i {
+        margin-right: 5px;
+    }
+
+    a {
+        background-color: #DBE2EF;
+        background-image: linear-gradient(to top, #112D4E 100%, #112D4E 100%);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}
+
 .signup__form {
     position: absolute;
     top: 50%;
@@ -36,7 +61,7 @@
     background-color: #ffffffe1;
     background-repeat: no-repeat;
     background-position: right 8px center;
-    border: 1px solid #e1e4e8;
+    border: 2px solid #e1e4e8;
     border-radius: 6px;
     outline: none;
     box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
@@ -72,11 +97,59 @@
 }
 
 ::-webkit-calendar-picker-indicator{
-    background-color: #ffffff;
+    background-color: #DBE2EF;
     padding: 5px;
     cursor: pointer;
     border-radius: 3px;
 }
+
+.radiobutton__sex {
+    .rad-btn {
+        display: none;
+    }
+
+    .male, .female {
+        display: inline-block;
+        background-color: #fff;
+        width: 198px;
+        padding: 0.5rem;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .rad-btn:checked+.male, .rad-btn:checked+.female {
+        background-color: #112D4E;
+        color: #f9f7f7;
+        transition: all 0.5s ease;
+    }
+}
+
+.radiobutton__role {
+    .rad-btn {
+        display: none;
+    }
+
+    .user, .doctor {
+        display: inline-block;
+        background-color: #fff;
+        width: 198px;
+        padding: 0.5rem;
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .rad-btn:checked+.user, .rad-btn:checked+.doctor {
+        background-color: #112D4E;
+        color: #f9f7f7;
+        transition: all 0.5s ease;
+    }
+}
+
+
 
 .signup__form--submit {
     width: auto;
@@ -87,6 +160,7 @@
     padding: 8px 20px;
     border-radius: 10px;
     border: 1px solid #112D4E;
+    margin-right: 0.5rem;
 }
 
 .signup__form--submit:hover {
@@ -95,18 +169,20 @@
     transition: all 0.3s ease;
 }
 
-.radio__btn--male, .radio__btn--female {
-    text-align: center;
-    align-content: center;
-    height: 38px;
-    width: 198px;
-    padding: 0 4rem;
-    border: 1px solid #e1e4e8;
-    border-radius: 5px;
+.form__submit {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    p {
+        padding-left: 2rem;
+        color: gray;
+        top: 50%;
+        left: 0%;
+        transform: translate(0%, 30%);
+    }
+
+    a {
+        text-decoration: none;
+        color: #0366d6;
+    }
 }
 
-.radio__btn--male:focus, #male:focus {
-    background-color: #DBE2EF;
-    color: #f9f7f7;
-    transition: all 0.3s ease;
-}
