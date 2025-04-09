@@ -43,7 +43,7 @@ body {
     }
 }
 
-.signup__form {
+.login__form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -56,7 +56,7 @@ body {
     box-shadow: 1px 1px 1px 1px color.adjust($color: black, $lightness: 78%);
 }
 
-.signup__form--wrapper {
+.login__form--wrapper {
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
@@ -92,78 +92,10 @@ body {
     box-sizing: border-box;
 }
 
-.form__date {
-    background-color: #ffffffe1;
-    padding: 0.5rem 1rem;
-    color: black;
-    border: 1px solid #e1e4e8;
-    outline: none;
-    border-radius: 6px;
-}
-
-.form__date:focus {
-    border-color: #0366d6;
-    outline: none;
-    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
-    transition: all 0.3s ease-in;
-}
-
-::-webkit-calendar-picker-indicator{
-    background-color: #DBE2EF;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 3px;
-}
-
-.radiobutton__sex {
-    .rad-btn {
-        display: none;
-    }
-
-    .male, .female {
-        display: inline-block;
-        background-color: #fff;
-        width: 198px;
-        padding: 0.5rem;
-        cursor: pointer;
-        border: 1px solid black;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .rad-btn:checked+.male, .rad-btn:checked+.female {
-        background-color: #112D4E;
-        color: #f9f7f7;
-        transition: all 0.5s ease;
-    }
-}
-
-.radiobutton__role {
-    .rad-btn {
-        display: none;
-    }
-
-    .user, .doctor {
-        display: inline-block;
-        background-color: #fff;
-        width: 198px;
-        padding: 0.5rem;
-        cursor: pointer;
-        border: 1px solid black;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .rad-btn:checked+.user, .rad-btn:checked+.doctor {
-        background-color: #112D4E;
-        color: #f9f7f7;
-        transition: all 0.5s ease;
-    }
-}
 
 
 
-.signup__form--submit {
+.login__form--submit {
     width: auto;
     height: auto;
     background-color: #112D4E;
@@ -175,7 +107,7 @@ body {
     margin-right: 0.5rem;
 }
 
-.signup__form--submit:hover {
+.login__form--submit:hover {
     background-color: #f9f7f7;
     color: #112d4E;
     transition: all 0.3s ease;
@@ -185,7 +117,7 @@ body {
     display: grid;
     grid-template-columns: 0.5fr 1.5fr;
     p {
-        padding-left: 2rem;
+        padding-left: 2.7rem;
         color: gray;
         top: 50%;
         left: 0%;
@@ -202,4 +134,3 @@ body {
         transition: all 0.3s ease;
     }
 }
-

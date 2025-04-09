@@ -6,9 +6,9 @@ async function create_user(event){
     const middle_name = document.getElementById("middle_name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const sex = document.querySelector('input[name=sex]:checked').value;
+    const sex = document.querySelector('input[name=options-outlined]:checked').value;
     const birth_date = document.getElementById("birth_date").value;
-    const role = document.querySelector('select[name=role]').value;
+    const role = document.querySelector('input[name=role]:checked').value;
 
     const user_data = JSON.stringify({
         last_name: last_name,
