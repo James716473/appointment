@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +18,12 @@
 
         
     <div class="logo">
-        <a href="landing.html" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
+        <a href="../" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
     </div>
 
 
     <div class="login__form">
-        <form action="/api/users/login", method="post" class = "login__form--wrapper">
+        <form action="/api/users/login" method="post" class = "login__form--wrapper">
             <label for="email">Email:</label><br>
             <input type="email" id="email" name="email" class="form__text" required>
             <br><br>
@@ -34,7 +34,7 @@
 
             <div class="form__submit">
                 <button type="submit" class="login__form--submit">Login</button>
-                <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                <p>Don't have an account? <a href="signup">Sign up</a></p>
             </div>
         </form>
     </div>
