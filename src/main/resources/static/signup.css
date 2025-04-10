@@ -4,6 +4,8 @@
   font-family: "Poppins", sans-serif;
 }
 
+
+
 body {
   margin: 0;
   width: 100%;
@@ -39,6 +41,7 @@ body {
 }
 
 .signup__form {
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -185,5 +188,7 @@ body {
   color: #112D4E;
   transition: all 0.3s ease;
 }
+
+
 
 /*# sourceMappingURL=signup.css.map */

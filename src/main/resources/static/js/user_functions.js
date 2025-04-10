@@ -6,7 +6,7 @@ async function create_user(event){
     const middle_name = document.getElementById("middle_name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const sex = document.querySelector('input[name=options-outlined]:checked').value;
+    const sex = document.querySelector('input[name=sex]:checked').value;
     const birth_date = document.getElementById("birth_date").value;
     const role = document.querySelector('input[name=role]:checked').value;
 
@@ -54,6 +54,7 @@ async function verify_user(event){
             },
             body: user_data
         });
+        
         alert(response.status);
     } catch (error) {
         alert("error has occured");

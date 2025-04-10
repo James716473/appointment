@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/users")
@@ -50,12 +52,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String verify_credentials(@RequestBody UserInfo user) {
-        boolean isValid = userRepository.verify(user.email(), user.password());
-        if (isValid) {
-            return "Login successful, welcome " + ((userRepository.roleByEmail(user.email()).equals("Doctor")) ? "Dr. " : "") + userRepository.findNameByEmail(user.email()) + "!";
+    public ResponseEntity<?> verify_credentials(@RequestBody UserInfo user, HttpSession session) {
+        if (userRepository.verify(user.email(), user.password())){
+            session.setAttribute("email", user.email());
+            return ResponseEntity.ok("Login successful!"); 
         } else {
-            return "Invalid email or password";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
 
@@ -70,6 +72,8 @@ public class UserController {
     void delete(@PathVariable Integer id) {
         userRepository.delete(id);
     }
+
+    
 
     
     
