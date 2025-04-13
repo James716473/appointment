@@ -55,7 +55,23 @@ async function verify_user(event){
             body: user_data
         });
         
-        alert(response.status);
+        user_info();
+    } catch (error) {
+        alert("error has occured");
+    }
+}
+
+async function user_info(){
+    try {
+        const response = await fetch("http://localhost:8080/api/users/info", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+        alert(JSON.stringify(data));
+
     } catch (error) {
         alert("error has occured");
     }

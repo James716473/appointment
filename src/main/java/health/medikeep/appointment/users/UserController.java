@@ -40,6 +40,19 @@ public class UserController {
         if(user.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
+        
+        return user.get();
+    }
+
+    //Need: Put an error handling in case its null. 
+    @GetMapping("/info")
+    UserInfo findById(HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        Integer id = userRepository.getUid(email);
+        Optional<UserInfo> user =  userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
         return user.get();
     }
 
