@@ -5,6 +5,7 @@
 }
 
 body {
+  overflow: auto;
   margin: 0;
   width: 100%;
   height: 100%;
@@ -184,6 +185,12 @@ body {
 .form__submit a:hover {
   color: #112D4E;
   transition: all 0.3s ease;
+}
+
+@media only screen and (max-width: 1920px) {
+  @-ms-viewport {
+    width: 1920px;
+  }
 }
 
 /*# sourceMappingURL=signup.css.map */
