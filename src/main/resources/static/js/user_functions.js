@@ -21,7 +21,7 @@ async function create_user(event){
         role: role
     });
     try{
-        const response = await fetch("http://localhost:8080/api/users/", {
+        const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33,7 +33,7 @@ async function create_user(event){
         }
     }
     catch (error){
-        alert("Error has occured");
+        alert("Error has occured " + error.message);
     }
 
 }
@@ -47,7 +47,7 @@ async function verify_user(event){
         password: password
     });
     try{
-        const response = await fetch("http://localhost:8080/api/users/login", {
+        const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -63,7 +63,7 @@ async function verify_user(event){
 
 async function user_info(){
     try {
-        const response = await fetch("http://localhost:8080/api/users/info", {
+        const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/info", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -76,3 +76,35 @@ async function user_info(){
         alert("error has occured");
     }
 }
+
+async function delete_user(event, id) {
+    event.preventDefault();
+
+    if (!confirm(`Are you sure you want to delete user with ID ${id}?`)) {
+        return;
+    }
+
+    const user_data = JSON.stringify({ id: id });
+
+    try {
+        const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: user_data
+        });
+
+        if (response.ok) {
+            alert("User deleted successfully!");
+            location.reload();
+        } else {
+            alert("Failed to delete user.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
+
+

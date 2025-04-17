@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/user_functions.js" defer></script> 
+    <title>Document</title>
+</head>
+<body>
+    <h1 th:text="${user.first_name}">First Name</h1>
+    <p>Id: [[${user.id}]]</p>
+    <p>Last name: [[${user.last_name}]]</p>
+    <p>First name: [[${user.first_name}]]</p>
+    <p>Middle name: [[${user.middle_name}]]</p>
+    <p>Email: [[${user.email}]]</p>
+    <p>Password: [[${user.password}]]</p>
+    <p>Sex: [[${user.sex}]]</p>
+    <p>Birth date: [[${user.birth_date}]]</p>
+    <p>Role: [[${user.role}]]</p>
+    <button type="button" onclick="window.location.href='all'">Back</button>
+</body>
+</html>

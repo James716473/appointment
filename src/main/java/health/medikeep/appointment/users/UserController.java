@@ -3,7 +3,6 @@ package health.medikeep.appointment.users;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -81,9 +80,14 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id) {
-        userRepository.delete(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete_user(@RequestBody UserInfo user){
+        if(userRepository.delete(user.id()) == 1){
+            return ResponseEntity.ok("User with id " + user.id() + " was deleted");
+        } else {
+            return ResponseEntity.badRequest().body("Cannot delete user");
+        }
+
     }
 
     

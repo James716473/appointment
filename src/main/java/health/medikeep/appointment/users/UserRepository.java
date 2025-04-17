@@ -85,12 +85,12 @@ public class UserRepository {
         Assert.state(updated == 1, "Failed to update user id " + id);
     }
 
-    public void delete(Integer id){
+    public int delete(Integer id){
         var updated = jdbcClient.sql("DELETE FROM USERS WHERE id = :id")
             .param("id", id)
             .update();
         
-        Assert.state(updated == 1, "Failed to delete user id " + id);
+        return updated;
     }
 
     public boolean verify(String email, String password){
