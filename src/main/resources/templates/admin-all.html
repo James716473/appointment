@@ -18,14 +18,14 @@
         </tr>
 
         <tr th:each="user : ${users}">
-            <td th:text="${user.id}">1</td>
+            <td th:text="${user.user_id}">1</td>
             <td th:text="${user.first_name}">John</td>
             <td th:text="${user.last_name}">Doe</td>
             <td th:text="${user.email}">john@example.com</td>
             <td>
-                <button type="button" th:onclick="'window.location.href=\'' + ${user.id} + '\''">More Info</button>
+                <button type="button" th:onclick="'window.location.href=\'' + ${user.user_id} + '\''">More Info</button>
 
-                <button type="button" th:attr="onclick=|delete_user(event, ${user.id})|">Delete</button>
+                <button type="button" th:attr="onclick=|delete_user(event, ${user.user_id})|">Delete</button>
 
             </td>
         </tr>

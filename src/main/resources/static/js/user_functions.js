@@ -8,17 +8,15 @@ async function create_user(event){
     const password = document.getElementById("password").value;
     const sex = document.querySelector('input[name=sex]:checked').value;
     const birth_date = document.getElementById("birth_date").value;
-    const role = document.querySelector('input[name=role]:checked').value;
 
     const user_data = JSON.stringify({
         last_name: last_name,
         first_name: first_name,
         middle_name: middle_name,
         email: email,
-        password: password,
+        pass: password,
         sex: sex,
         birth_date: birth_date,
-        role: role
     });
     try{
         const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/", {
@@ -44,7 +42,7 @@ async function verify_user(event){
     const password = document.getElementById("password").value;
     const user_data = JSON.stringify({
         email: email,
-        password: password
+        pass: password
     });
     try{
         const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/login", {
@@ -77,14 +75,14 @@ async function user_info(){
     }
 }
 
-async function delete_user(event, id) {
+async function delete_user(event, user_id) {
     event.preventDefault();
 
-    if (!confirm(`Are you sure you want to delete user with ID ${id}?`)) {
+    if (!confirm(`Are you sure you want to delete user with ID ${user_id}?`)) {
         return;
     }
 
-    const user_data = JSON.stringify({ id: id });
+    const user_data = JSON.stringify({ user_id: user_id });
 
     try {
         const response = await fetch("https://foal-engaged-regularly.ngrok-free.app/api/users/delete", {

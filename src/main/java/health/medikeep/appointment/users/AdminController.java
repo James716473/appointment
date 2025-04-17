@@ -23,14 +23,14 @@ public class AdminController {
 
     @GetMapping("/all")
     public String showAll(Model model){
-        List<UserInfo> users = userRepository.findAll();
+        List<UserInfo> users = userRepository.showUsers();
         model.addAttribute("users", users);
         return "admin-all";
     }
 
     @GetMapping("/{id}")
-    public String userInfo(Model model, @PathVariable Integer id){
-        Optional<UserInfo> user = userRepository.findById(id);
+    public String userInfo(Model model, @PathVariable Integer user_id){
+        Optional<UserInfo> user = userRepository.findById(user_id);
         model.addAttribute("user", user.get());
         return "admin-user-info";
     }

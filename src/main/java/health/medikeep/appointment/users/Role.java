@@ -1,5 +1,5 @@
 package health.medikeep.appointment.users;
 
 public enum Role {
-    User, Doctor;
+    User, Doctor, Admin;
 }

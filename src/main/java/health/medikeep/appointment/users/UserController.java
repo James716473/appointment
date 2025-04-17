@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,8 +27,8 @@ public class UserController {
     }
     
     @GetMapping("/")
-    List<UserInfo> findAll() {
-        return userRepository.findAll();
+    List<UserInfo> showUsers() {
+        return userRepository.showUsers();
     }
     
     @GetMapping("/{id}")
@@ -47,12 +46,18 @@ public class UserController {
     @GetMapping("/info")
     UserInfo findById(HttpSession session) {
         String email = (String) session.getAttribute("email");
-        Integer id = userRepository.getUid(email);
-        Optional<UserInfo> user =  userRepository.findById(id);
-        if(user.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+
+        if (email == null) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No user logged in");
         }
-        return user.get();
+
+        Integer user_id = userRepository.getUid(email).orElseThrow(() -> 
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "User ID not found"));
+
+        return userRepository.findById(user_id).orElseThrow(() -> 
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        
+        
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,7 +70,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> verify_credentials(@RequestBody UserInfo user, HttpSession session) {
-        if (userRepository.verify(user.email(), user.password())){
+        if (userRepository.verify(user.email(), user.pass())){
             session.setAttribute("email", user.email());
             return ResponseEntity.ok("Login successful!"); 
         } else {
@@ -73,17 +78,12 @@ public class UserController {
         }
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{id}")
-    void update(@RequestBody UserInfo user, @PathVariable Integer id) {
-        userRepository.update(user, id);
-    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete_user(@RequestBody UserInfo user){
-        if(userRepository.delete(user.id()) == 1){
-            return ResponseEntity.ok("User with id " + user.id() + " was deleted");
+        if(userRepository.delete(user.user_id()) == 1){
+            return ResponseEntity.ok("User with id " + user.user_id() + " was deleted");
         } else {
             return ResponseEntity.badRequest().body("Cannot delete user");
         }
