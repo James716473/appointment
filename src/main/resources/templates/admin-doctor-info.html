@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/user_functions.js" defer></script> 
+    <title>Document</title>
+</head>
+<body>
+    <h1 th:text="${'Dr. ' + (doctor.first_name ?: '') + ' ' + (doctor.middle_name ?: '') + ' ' + (doctor.last_name ?: '')}">Full Name</h1>
+    <p>Id: [[${doctor.doctor_id}]]</p>
+    <p>Last name: [[${doctor.last_name}]]</p>
+    <p>First name: [[${doctor.first_name}]]</p>
+    <p>Middle name: [[${doctor.middle_name}]]</p>
+    <p>Email: [[${doctor.email}]]</p>
+    <p>Password: [[${doctor.pass}]]</p>
+    <p>Sex: [[${doctor.sex}]]</p>
+    <p>Birth date: [[${doctor.birth_date}]]</p>
+    <p>Contact number: [[${doctor.contact_number} ?: 'None']]</p>
+    <p>Specialty: [[${doctor.specialty} ?: 'None']]</p>
+    <p>Affiliation: [[${doctor.affiliation} ?: 'None']]</p>
+    <p>Schedule: [[${#dates.format(doctor.schedule_from, 'HH:mm')} ?: 'None']] to [[${#dates.format(doctor.schedule_to, 'HH:mm')} ?: 'None']]</p>
+    <button type="button">Edit</button>
+    <button type="button" onclick="window.location.href='../all'">Back</button>
+</body>
+</html>

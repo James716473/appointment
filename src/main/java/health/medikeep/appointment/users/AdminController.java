@@ -16,22 +16,35 @@ import org.springframework.ui.Model;
 public class AdminController {
 
     private final UserRepository userRepository;
+    private final DoctorRepository doctorRepository;
     
-    public AdminController(UserRepository userRepository) {
+    public AdminController(UserRepository userRepository, DoctorRepository doctorRepository) {
         this.userRepository = userRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     @GetMapping("/all")
     public String showAll(Model model){
         List<UserInfo> users = userRepository.showUsers();
+        List<DoctorInfo> doctors = doctorRepository.showDoctors();
         model.addAttribute("users", users);
+        model.addAttribute("doctors", doctors);
+        
         return "admin-all";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{user_id}")
     public String userInfo(Model model, @PathVariable Integer user_id){
         Optional<UserInfo> user = userRepository.findById(user_id);
         model.addAttribute("user", user.get());
         return "admin-user-info";
     }
+
+    @GetMapping("/doctor/{doctor_id}")
+    public String doctorInfo(Model model, @PathVariable Integer doctor_id){
+        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
+        model.addAttribute("doctor", doctor.get());
+        return "admin-doctor-info";
+    }
+
 }

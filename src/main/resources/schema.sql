@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS doctors (
   sex ENUM('M', 'F') NOT NULL,
   birth_date DATE NOT NULL,
   contact_number VARCHAR(12),
-  specialty SET('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'),
-  affiliation ENUM('A', 'B', 'C', 'D'),
+  specialty VARCHAR(255),
+  affiliation VARCHAR(255),
   schedule_from TIME DEFAULT '10:00:00',
   schedule_to TIME DEFAULT '17:00:00'
 );

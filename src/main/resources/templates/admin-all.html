@@ -23,18 +23,37 @@
             <td th:text="${user.last_name}">Doe</td>
             <td th:text="${user.email}">john@example.com</td>
             <td>
-                <button type="button" th:onclick="'window.location.href=\'' + ${user.user_id} + '\''">More Info</button>
+                <button th:onclick="'window.location.href=\'/admin/user/' + ${user.user_id} + '\''">More Info</button>
+
 
                 <button type="button" th:attr="onclick=|delete_user(event, ${user.user_id})|">Delete</button>
 
             </td>
         </tr>
 
-        <!-- Optional test button -->
+    </table>
+    
+        
+    <table border="1">
         <tr>
-            <td colspan="5">
-                <button type="button" onclick="delete_user(event, 1)">Test Delete (ID = 1)</button>
-            </td>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+
+            <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.doctor_id}">1</td>
+                <td th:text="${doctor.first_name}">John</td>
+                <td th:text="${doctor.last_name}">Doe</td>
+                <td th:text="${doctor.email}">john@example.com</td>
+                <td>
+                    <button type="button" th:onclick="'window.location.href=\'/admin/doctor/' + ${doctor.doctor_id} + '\''">More Info</button>
+            
+                    <button type="button" th:attr="onclick=|delete_doctor(event, ${doctor.doctor_id})|">Delete</button>
+            
+                </td>
+            </tr>
         </tr>
     </table>
 </body>

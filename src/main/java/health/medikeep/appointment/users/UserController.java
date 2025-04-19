@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -57,6 +58,7 @@ public class UserController {
         return userRepository.findById(user_id).orElseThrow(() -> 
             new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         
+
         
     }
 
