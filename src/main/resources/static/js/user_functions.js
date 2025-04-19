@@ -10,7 +10,7 @@ async function create_user(event){
     const password = document.getElementById("password").value;
     const sex = document.querySelector('input[name=sex]:checked').value;
     const birth_date = document.getElementById("birth_date").value;
-    const role = document.querySelector('input[name=role]:checked').value;
+
 
     const user_data = JSON.stringify({
         last_name: last_name,
@@ -166,5 +166,55 @@ function edit_toggle() {
     } else {
         user_info.style.display = "none";
         edit_info.style.display = "block";
+    }
+}
+
+async function edit_user(event, user_id) {
+    event.preventDefault();
+    
+    const first_name = document.getElementById("edit_first_name").value;
+    const middle_name = document.getElementById("edit_middle_name").value;
+    const last_name = document.getElementById("edit_last_name").value;
+    const email = document.getElementById("edit_email").value;
+    const pass = document.getElementById("edit_pass").value;
+    const sex = document.querySelector('input[name=edit_sex]:checked').value;
+    const birth_date = document.getElementById("edit_birth_date").value;
+    const contact_number = document.getElementById("edit_contact_number").value;
+    const medical_history = document.getElementById("edit_medical_history").value;
+    const allergies = document.getElementById("edit_allergies").value;
+    const family_medical_history = document.getElementById("edit_family_medical_history").value;
+
+    console.log("User ID:", user_id);
+    const user_data = JSON.stringify({
+        user_id: user_id,
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        email: email,
+        pass: pass,
+        sex: sex,
+        birth_date: birth_date,
+        contact_number: contact_number,
+        medical_history: medical_history,
+        allergies: allergies,
+        family_medical_history: family_medical_history
+    });
+
+    try{
+        const response = await fetch(`${url}api/users/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: user_data
+        });
+        if(response.ok){
+            alert("User information updated successfully!");
+            location.reload();
+        } else {
+            alert("Failed to update user information.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
     }
 }

@@ -64,7 +64,7 @@
     
         <label for="edit_family_medical_history">Family Medical History: </label>
         <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
-        <button type="button">Save</button>
+        <button type="button" th:attr="onclick=|edit_user(event, ${user.user_id})|">Save</button>
         <button type="button" onclick="edit_toggle()">Back</button>
     </div>
     

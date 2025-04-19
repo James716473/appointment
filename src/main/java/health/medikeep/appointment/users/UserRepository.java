@@ -68,6 +68,13 @@ public class UserRepository {
             .single() > 0;
     }
 
+    public boolean update(UserInfo user){
+        return jdbcClient.sql("UPDATE users SET first_name= ?, middle_name= ?, last_name= ?, email= ?, pass= ?, sex= ?, birth_date= ?, contact_number= ?, medical_history= ?, allergies= ?, family_medical_history= ? WHERE user_id= ?")
+            .params(List.of(user.first_name(), user.middle_name(), user.last_name(), user.email(), user.pass(), user.sex().name(), user.birth_date(), user.contact_number(), user.medical_history(), user.allergies(), user.family_medical_history(), user.user_id()))
+            .update() == 1; // returns 1 when it successfully updated
+        
+    }   
+
     
 
    
