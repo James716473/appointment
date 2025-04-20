@@ -56,6 +56,13 @@ public class DoctorRepository {
         return updated;
     }
 
+    public boolean update(DoctorInfo doctor){
+        return jdbcClient.sql("UPDATE doctors SET first_name= ?, middle_name= ?, last_name= ?, email= ?, pass= ?, sex= ?, birth_date= ?, contact_number= ?, specialty= ?, affiliation= ?, schedule_from= ?, schedule_to= ? WHERE doctor_id= ?")
+            .params(List.of(doctor.first_name(), doctor.middle_name(), doctor.last_name(), doctor.email(), doctor.pass(), doctor.sex().name(), doctor.birth_date(), doctor.contact_number(), doctor.specialty(), doctor.affiliation(), doctor.schedule_from(), doctor.schedule_to(), doctor.doctor_id()))
+            .update() == 1; // returns 1 when it successfully updated
+        
+    }
+
     public boolean verify(String email, String pass){
         return jdbcClient.sql("SELECT COUNT(*) FROM doctors WHERE email = ? AND pass = ?")
             .params(List.of(email, pass))

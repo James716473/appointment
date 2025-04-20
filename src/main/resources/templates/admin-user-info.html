@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="user_info">
+    <div id="info">
         <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
         <p>Id: [[${user.user_id}]]</p>
         <p id="first_name">First name: [[${user.first_name}]]</p>

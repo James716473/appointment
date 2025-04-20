@@ -10,6 +10,7 @@ async function create_user(event){
     const password = document.getElementById("password").value;
     const sex = document.querySelector('input[name=sex]:checked').value;
     const birth_date = document.getElementById("birth_date").value;
+    const role = document.querySelector('input[name=role]:checked').value;
 
 
     const user_data = JSON.stringify({
@@ -20,7 +21,6 @@ async function create_user(event){
         pass: password,
         sex: sex,
         birth_date: birth_date,
-        role: role
     });
     try{
         if(role === "User"){
@@ -155,16 +155,16 @@ async function delete_doctor(event, doctor_id) {
 
 function edit_toggle() {
     const button = document.getElementById("edit_button");
-    const user_info = document.getElementById("user_info");
+    const info = document.getElementById("info");
     const edit_info = document.getElementById("edit_info");
 
-    if (!button || !user_info || !edit_info) return; // checks if the 3 variable exists
+    if (!button || !info || !edit_info) return; // checks if the 3 variable exists
 
-    if(user_info.style.display === "none"){
-        user_info.style.display = "block";
+    if(info.style.display === "none"){
+        info.style.display = "block";
         edit_info.style.display = "none";
     } else {
-        user_info.style.display = "none";
+        info.style.display = "none";
         edit_info.style.display = "block";
     }
 }
@@ -184,7 +184,6 @@ async function edit_user(event, user_id) {
     const allergies = document.getElementById("edit_allergies").value;
     const family_medical_history = document.getElementById("edit_family_medical_history").value;
 
-    console.log("User ID:", user_id);
     const user_data = JSON.stringify({
         user_id: user_id,
         first_name: first_name,
@@ -207,6 +206,57 @@ async function edit_user(event, user_id) {
                 "Content-Type": "application/json"
             },
             body: user_data
+        });
+        if(response.ok){
+            alert("User information updated successfully!");
+            location.reload();
+        } else {
+            alert("Failed to update user information.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
+async function edit_doctor(event, doctor_id) {
+    event.preventDefault();
+    
+    const first_name = document.getElementById("edit_first_name").value;
+    const middle_name = document.getElementById("edit_middle_name").value;
+    const last_name = document.getElementById("edit_last_name").value;
+    const email = document.getElementById("edit_email").value;
+    const pass = document.getElementById("edit_pass").value;
+    const sex = document.querySelector('input[name=edit_sex]:checked').value;
+    const birth_date = document.getElementById("edit_birth_date").value;
+    const contact_number = document.getElementById("edit_contact_number").value;
+    const specialty = document.getElementById("edit_specialty").value;
+    const affiliation = document.getElementById("edit_affiliation").value;
+    const schedule_from = document.getElementById("edit_schedule_from").value;
+    const schedule_to = document.getElementById("edit_schedule_to").value;
+
+    doctor_data = JSON.stringify({
+        doctor_id: doctor_id,
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        email: email,
+        pass: pass,
+        sex: sex,
+        birth_date: birth_date,
+        contact_number: contact_number,
+        specialty: specialty,
+        affiliation: affiliation,
+        schedule_from: schedule_from,
+        schedule_to: schedule_to
+    });
+
+    try{
+        const response = await fetch(`${url}api/doctors/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: doctor_data
         });
         if(response.ok){
             alert("User information updated successfully!");

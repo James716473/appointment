@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -66,6 +67,15 @@ public class DoctorController {
         doctorRepository.create(doctor);
 
         return "doctor successfully created";
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<?> editUser(@RequestBody DoctorInfo doctor){
+        if(doctorRepository.update(doctor) == true){
+            return ResponseEntity.ok("User Updated Sucessfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User Updated Unsucessfully");
+        }
     }
 
     @PostMapping("/login")
