@@ -4,68 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_functions.js" defer></script> 
+    <link rel="stylesheet" href="../static/edit-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <div id="info">
-        <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
-        <p>Id: [[${user.user_id}]]</p>
-        <p id="first_name">First name: [[${user.first_name}]]</p>
-        <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
-        <p id="last_name">Last name: [[${user.last_name}]]</p>
-        <p id="email">Email: [[${user.email}]]</p>
-        <p id="pass">Password: [[${user.pass}]]</p>
-        <p id="sex">Sex: [[${user.sex}]]</p>
-        <p id="birth_date">Birth date: [[${user.birth_date}]]</p>
-        <p id="contact_number">Contact number: [[${user.contact_number} ?: 'None']]</p>
-        <p id="medical_history">Medical history: [[${user.medical_history} ?: 'None']]</p>
-        <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
-        <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
-        <button type="button" id="edit_button" onclick="edit_toggle()">Edit</button>
-        <button type="button" onclick="window.location.href='../all'">Back</button>
+        <div class="edit__container">
+            <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
+            <p>Id: [[${user.user_id}]]</p>
+            <p id="first_name">First name: [[${user.first_name}]]</p>
+            <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
+            <p id="last_name">Last name: [[${user.last_name}]]</p>
+            <p id="email">Email: [[${user.email}]]</p>
+            <p id="pass">Password: [[${user.pass}]]</p>
+            <p id="sex">Sex: [[${user.sex}]]</p>
+            <p id="birth_date">Birth date: [[${user.birth_date}]]</p>
+            <p id="contact_number">Contact number: [[${user.contact_number} ?: 'None']]</p>
+            <p id="medical_history">Medical history: [[${user.medical_history} ?: 'None']]</p>
+            <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
+            <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
+            <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
+            <input type="button" id="back__button" onclick="window.location.href='../admin-user'" value="Back"><!-- Need to change the endpoint-->
+        </div>
     </div>
     
+    
     <div id="edit_info" style="display: none;">
-        <p>Id: <span th:text="${user.user_id}"></span></p>
+        <div class="info__container">
+            <p>Id: <span th:text="${user.user_id}"></span></p>
+            
+            <label for="edit_first_name">First Name: </label>
+            <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
         
-        <label for="edit_first_name">First Name: </label>
-        <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
-    
-        <label for="edit_middle_name">Middle Name: </label>
-        <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
-    
-        <label for="edit_last_name">Last Name: </label>
-        <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
-    
-        <label for="edit_email">Email: </label>
-        <input type="text" id="edit_email" th:value="${user.email}"><br>
-    
-        <label for="edit_pass">Password: </label>
-        <input type="text" id="edit_pass" th:value="${user.pass}"><br>
-    
-        <label for="edit_sex">Sex:</label>
-        <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
-        <label class="male" for="male">Male</label>
+            <label for="edit_middle_name">Middle Name: </label>
+            <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
         
-        <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
-        <label class="female" for="female">Female</label><br>
-    
-        <label for="edit_birth_date">Birth Date: </label>
-        <input type="date" id="edit_birth_date" th:value="${user.birth_date}"><br>
-    
-        <label for="edit_contact_number">Contact Number: </label>
-        <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
-    
-        <label for="edit_medical_history">Medical History: </label>
-        <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
-    
-        <label for="edit_allergies">Allergies: </label>
-        <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
-    
-        <label for="edit_family_medical_history">Family Medical History: </label>
-        <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
-        <button type="button" th:attr="onclick=|edit_user(event, ${user.user_id})|">Save</button>
-        <button type="button" onclick="edit_toggle()">Back</button>
+            <label for="edit_last_name">Last Name: </label>
+            <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
+        
+            <label for="edit_email">Email: </label>
+            <input type="text" id="edit_email" th:value="${user.email}"><br>
+        
+            <label for="edit_pass">Password: </label>
+            <input type="text" id="edit_pass" th:value="${user.pass}"><br>
+        
+            <label for="edit_sex">Sex:</label>
+            <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
+            <label class="male" for="male">Male</label>
+            
+            <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
+            <label class="female" for="female">Female</label><br>
+        
+            <label for="edit_birth_date">Birth Date: </label>
+            <input type="date" id="edit_birth_date" th:value="${user.birth_date}"><br>
+        
+            <label for="edit_contact_number">Contact Number: </label>
+            <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
+        
+            <label for="edit_medical_history">Medical History: </label>
+            <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
+        
+            <label for="edit_allergies">Allergies: </label>
+            <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
+        
+            <label for="edit_family_medical_history">Family Medical History: </label>
+            <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
+
+        
+            <input type="button" id="save__button" th:attr="onclick=|edit_user(event, ${user.user_id})|" value="Save">
+            <input type="button" id="discard__button" onclick="edit_toggle()" value="Back">
+
+        </div>
     </div>
     
     

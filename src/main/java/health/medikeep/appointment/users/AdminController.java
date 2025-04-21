@@ -25,7 +25,7 @@ public class AdminController {
         this.affiliateRepository = affiliateRepository;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all") // Changed the HTML for user and doctor
     public String showAll(Model model){
         List<UserInfo> users = userRepository.showUsers();
         List<DoctorInfo> doctors = doctorRepository.showDoctors();

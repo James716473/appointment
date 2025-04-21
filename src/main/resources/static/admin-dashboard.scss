@@ -128,60 +128,80 @@ body {
     transition: all 0.3s ease;
 }
 
-.manage__wrapper {
-    position: relative;
-    display: inline-block;
-    font-family: Arial, sans-serif;
-  
-    .navbar__toggle {
-      cursor: pointer;
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      border-radius: 5px;
-      user-select: none;
-  
-      .bar {
+
+.main__container {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
+}
+
+// Vertical Navbar
+
+.vertical-navbar {
+  width: 200px;
+  height: 91.7vh;
+  background-color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Vertical center
+  align-items: center;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 10px 0;
+
+      a {
         display: block;
-        width: 25px;
-        height: 3px;
-        background-color: white;
-        margin: 4px 0;
-        transition: 0.4s;
-      }
-    }
-  
-    .manage__menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #ffffff;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      padding: 10px 0;
-      min-width: 160px;
-      z-index: 1000;
-  
-      .manage__item {
-        list-style: none;
-  
-        .manage__links {
-          display: block;
-          padding: 10px 20px;
-          color: #333;
-          text-decoration: none;
-          transition: background 0.3s;
-  
-          &:hover {
-            background-color: #f1f1f1;
-          }
+        color: white;
+        text-decoration: none;
+        padding: 10px 45px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #34495e;
         }
-      }
-  
-      &.show {
-        display: block;
       }
     }
   }
-  
+}
+
+
+// Main Section
+
+.content {
+  background-color: #DBE2EF;
+  height: 800px;
+  width: 1600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 2rem;
+  margin-left: 6rem;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  opacity: 90%;
+}
+
+#welcome__admin {
+  padding-top: 20rem;
+  padding-left: 38rem;
+}
+
+#welcome__text {
+  padding-left: 37rem;
+}
+
+.user__table {
+  margin-top: 0.5rem;
+}
+
+.doctor__table {
+  margin-top: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

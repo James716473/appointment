@@ -116,54 +116,72 @@ body {
   transition: all 0.3s ease;
 }
 
-.manage__wrapper {
-  position: relative;
-  display: inline-block;
-  font-family: Arial, sans-serif;
+.main__container {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
 }
-.manage__wrapper .navbar__toggle {
-  cursor: pointer;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  border-radius: 5px;
-  user-select: none;
+
+.vertical-navbar {
+  width: 200px;
+  height: 91.7vh;
+  background-color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.manage__wrapper .navbar__toggle .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
-  transition: 0.4s;
-}
-.manage__wrapper .manage__menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #ffffff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 10px 0;
-  min-width: 160px;
-  z-index: 1000;
-}
-.manage__wrapper .manage__menu .manage__item {
+.vertical-navbar ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.manage__wrapper .manage__menu .manage__item .manage__links {
+.vertical-navbar ul li {
+  margin: 10px 0;
+}
+.vertical-navbar ul li a {
   display: block;
-  padding: 10px 20px;
-  color: #333;
+  color: white;
   text-decoration: none;
-  transition: background 0.3s;
+  padding: 10px 45px;
+  transition: background-color 0.3s ease;
 }
-.manage__wrapper .manage__menu .manage__item .manage__links:hover {
-  background-color: #f1f1f1;
+.vertical-navbar ul li a:hover {
+  background-color: #34495e;
 }
-.manage__wrapper .manage__menu.show {
-  display: block;
+
+.content {
+  background-color: #DBE2EF;
+  height: 800px;
+  width: 1600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 2rem;
+  margin-left: 6rem;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  opacity: 90%;
+}
+
+#welcome__admin {
+  padding-top: 20rem;
+  padding-left: 38rem;
+}
+
+#welcome__text {
+  padding-left: 37rem;
+}
+
+.user__table {
+  margin-top: 0.5rem;
+}
+
+.doctor__table {
+  margin-top: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /*# sourceMappingURL=admin-dashboard.css.map */
