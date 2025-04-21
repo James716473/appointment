@@ -19,6 +19,12 @@ public class DoctorRepository {
             .list();
     }
 
+    public List<String> showSpecialty(){
+        return jdbcClient.sql("select distinct specialty from doctors")
+            .query(String.class)
+            .list();
+    }
+
     public Optional<DoctorInfo> findById(Integer doctor_id){
         return jdbcClient.sql("select * from doctors where doctor_id = :doctor_id")
             .param("doctor_id", doctor_id)

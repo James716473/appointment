@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS admn (
 );
 
 CREATE TABLE IF NOT EXISTS affiliates (
-  name VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
+  affiliate_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
   address VARCHAR(255) NOT NULL,
   description TEXT 
 );
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS appointments (
   user_id INT NOT NULL,
   doctor_id INT NOT NULL,
   appointment_date DATE NOT NULL,
-  appointment_type ENUM('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J') NOT NULL,
+  appointment_type VARCHAR(255) NOT NULL,
   billing_id INT NOT NULL,
   description TEXT
 );

@@ -268,3 +268,65 @@ async function edit_doctor(event, doctor_id) {
         alert("An error occurred: " + error.message);
     }
 }
+
+async function create_affiliate(event){
+    event.preventDefault();
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const description = document.getElementById("description").value;
+
+    affiliate_data = JSON.stringify({
+        name: name,
+        address: address,
+        description: description
+    });
+
+    try{
+        const response = await fetch(`${url}api/affiliates/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: affiliate_data
+        });
+        if(response.ok){
+            alert("Affiliate created successfully!");
+        } else {
+            alert("Failed to create affiliate.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+    
+    window.location.href = "/admin/affiliates";
+
+}
+
+async function delete_affiliate(event, affiliate_id) {
+    event.preventDefault();
+
+    if (!confirm(`Are you sure you want to delete affiliate with ID ${affiliate_id}?`)) {
+        return;
+    }
+
+    const affiliate_data = JSON.stringify({ affiliate_id: affiliate_id });
+
+    try {
+        const response = await fetch(`${url}api/affiliates/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: affiliate_data
+        });
+
+        if (response.ok) {
+            alert("Affiliate deleted successfully!");
+            location.reload();
+        } else {
+            alert("Failed to delete affiliate.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}

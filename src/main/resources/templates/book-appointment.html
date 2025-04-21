@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Select Clinic</h1>
+        <div th:each="affiliate : ${affiliates}">
+            <input type="radio"
+                name="affiliate"
+                th:value="${affiliate.name}"
+                th:id="${affiliate.name}" />
+            <label th:for="${affiliate.name}" th:text="${affiliate.name}"></label>
+        </div>
+    </div>
+
+    <div>
+        <h1>Select Service</h1>
+
+        <input type="radio" name="specialty" id="general" value="General" />
+        <label for="general">General</label>
+
+        <div th:each="specialty : ${specialties}">
+            <input type="radio"
+                name="specialty"
+                th:value="${specialty}"
+                th:id="${specialty}" />
+            <label th:for="${specialty}" th:text="${specialty}"></label>
+        </div>
+    </div>
+    
+</body>
+</html>

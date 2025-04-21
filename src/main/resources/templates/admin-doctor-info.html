@@ -60,7 +60,11 @@
         <input type="text" id="edit_specialty" th:value="${doctor.specialty != null ? doctor.specialty : 'None'}"><br>
 
         <label for="edit_affiliation">Affiliation: </label>
-        <input type="text" id="edit_affiliation" th:value="${doctor.affiliation != null ? doctor.affiliation : 'None'}"><br>
+        <select id="edit_affiliation">
+            <option th:value="${doctor.specialty != null ? doctor.specialty : 'None'}" th:text="${doctor.specialty != null ? doctor.specialty : 'None'}" selected></option>
+            <option th:each= "affiliate : ${affiliates}" th:value="${affiliate.name}" th:text="${affiliate.name}"></option>
+        </select> <br>
+        
 
         <label for="edit_schedule_from">Schedule From: </label>
         <input type="time" id="edit_schedule_from" name="schedule_from" th:value="${#temporals.format(doctor.schedule_from, 'HH:mm')}"><br>
