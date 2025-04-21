@@ -32,6 +32,53 @@
             <label th:for="${specialty}" th:text="${specialty}"></label>
         </div>
     </div>
+    <!-- The Doctor Shown should be based on what specialty and hospital they are in-->
+    <div>
+        <h1>Select Doctor</h1>
+        <div th:each="doctor : ${doctors}">
+            <input type="radio"
+                name="doctor"
+                th:value="${doctor.doctor_id}"
+                th:id="${doctor.doctor_id}" />
+            <label th:for="${doctor.doctor_id}"
+                th:text="${doctor.first_name + ' ' + doctor.middle_name + ' ' + doctor.last_name + ' (' + doctor.email + ')'}">
+            </label>
+         
+        </div> 
+    </div>
+
+    <div>
+        <h1>Select Date & Time</h1>
+        <input type="date" id="date" name="date">
+        <input type="time" id="time" name="time">
+    </div>
+
+    <div>
+        <h1>Reason for appointment</h1>
+        <label for="reason"></label>
+        <textarea id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
+    </div>
+    
+    <div>
+        <h1>Personal Information</h1>
+        
+    </div>
+
+    <script>
+        const today = new Date();
+    
+        // Create a new Date object for the next year
+        const nextYear = new Date();
+        nextYear.setFullYear(today.getFullYear() + 1);
+    
+        const formattedDate = nextYear.toISOString().split('T')[0];
+    
+        // Set the min and max attributes
+        document.getElementById("date").setAttribute("min", today.toISOString().split('T')[0]); // Today's date as min
+        document.getElementById("date").setAttribute("max", formattedDate); // One year from today as max
+    </script>
+    
+
     
 </body>
 </html>
