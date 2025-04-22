@@ -178,7 +178,7 @@ body {
 }
 
 .table__container {
-  max-height: 750px;
+  max-height: 600px;
   overflow-y: auto;
   margin-top: 1rem;
 }
