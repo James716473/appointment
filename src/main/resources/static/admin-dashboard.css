@@ -173,15 +173,37 @@ body {
   padding-left: 37rem;
 }
 
-.user__table {
+.user__table, .doctor__table {
   margin-top: 0.5rem;
 }
 
-.doctor__table {
-  margin-top: 0.5rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.table__container {
+  max-height: 750px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+.table__container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table__container table th, .table__container table td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+#more__button, #delete__button {
+  background-color: #112D4E;
+  color: #F9F7F7;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #112D4E;
+  cursor: pointer;
+}
+#more__button:hover, #delete__button:hover {
+  background-color: #F9F7F7;
+  color: #112D4E;
+  transition: all 0.3s ease;
+  border: 1px solid #112D4E;
 }
 
 /*# sourceMappingURL=admin-dashboard.css.map */
