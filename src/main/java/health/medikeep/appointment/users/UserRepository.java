@@ -62,10 +62,11 @@ public class UserRepository {
     }
 
     public boolean verify(String email, String pass){
+        System.out.println("Verifying email: " + email + " with password: " + pass); // Debugging line
         return jdbcClient.sql("SELECT COUNT(*) FROM users WHERE email = ? AND pass = ?")
             .params(List.of(email, pass))
             .query(Integer.class)
-            .single() > 0;
+            .single() == 1;
     }
 
     public boolean update(UserInfo user){

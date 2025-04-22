@@ -61,7 +61,37 @@
     
     <div>
         <h1>Personal Information</h1>
-        
+        <label for="edit_first_name">First Name: </label>
+        <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
+    
+        <label for="edit_middle_name">Middle Name: </label>
+        <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
+    
+        <label for="edit_last_name">Last Name: </label>
+        <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
+    
+        <label for="edit_email">Email: </label>
+        <input type="text" id="edit_email" th:value="${user.email}"><br>
+    
+        <label for="edit_contact_number">Contact Number: </label>
+        <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
+    
+        <label for="edit_medical_history">Medical History: </label>
+        <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
+    
+        <label for="edit_allergies">Allergies: </label>
+        <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
+    
+        <label for="edit_family_medical_history">Family Medical History: </label>
+        <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
+    </div>
+
+    <div>
+        <h1>Payment</h1>
+        <label for="now">Now</label>
+        <input type="radio" name="payment" id="now" value="Now"/>
+        <label for="later">Later</label>
+        <input type="radio" name="payment" id="later" value="Later"/>
     </div>
 
     <script>

@@ -3,6 +3,8 @@ package health.medikeep.appointment.users;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -35,10 +37,16 @@ public class PageController {
     }
 
     @GetMapping("/book-appointment")
-    public String bookAppointment(Model model) {
+    public String bookAppointment(Model model, HttpSession session) {
         model.addAttribute("doctors", doctorRepository.showDoctors());
         model.addAttribute("affiliates", affiliateRepository.showAffiliates());
         model.addAttribute("specialties", doctorRepository.showSpecialty());
+
+        String email = (String) session.getAttribute("email");
+        Integer user_id = userRepository.getUid(email).orElse(null);
+        model.addAttribute("user", userRepository.findById(user_id).orElse(null));
+
+        
         return "book-appointment";
     }
     

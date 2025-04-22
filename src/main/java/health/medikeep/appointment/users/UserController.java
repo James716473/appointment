@@ -57,6 +57,7 @@ public class UserController {
     @GetMapping("/info")
     UserInfo findById(HttpSession session) {
         String email = (String) session.getAttribute("email");
+        System.out.println("Session email: " + email);  // Debugging log
 
         if (email == null) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No user logged in");
@@ -84,6 +85,7 @@ public class UserController {
     public ResponseEntity<?> verify_credentials(@RequestBody UserInfo user, HttpSession session) {
         if (userRepository.verify(user.email(), user.pass())){
             session.setAttribute("email", user.email());
+            System.out.println("Session email set to: " + user.email()); // Debugging line
             return ResponseEntity.ok("Login successful!"); 
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");

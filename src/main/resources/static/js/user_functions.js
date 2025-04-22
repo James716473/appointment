@@ -59,10 +59,10 @@ async function create_user(event){
 async function verify_user(event){
     event.preventDefault();
     const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const pass = document.getElementById("pass").value;
     const user_data = JSON.stringify({
         email: email,
-        password: password
+        pass: pass
     });
     try{
         const response = await fetch(`${url}api/users/login`, {
@@ -72,8 +72,14 @@ async function verify_user(event){
             },
             body: user_data
         });
+        if(response.status === 200){
+            alert("user logged in!");
+            window.location.href = "/book-appointment";
+        } else {
+            alert("user not found!");
+            
+        }
         
-        user_info();
     } catch (error) {
         alert("error has occured");
     }
@@ -85,7 +91,8 @@ async function user_info(){
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            credentials: "same-origin"
         });
         const data = await response.json();
         alert(JSON.stringify(data));
