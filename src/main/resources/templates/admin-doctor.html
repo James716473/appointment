@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 <head>
     <meta charset="UTF-8">
-    <title>User List</title>
-    <script src="/js/user_functions.js" defer></script> 
-    <link rel="stylesheet" href="../static/admin-dashboard.css">
+    <title>Doctor List</title>
+    <script src="js/user_functions.js" defer></script> 
+    <link rel="stylesheet" href="/admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,28 +42,31 @@
 
             <main class="content">
                 <h1>Doctor List</h1>
-                <table border="1" class="doctor__table">
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
+                
+                <div class="table__container">
+                    <table border="1" class="doctor__table">
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
 
-                        <tr th:each="doctor : ${doctors}">
-                            <td th:text="${doctor.doctor_id}">1</td>
-                            <td th:text="${doctor.first_name}">John</td>
-                            <td th:text="${doctor.last_name}">Doe</td>
-                            <td th:text="${doctor.email}">john@example.com</td>
-                            <td>
-                                <button type="button" th:onclick="'window.location.href=\'/admin/doctor/' + ${doctor.doctor_id} + '\''">More Info</button>
-                        
-                                <button type="button" th:attr="onclick=|delete_doctor(event, ${doctor.doctor_id})|">Delete</button>
-                        
-                            </td>
+                            <tr th:each="doctor : ${doctors}">
+                                <td th:text="${doctor.doctor_id}">1</td>
+                                <td th:text="${doctor.first_name}">John</td>
+                                <td th:text="${doctor.last_name}">Doe</td>
+                                <td th:text="${doctor.email}">john@example.com</td>
+                                <td style="width: 226px;">
+                                    <input type="button" th:onclick="'window.location.href=\'/admin/doctor/' + ${doctor.doctor_id} + '\''"id="more__button" value="More Info">
+                            
+                                    <input type="button" th:attr="onclick=|delete_doctor(event, ${doctor.doctor_id})|" id="delete__button" value="Delete">
+                            
+                                </td>
+                            </tr>
                         </tr>
-                    </tr>
-                </table>
+                    </table>
+                </div>
             </main>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_functions.js" defer></script> 
-    <link rel="stylesheet" href="../static/edit-info.css">
+    <link rel="stylesheet" href="/edit-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
             <p id="affiliation">Affiliation: [[${doctor.affiliation} ?: 'None']]</p>
             <p id="schedule">Schedule: [[${doctor.schedule_from.toString()} ?: 'None']] to [[${doctor.schedule_to.toString()} ?: 'None']]</p>
             <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-            <input type="button" id="back__button" onclick="window.location.href='../admin-doctor'" value="Back">
+            <input type="button" id="back__button" onclick="window.location.href='../doctors'" value="Back">
         </div>
     </div>
     

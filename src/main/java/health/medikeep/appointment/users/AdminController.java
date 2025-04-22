@@ -38,6 +38,20 @@ public class AdminController {
         return "admin-all";
     }
 
+    @GetMapping("/doctors")
+    public String showDoctoctors(Model model){
+        List<DoctorInfo> doctors = doctorRepository.showDoctors();
+        model.addAttribute("doctors", doctors);
+        return "admin-doctor";
+    }
+
+    @GetMapping("/users")
+    public String showUsers(Model model){
+        List<UserInfo> users = userRepository.showUsers();
+        model.addAttribute("users", users);
+        return "admin-user";
+    }
+
     @GetMapping("/user/{user_id}")
     public String userInfo(Model model, @PathVariable Integer user_id){
         Optional<UserInfo> user = userRepository.findById(user_id);
