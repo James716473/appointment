@@ -4,79 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_functions.js" defer></script> 
+    <link rel="stylesheet" href="../static/edit-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <div id="info">
-        <h1 th:text="${(doctor.first_name ?: '') + ' ' + (doctor.middle_name ?: '') + ' ' + (doctor.last_name ?: '')}">Full Name</h1>
-        <p>Id: [[${doctor.doctor_id}]]</p>
-        <p id="first_name">First name: [[${doctor.first_name}]]</p>
-        <p id="middle_name">Middle name: [[${doctor.middle_name}]]</p>
-        <p id="last_name">Last name: [[${doctor.last_name}]]</p>
-        <p id="email">Email: [[${doctor.email}]]</p>
-        <p id="pass">Password: [[${doctor.pass}]]</p>
-        <p id="sex">Sex: [[${doctor.sex}]]</p>
-        <p id="birth_date">Birth date: [[${doctor.birth_date}]]</p>
-        <p id="contact_number">Contact number: [[${doctor.contact_number} ?: 'None']]</p>
-        <p id="specialty">Specialty: [[${doctor.specialty} ?: 'None']]</p>
-        <p id="affiliation">Affiliation: [[${doctor.affiliation} ?: 'None']]</p>
-        <p id="schedule">Schedule: [[${doctor.schedule_from.toString()} ?: 'None']] to [[${doctor.schedule_to.toString()} ?: 'None']]</p>
-        <button type="button" id="edit_button" onclick="edit_toggle()">Edit</button>
-        <button type="button" onclick="window.location.href='../all'">Back</button>
+        <div class="edit__container">
+            <h1 th:text="${(doctor.first_name ?: '') + ' ' + (doctor.middle_name ?: '') + ' ' + (doctor.last_name ?: '')}">Full Name</h1>
+            <p>Id: [[${doctor.doctor_id}]]</p>
+            <p id="first_name">First name: [[${doctor.first_name}]]</p>
+            <p id="middle_name">Middle name: [[${doctor.middle_name}]]</p>
+            <p id="last_name">Last name: [[${doctor.last_name}]]</p>
+            <p id="email">Email: [[${doctor.email}]]</p>
+            <p id="pass">Password: [[${doctor.pass}]]</p>
+            <p id="sex">Sex: [[${doctor.sex}]]</p>
+            <p id="birth_date">Birth date: [[${doctor.birth_date}]]</p>
+            <p id="contact_number">Contact number: [[${doctor.contact_number} ?: 'None']]</p>
+            <p id="specialty">Specialty: [[${doctor.specialty} ?: 'None']]</p>
+            <p id="affiliation">Affiliation: [[${doctor.affiliation} ?: 'None']]</p>
+            <p id="schedule">Schedule: [[${doctor.schedule_from.toString()} ?: 'None']] to [[${doctor.schedule_to.toString()} ?: 'None']]</p>
+            <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
+            <input type="button" id="back__button" onclick="window.location.href='../admin-doctor'" value="Back">
+        </div>
     </div>
     
     <div id="edit_info" style="display: none;">
-        <p>Id: <span th:text="${doctor.doctor_id}"></span></p>
+        <div class="info__container">
+            <p>Id: <span th:text="${doctor.doctor_id}"></span></p>
+            
+            <label for="edit_first_name">First Name: </label>
+            <input type="text" id="edit_first_name" th:value="${doctor.first_name}"> <br>
         
-        <label for="edit_first_name">First Name: </label>
-        <input type="text" id="edit_first_name" th:value="${doctor.first_name}"> <br>
-    
-        <label for="edit_middle_name">Middle Name: </label>
-        <input type="text" id="edit_middle_name" th:value="${doctor.middle_name}"><br>
-    
-        <label for="edit_last_name">Last Name: </label>
-        <input type="text" id="edit_last_name" th:value="${doctor.last_name}"><br>
-    
-        <label for="edit_email">Email: </label>
-        <input type="text" id="edit_email" th:value="${doctor.email}"><br>
-    
-        <label for="edit_pass">Password: </label>
-        <input type="text" id="edit_pass" th:value="${doctor.pass}"><br>
-    
-        <label for="edit_sex">Sex:</label>
-        <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${doctor.sex.name() == 'M'}">
-        <label class="male" for="male">Male</label>
+            <label for="edit_middle_name">Middle Name: </label>
+            <input type="text" id="edit_middle_name" th:value="${doctor.middle_name}"><br>
         
-        <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${doctor.sex.name() == 'F'}">
-        <label class="female" for="female">Female</label><br>
-    
-        <label for="edit_birth_date">Birth Date: </label>
-        <input type="date" id="edit_birth_date" th:value="${doctor.birth_date}"><br>
-    
-        <label for="edit_contact_number">Contact Number: </label>
-        <input type="text" id="edit_contact_number" th:value="${doctor.contact_number != null ? doctor.contact_number : 'None'}"><br>
-
-        <label for="edit_specialty">Specialty: </label>
-        <input type="text" id="edit_specialty" th:value="${doctor.specialty != null ? doctor.specialty : 'None'}"><br>
-
-        <label for="edit_affiliation">Affiliation: </label>
-        <select id="edit_affiliation">
-            <option th:value="${doctor.specialty != null ? doctor.specialty : 'None'}" th:text="${doctor.specialty != null ? doctor.specialty : 'None'}" selected></option>
-            <option th:each= "affiliate : ${affiliates}" th:value="${affiliate.name}" th:text="${affiliate.name}"></option>
-        </select> <br>
+            <label for="edit_last_name">Last Name: </label>
+            <input type="text" id="edit_last_name" th:value="${doctor.last_name}"><br>
         
+            <label for="edit_email">Email: </label>
+            <input type="text" id="edit_email" th:value="${doctor.email}"><br>
+        
+            <label for="edit_pass">Password: </label>
+            <input type="text" id="edit_pass" th:value="${doctor.pass}"><br>
+        
+            <label for="edit_sex">Sex:</label>
+            <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${doctor.sex.name() == 'M'}">
+            <label class="male" for="male">Male</label>
+            
+            <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${doctor.sex.name() == 'F'}">
+            <label class="female" for="female">Female</label><br>
+        
+            <label for="edit_birth_date">Birth Date: </label>
+            <input type="date" id="edit_birth_date" th:value="${doctor.birth_date}"><br>
+        
+            <label for="edit_contact_number">Contact Number: </label>
+            <input type="text" id="edit_contact_number" th:value="${doctor.contact_number != null ? doctor.contact_number : 'None'}"><br>
 
-        <label for="edit_schedule_from">Schedule From: </label>
-        <input type="time" id="edit_schedule_from" name="schedule_from" th:value="${#temporals.format(doctor.schedule_from, 'HH:mm')}"><br>
+            <label for="edit_specialty">Specialty: </label>
+            <input type="text" id="edit_specialty" th:value="${doctor.specialty != null ? doctor.specialty : 'None'}"><br>
 
-        <label for="edit_schedule_to">Schedule To: </label>
-        <input type="time" id="edit_schedule_to" name="schedule_to" th:value="${#temporals.format(doctor.schedule_to, 'HH:mm')}"><br>
+            <label for="edit_affiliation">Affiliation: </label>
+            <select id="edit_affiliation">
+                <option th:value="${doctor.specialty != null ? doctor.specialty : 'None'}" th:text="${doctor.specialty != null ? doctor.specialty : 'None'}" selected></option>
+                <option th:each= "affiliate : ${affiliates}" th:value="${affiliate.name}" th:text="${affiliate.name}"></option>
+            </select> <br>
+            
+
+            <label for="edit_schedule_from">Schedule From: </label>
+            <input type="time" id="edit_schedule_from" name="schedule_from" th:value="${#temporals.format(doctor.schedule_from, 'HH:mm')}"><br>
+
+            <label for="edit_schedule_to">Schedule To: </label>
+            <input type="time" id="edit_schedule_to" name="schedule_to" th:value="${#temporals.format(doctor.schedule_to, 'HH:mm')}"><br>
 
 
 
 
-        <button type="button" th:attr="onclick=|edit_doctor(event, ${doctor.doctor_id})|">Save</button>
-        <button type="button" onclick="edit_toggle()">Back</button>
+            <input type="button" id="save__button" th:attr="onclick=|edit_doctor(event, ${doctor.doctor_id})|" value="Save">
+            <input type="button" id="discard__button" onclick="edit_toggle()" value="Back">
+        </div>
     </div>
     
     

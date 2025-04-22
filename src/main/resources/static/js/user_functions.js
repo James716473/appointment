@@ -161,7 +161,7 @@ async function delete_doctor(event, doctor_id) {
 }
 
 function edit_toggle() {
-    const button = document.getElementById("edit_button");
+    const button = document.getElementById("edit__button");
     const info = document.getElementById("info");
     const edit_info = document.getElementById("edit_info");
 

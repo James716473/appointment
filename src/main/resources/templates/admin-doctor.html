@@ -33,42 +33,15 @@
 
             <nav class="vertical-navbar">
                 <ul>
-                <li><a href="#" class="manage__links">User</a></li>
-                <li><a href="#" class="manage__links">Doctor</a></li>
+                <li><a href="admin-user" class="manage__links">User</a></li>
+                <li class="active"><a href="admin-doctor" class="manage__links">Doctor</a></li>
                 <li><a href="#" class="manage__links">Billing</a></li>
                 <li><a href="#" class="manage__links">Appointment</a></li>
                 </ul>
             </nav>
 
             <main class="content">
-                <h1>User List</h1>
-
-                <table border="1" class="user__table">
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
-                    </tr>
-
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.user_id}">1</td>
-                        <td th:text="${user.first_name}">John</td>
-                        <td th:text="${user.last_name}">Doe</td>
-                        <td th:text="${user.email}">john@example.com</td>
-                        <td>
-                            <button th:onclick="'window.location.href=\'/admin/user/' + ${user.user_id} + '\''">More Info</button>
-
-
-                            <button type="button" th:attr="onclick=|delete_user(event, ${user.user_id})|">Delete</button>
-
-                        </td>
-                    </tr>
-
-                </table>
-                
-                    
+                <h1>Doctor List</h1>
                 <table border="1" class="doctor__table">
                     <tr>
                         <th>ID</th>
