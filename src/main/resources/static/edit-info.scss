@@ -51,10 +51,14 @@ body {
     @extend .edit__container;
 }
 
-#save__button {
+#save__button  {
     @extend #edit__button;
 }
 
 #discard__button {
+    @extend #edit__button;
+}
+
+#create__button {
     @extend #edit__button;
 }
