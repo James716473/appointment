@@ -173,7 +173,7 @@ body {
   padding-left: 37rem;
 }
 
-.user__table, .doctor__table {
+.user__table, .doctor__table, .affilliate_table, .appointment__table, .billings__table {
   margin-top: 0.5rem;
 }
 
@@ -191,7 +191,7 @@ body {
   text-align: left;
 }
 
-#more__button, #delete__button {
+#more__button, .create__button, #delete__button, .delete__button {
   background-color: #112D4E;
   color: #F9F7F7;
   padding: 0.7rem 1.5rem;
@@ -199,11 +199,15 @@ body {
   border: 1px solid #112D4E;
   cursor: pointer;
 }
-#more__button:hover, #delete__button:hover {
+#more__button:hover, .create__button:hover, #delete__button:hover, .delete__button:hover {
   background-color: #F9F7F7;
   color: #112D4E;
   transition: all 0.3s ease;
   border: 1px solid #112D4E;
+}
+
+.create__button {
+  margin-top: 2rem;
 }
 
 /*# sourceMappingURL=admin-dashboard.css.map */

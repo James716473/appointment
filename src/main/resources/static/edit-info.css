@@ -24,7 +24,7 @@ body {
   line-height: 50px;
 }
 
-#edit__button, #discard__button, #save__button, #back__button {
+#edit__button, #create__button, #discard__button, #save__button, #back__button {
   background-color: #112D4E;
   color: #F9F7F7;
   padding: 0.7rem 1.5rem;
@@ -34,7 +34,7 @@ body {
   margin-top: 10rem;
   margin-right: 1rem;
 }
-#edit__button:hover, #discard__button:hover, #save__button:hover, #back__button:hover {
+#edit__button:hover, #create__button:hover, #discard__button:hover, #save__button:hover, #back__button:hover {
   background-color: #F9F7F7;
   color: #112D4E;
   transition: all 0.3s ease;
