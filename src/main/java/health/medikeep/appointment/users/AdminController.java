@@ -18,8 +18,10 @@ public class AdminController {
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
     private final AffiliateRepository affiliateRepository;
-    
-    public AdminController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository) {
+    private final AppointmentRepository appointmentRepository;
+
+    public AdminController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
         this.userRepository = userRepository;
         this.doctorRepository = doctorRepository;
         this.affiliateRepository = affiliateRepository;
@@ -65,4 +67,10 @@ public class AdminController {
         return "admin-affiliate-create";
     }
 
+    @GetMapping("/appointments")
+    public String showAppointments(Model model){
+        List<AppointmentInfo> appointments = appointmentRepository.showAppointments();
+        model.addAttribute("appointments", appointments);
+        return "admin-all-appointments";
+    }
 }
