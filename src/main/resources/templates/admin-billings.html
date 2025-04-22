@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Billing ID</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Date_Issued</th>
+            <th>Date_Paid</th>
+            
+        </tr>
+        <tr th:each="billing: ${billings}">
+            <td th:text="${billing.billing_id}">billing_id</td>
+            <td th:text="${billing.price}">price</td>
+            <td th:text="${billing.status}">status</td>
+            <td th:text="${billing.date_issued}">date_issued</td>
+            <td th:text="${billing.date_paid}">date_paid</td>
+        </tr>
+
+</body>
+</html>

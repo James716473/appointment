@@ -19,8 +19,10 @@ public class AdminController {
     private final DoctorRepository doctorRepository;
     private final AffiliateRepository affiliateRepository;
     private final AppointmentRepository appointmentRepository;
+    private final BillingRepository billingRepository;
 
-    public AdminController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository) {
+    public AdminController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository, BillingRepository billingRepository) {
+        this.billingRepository = billingRepository;
         this.appointmentRepository = appointmentRepository;
         this.userRepository = userRepository;
         this.doctorRepository = doctorRepository;
@@ -86,5 +88,12 @@ public class AdminController {
         List<AppointmentInfo> appointments = appointmentRepository.showAppointments();
         model.addAttribute("appointments", appointments);
         return "admin-all-appointments";
+    }
+
+    @GetMapping("/billings")
+    public String showBillings(Model model){
+        List<BillingInfo> billings = billingRepository.showBillings();
+        model.addAttribute("billings", billings);
+        return "admin-billings";
     }
 }

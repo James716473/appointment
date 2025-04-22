@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS appointments (
 
 CREATE TABLE IF NOT EXISTS billings (
   billing_id INT AUTO_INCREMENT PRIMARY KEY,
-  price DECIMAL(10, 2) NOT NULL,
-  status ENUM('Paid', 'Not Paid'),
+  price DECIMAL(10, 2),
+  status ENUM('Paid', 'Not_Paid') DEFAULT 'Not_Paid',
   date_issued DATE NOT NULL,
   date_paid DATE 
 );
