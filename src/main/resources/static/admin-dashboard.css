@@ -210,4 +210,8 @@ body {
   margin-top: 2rem;
 }
 
+.active {
+  background-color: #34495e;
+}
+
 /*# sourceMappingURL=admin-dashboard.css.map */

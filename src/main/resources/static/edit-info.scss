@@ -24,6 +24,17 @@ body {
     line-height: 50px;
 }
 
+.edit__container2 {
+    @extend .edit__container;
+    height: 36.7vh;
+
+    h1 {
+        font-weight: 700;
+        color: #112D4E;
+        margin-bottom: 0.5rem;
+    }
+}
+
 #edit__button {
     background-color: #112D4E;
     color: #F9F7F7;
@@ -61,4 +72,28 @@ body {
 
 #create__button {
     @extend #edit__button;
+    margin-top: 3rem;
+}
+
+.form__text {
+    width: 400px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    background-color: #ffffffe1;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 2px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.form__text:focus{
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease;
 }
