@@ -176,8 +176,37 @@ function edit_toggle() {
     }
 }
 
-function toggle_page_section(event, page_section) {
+function toggle_page_section(event, page_section, class_name) {
     event.preventDefault();
+    
+    if (class_name !== undefined) {
+        const inputs = document.querySelectorAll(class_name);
+        let checked = false;
+
+        if(inputs[0].type === "radio"){
+            inputs.forEach(input => {
+                if (input.checked) {
+                    checked = true;
+                }
+            });   
+        } else {
+            checked = true;
+            for (const input of inputs) {
+                if (input.value.trim() === "") {
+                    checked = false;
+                    break;
+                }
+            }
+        }
+
+        if (!checked) {
+            alert("Please input value to proceed.");
+            return;
+        }
+        
+    }
+    
+
     const sections = document.querySelectorAll(".page-section");
     sections.forEach(section => {
         if (section.id === page_section) {

@@ -12,23 +12,25 @@
         <h1>Select Hospital</h1>
         <div th:each="affiliate : ${affiliates}">
             <input type="radio"
+                class="affiliate-radio"
                 name="affiliate"
                 th:value="${affiliate.name}"
                 th:id="${affiliate.name}" />
             <label th:for="${affiliate.name}" th:text="${affiliate.name}"></label>
             
         </div>
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service')">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
     </div>
 
     <div class="page-section" id="select-service" style="display: none;">
         <h1>Select Service</h1>
 
-        <input type="radio" name="specialty" id="general" value="General" />
+        <input class="service-radio" type="radio" name="specialty" id="general" value="General" />
         <label for="general">General</label>
 
         <div th:each="specialty : ${specialties}">
             <input type="radio"
+                class="service-radio"
                 name="specialty"
                 th:value="${specialty}"
                 th:id="${specialty}" />
@@ -36,7 +38,7 @@
             
         </div>
         <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-doctor')">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-doctor', '.service-radio')">
         
     </div>
     <!-- The Doctor Shown should be based on what specialty and hospital they are in-->
@@ -44,34 +46,35 @@
         <h1>Select Doctor</h1>
         <div th:each="doctor : ${doctors}">
             <input type="radio"
+                class="doctor-radio"
                 name="doctor"
                 th:value="${doctor.doctor_id}"
                 th:id="${doctor.doctor_id}" />
             <label th:for="${doctor.doctor_id}"
-                th:text="${doctor.first_name + ' ' + doctor.middle_name + ' ' + doctor.last_name + ' (' + doctor.email + ')'}">
+                th:text="|${doctor.first_name} ${doctor.middle_name} ${doctor.last_name} (${doctor.email})|">
             </label>
             
         </div> 
         <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-date-time')">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-date-time', '.doctor-radio')">
         
     </div>
 
     <div class="page-section" id="select-date-time" style="display: none;">
         <h1>Select Date & Time</h1>
-        <input type="date" id="date" name="date">
-        <input type="time" id="time" name="time">
+        <input type="date" class="date-time" id="date" name="date">
+        <input type="time" class="date-time" id="time" name="time">
         <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'reason-for-appointment')">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'reason-for-appointment', '.date-time')">
         
     </div>
 
     <div class="page-section" id="reason-for-appointment" style="display: none;">
         <h1>Reason for appointment</h1>
         <label for="reason"></label>
-        <textarea id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
+        <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
         <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'personal-information')">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'personal-information', '.reason')">
         
     </div>
     
