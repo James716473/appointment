@@ -176,6 +176,19 @@ function edit_toggle() {
     }
 }
 
+function toggle_page_section(event, page_section) {
+    event.preventDefault();
+    const sections = document.querySelectorAll(".page-section");
+    sections.forEach(section => {
+        if (section.id === page_section) {
+            section.style.display = "block";
+        } else {
+            section.style.display = "none";
+        }
+    });
+
+}
+
 async function edit_user(event, user_id) {
     event.preventDefault();
     

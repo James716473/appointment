@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/js/user_functions.js" defer></script> 
 </head>
 <body>
-    <div>
-        <h1>Select Clinic</h1>
+    <div class="page-section" id="select-hospital">
+        <h1>Select Hospital</h1>
         <div th:each="affiliate : ${affiliates}">
             <input type="radio"
                 name="affiliate"
                 th:value="${affiliate.name}"
                 th:id="${affiliate.name}" />
             <label th:for="${affiliate.name}" th:text="${affiliate.name}"></label>
+            
         </div>
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service')">
     </div>
 
-    <div>
+    <div class="page-section" id="select-service" style="display: none;">
         <h1>Select Service</h1>
 
         <input type="radio" name="specialty" id="general" value="General" />
@@ -30,10 +33,13 @@
                 th:value="${specialty}"
                 th:id="${specialty}" />
             <label th:for="${specialty}" th:text="${specialty}"></label>
+            
         </div>
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-doctor')">
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
     </div>
     <!-- The Doctor Shown should be based on what specialty and hospital they are in-->
-    <div>
+    <div class="page-section" id="select-doctor" style="display: none;">
         <h1>Select Doctor</h1>
         <div th:each="doctor : ${doctors}">
             <input type="radio"
@@ -43,23 +49,29 @@
             <label th:for="${doctor.doctor_id}"
                 th:text="${doctor.first_name + ' ' + doctor.middle_name + ' ' + doctor.last_name + ' (' + doctor.email + ')'}">
             </label>
-         
+            
         </div> 
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'select-date-time')">
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
     </div>
 
-    <div>
+    <div class="page-section" id="select-date-time" style="display: none;">
         <h1>Select Date & Time</h1>
         <input type="date" id="date" name="date">
         <input type="time" id="time" name="time">
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'reason-for-appointment')">
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
     </div>
 
-    <div>
+    <div class="page-section" id="reason-for-appointment" style="display: none;">
         <h1>Reason for appointment</h1>
         <label for="reason"></label>
         <textarea id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'personal-information')">
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
     </div>
     
-    <div>
+    <div class="page-section" id="personal-information" style="display: none;">
         <h1>Personal Information</h1>
         <label for="edit_first_name">First Name: </label>
         <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
@@ -84,14 +96,16 @@
     
         <label for="edit_family_medical_history">Family Medical History: </label>
         <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
+        <input type="button" value="Next" onclick="toggle_page_section(event, 'confimation')">
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'reason-for-appointment')">
     </div>
 
-    <div>
-        <h1>Payment</h1>
-        <label for="now">Now</label>
-        <input type="radio" name="payment" id="now" value="Now"/>
-        <label for="later">Later</label>
-        <input type="radio" name="payment" id="later" value="Later"/>
+    <div class="page-section" id="confimation" style="display: none;">
+        <h1>Confirmation</h1>
+        <p>Are you sure you want to book this appointment?</p>
+        <button type="button" id="confirm">Confirm</button>
+        <button type="button" id="cancel">Cancel</button>
+        <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
     </div>
 
     <script>
