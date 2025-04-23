@@ -14,10 +14,11 @@ public class AppointmentRepository {
     }
 
     public boolean create(AppointmentInfo appointment) {
-        return jdbcClient.sql("INSERT INTO APPOINTMENTS(user_id, doctor_id, appointment_date, appointment_type, billing_id) values(?, ?, ?, ?, ?)")
-            .params(List.of(appointment.user_id(), appointment.doctor_id(), appointment.appointment_date(), appointment.appointment_type(), appointment.billing_id()))
+        return jdbcClient.sql("INSERT INTO APPOINTMENTS(user_id, doctor_id, appointment_date, appointment_time, appointment_type, billing_id, description) values(?, ?, ?, ?, ?, ?, ?)")
+            .params(List.of(appointment.user_id(), appointment.doctor_id(), appointment.appointment_date(), appointment.appointment_time(), appointment.appointment_type(), appointment.billing_id(), appointment.description()))
             .update() == 1;    
     }
+
 
     public List<AppointmentInfo> showAppointments() {
         return jdbcClient.sql("select * from appointments")

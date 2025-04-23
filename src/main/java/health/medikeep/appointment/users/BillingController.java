@@ -2,6 +2,7 @@ package health.medikeep.appointment.users;
 
 import java.util.List;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,8 +29,9 @@ public class BillingController {
     
     @PostMapping("/")
     public ResponseEntity<?> createBilling(@RequestBody BillingInfo billing) {
-        if (billingRepository.create(billing)) {
-            return ResponseEntity.ok("Billing Created Successfully");
+        Long billing_id = billingRepository.create(billing);
+        if (billing_id != 0) {
+            return ResponseEntity.ok(billing_id);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Billing Creation Unsuccessful");
         }

@@ -1,6 +1,8 @@
 package health.medikeep.appointment.users;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +15,19 @@ public class BillingRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    public boolean create(BillingInfo billing) {
-        return jdbcClient.sql("INSERT INTO BILLING(billing_id, date_issued) values(?, ?)")
-            .params(List.of(billing.billing_id(), billing.price(), billing.date_issued()))
-            .update() == 1;    
+    public long create(BillingInfo billing) {
+
+        KeyHolder kh = new GeneratedKeyHolder();
+        int rows = jdbcClient.sql("INSERT INTO BILLINGS(date_issued) values(?)")
+            .params(List.of(billing.date_issued()))
+            .update(kh);  
+        
+        if (rows != 1) return 0;                    // or throw
+
+        // MySQL returns it as Number
+        Number key = kh.getKey();
+        return key != null ? key.longValue() : 0;
+              
     }
 
     public List<BillingInfo> showBillings() {

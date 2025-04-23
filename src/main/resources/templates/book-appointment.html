@@ -83,7 +83,8 @@
         <div id="info">
             <div class="edit__container">
                 <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
-                <p>Id: [[${user.user_id}]]</p>
+                <input type="hidden" id="user_id" th:value="${user.user_id}">
+                <p th:text="${user.user_id}">Id: 0</p>
                 <p id="first_name">First name: [[${user.first_name}]]</p>
                 <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
                 <p id="last_name">Last name: [[${user.last_name}]]</p>
@@ -96,7 +97,8 @@
                 <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
                 <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
                 <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-                
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'reason-for-appointment')">
+                <input type="button" value="Next" onclick="toggle_page_section(event, 'confimation')">
             </div>
         </div>
         
@@ -148,15 +150,14 @@
     
             </div>
         </div>
-        <input type="button" value="Back" onclick="toggle_page_section(event, 'reason-for-appointment')">
-        <input type="button" value="Next" onclick="toggle_page_section(event, 'confimation')">
+        
         
     </div>
 
     <div class="page-section" id="confimation" style="display: none;">
         <h1>Confirmation</h1>
         <p>Are you sure you want to book this appointment?</p>
-        <button type="button" id="confirm">Confirm</button>
+        <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
         <button type="button" id="cancel">Cancel</button>
         <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
     </div>

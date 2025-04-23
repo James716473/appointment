@@ -379,3 +379,75 @@ async function delete_affiliate(event, affiliate_id) {
         alert("An error occurred: " + error.message);
     }
 }
+
+async function book_appointment(event){
+    event.preventDefault();
+    const user_id = document.getElementById("user_id").value;
+    const doctor_id = document.querySelector('input[name=doctor]:checked').value;
+    const appointment_date = document.getElementById("date").value;
+    const appointment_time = document.getElementById("time").value;
+    const appointment_type = document.querySelector('input[name=specialty]:checked').value;
+    const description = document.getElementById("reason").value;
+
+    
+    let billing_id = null;
+
+
+    const date_issued = new Date().toISOString().slice(0, 10);
+
+    try{
+        const response = await fetch(`${url}api/billings/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                date_issued: date_issued
+            })
+        });
+        if(response.ok){
+            billing_id = await response.json();
+            alert("Billing created successfully!");
+        }
+        else {
+            alert("Failed to create billing.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+    
+    console.log(user_id);
+    console.log(doctor_id);
+    console.log(appointment_date);
+    console.log(appointment_time);
+    console.log(appointment_type);
+    console.log(description);
+    console.log(billing_id);
+    
+    appointment_data = JSON.stringify({
+        user_id: user_id,
+        doctor_id: doctor_id,
+        appointment_date: appointment_date,
+        appointment_time: appointment_time,
+        appointment_type: appointment_type,
+        description: description,
+        billing_id: billing_id
+    });
+
+    try{
+        const response = await fetch(`${url}api/appointments/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: appointment_data
+        });
+        if(response.ok){
+            alert("Appointment booked successfully!");
+        } else {
+            alert("Failed to book appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
