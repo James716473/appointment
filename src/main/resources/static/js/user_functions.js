@@ -182,7 +182,14 @@ function toggle_page_section(event, page_section, class_name) {
     if (class_name !== undefined) {
         const inputs = document.querySelectorAll(class_name);
         let checked = false;
-
+    if (page_section === 'select-service') {
+        filter_doctors_by_hospital(); // hides doctors now, not yet visible
+        renderSpecialtiesForHospital();
+    }
+    if (page_section === 'select-doctor') {
+        filter_doctors_by_hospital(); // ensure doctors match latest hospital
+        filter_doctors_by_specialty(); // optional: hide by chosen specialty
+    }
         if(inputs[0].type === "radio"){
             inputs.forEach(input => {
                 if (input.checked) {
@@ -450,4 +457,55 @@ async function book_appointment(event){
     } catch (error) {
         alert("An error occurred: " + error.message);
     }
+}
+
+function filter_doctors_by_hospital() {
+    const selectedHospital = document.querySelector('input[name=affiliate]:checked').value;
+    document.querySelectorAll('.doctor-radio').forEach(radio => {
+        const belongs = radio.dataset.hospital === selectedHospital;
+        radio.parentElement.style.display = belongs ? '' : 'none';   // hide whole <div>
+        if (!belongs) radio.checked = false;                         // uncheck if hidden
+    });
+}
+
+function filter_doctors_by_specialty() {
+    const spec = document.querySelector('input[name=specialty]:checked')?.value;
+    if (!spec || spec === 'General') return;          // show all for General
+  
+    document.querySelectorAll('.doctor-radio').forEach(radio => {
+        const match = radio.dataset.specialty === spec &&
+                      radio.style.display !== 'none'; // still in hospital
+        radio.parentElement.style.display = match ? '' : 'none';
+        if (!match) radio.checked = false;
+    });
+  }
+
+function renderSpecialtiesForHospital() {
+    const hosp = document.querySelector('input[name=affiliate]:checked').value;
+  
+    // collect distinct specialties from doctors that belong to this hospital
+    const specialties = new Set();
+    document.querySelectorAll('.doctor-radio').forEach(r => {
+      if (r.dataset.hospital === hosp) specialties.add(r.dataset.specialty);
+    });
+  
+    // add a “General” option first
+    const container = document.getElementById('specialty-container');
+    container.innerHTML =
+      `<div>
+         <input class="service-radio" type="radio"
+                name="specialty" id="general" value="General">
+         <label for="general">General</label>
+       </div>`;
+  
+    // append one radio per distinct specialty
+    specialties.forEach(spec => {
+      const safeId = `spec-${spec.replace(/\s+/g,'_')}`;
+      container.insertAdjacentHTML('beforeend', `
+        <div>
+          <input class="service-radio" type="radio"
+                 name="specialty" id="${safeId}" value="${spec}">
+          <label for="${safeId}">${spec}</label>
+        </div>`);
+    });
 }

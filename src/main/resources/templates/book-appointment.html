@@ -25,16 +25,7 @@
     <div class="page-section" id="select-service" style="display: none;">
         <h1>Select Service</h1>
 
-        <input class="service-radio" type="radio" name="specialty" id="general" value="General" />
-        <label for="general">General</label>
-
-        <div th:each="specialty : ${specialties}">
-            <input type="radio"
-                class="service-radio"
-                name="specialty"
-                th:value="${specialty}"
-                th:id="${specialty}" />
-            <label th:for="${specialty}" th:text="${specialty}"></label>
+        <div id="specialty-container">
             
         </div>
         <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
@@ -49,6 +40,9 @@
                 class="doctor-radio"
                 name="doctor"
                 th:value="${doctor.doctor_id}"
+                th:data-hospital="${doctor.affiliation}"
+                th:data-specialty="${doctor.specialty}"
+                
                 th:id="${doctor.doctor_id}" />
             <label th:for="${doctor.doctor_id}"
                 th:text="|${doctor.first_name} ${doctor.middle_name} ${doctor.last_name} (${doctor.email})|">
