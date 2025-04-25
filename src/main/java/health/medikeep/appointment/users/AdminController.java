@@ -54,22 +54,7 @@ public class AdminController {
         return "admin-user";
     }
 
-    @GetMapping("/user/{user_id}")
-    public String userInfo(Model model, @PathVariable Integer user_id){
-        Optional<UserInfo> user = userRepository.findById(user_id);
-        model.addAttribute("user", user.get());
-        return "admin-user-info";
-    }
-
-    @GetMapping("/doctor/{doctor_id}")
-    public String doctorInfo(Model model, @PathVariable Integer doctor_id){
-        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
-        List<AffiliateInfo> affiliates = affiliateRepository.showAffiliates();
-        model.addAttribute("affiliates", affiliates);
-        model.addAttribute("doctor", doctor.get());
-
-        return "admin-doctor-info";
-    }
+    
 
     @GetMapping("/affiliates")
     public String showAffiliates(Model model){

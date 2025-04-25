@@ -1,7 +1,11 @@
 package health.medikeep.appointment.users;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -64,6 +68,32 @@ public class PageController {
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
         model.addAttribute("appointments", appointmentRepository.findByUserId(user_id));
         return "user-appointment";
+    }
+
+    @GetMapping("/user-info")
+    public String userInfo(Model model, HttpSession session) {
+
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
+        Optional<UserInfo> user = userRepository.findById(user_id);
+        model.addAttribute("user", user.get());
+        return "admin-user-info";
+    }
+
+    @GetMapping("/doctor-info")
+    public String doctorInfo(Model model, HttpSession session) {
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
+        List<AffiliateInfo> affiliates = affiliateRepository.showAffiliates();
+        model.addAttribute("affiliates", affiliates);
+        model.addAttribute("doctor", doctor.get());
+
+        return "admin-doctor-info";
     }
     
 }

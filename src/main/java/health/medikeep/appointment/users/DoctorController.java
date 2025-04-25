@@ -80,9 +80,12 @@ public class DoctorController {
 
     @PostMapping("/login")
     public ResponseEntity<?> verify_credentials(@RequestBody DoctorInfo doctor, HttpSession session) {
-        if (doctorRepository.verify(doctor.email(), doctor.pass())){
+        Optional<Integer> doctor_id = doctorRepository.verify(doctor.email(), doctor.pass());
+        if (doctor_id.isPresent()){
+            session.setAttribute("doctor_id", doctor_id.get());
             session.setAttribute("email", doctor.email());
-            return ResponseEntity.ok("Login successful!"); 
+            session.setAttribute("role", "doctor");
+            return ResponseEntity.ok(doctor_id.get()); 
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }

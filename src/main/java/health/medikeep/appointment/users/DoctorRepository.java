@@ -69,10 +69,10 @@ public class DoctorRepository {
         
     }
 
-    public boolean verify(String email, String pass){
-        return jdbcClient.sql("SELECT COUNT(*) FROM doctors WHERE email = ? AND pass = ?")
+    public Optional<Integer> verify(String email, String pass){
+        return jdbcClient.sql("SELECT DOCTOR_ID FROM doctors WHERE email = ? AND pass = ?")
             .params(List.of(email, pass))
             .query(Integer.class)
-            .single() > 0;
+            .optional();
     }
 }

@@ -125,4 +125,23 @@ body {
   transition: all 0.3s ease;
 }
 
+.radiobutton__role .rad-btn {
+  display: none;
+}
+.radiobutton__role .user, .radiobutton__role .doctor {
+  display: inline-block;
+  background-color: #fff;
+  width: 198px;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+.radiobutton__role .rad-btn:checked + .user, .radiobutton__role .rad-btn:checked + .doctor {
+  background-color: #112D4E;
+  color: #f9f7f7;
+  transition: all 0.5s ease;
+}
+
 /*# sourceMappingURL=login.css.map */

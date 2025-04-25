@@ -60,29 +60,59 @@ async function verify_user(event){
     event.preventDefault();
     const email = document.getElementById("email").value;
     const pass = document.getElementById("pass").value;
-    const user_data = JSON.stringify({
+    const role = document.querySelector('input[name=role]:checked').value;
+
+    
+    const data = JSON.stringify({
         email: email,
         pass: pass
     });
-    try{
-        const response = await fetch(`${url}api/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: user_data
-        });
-        if(response.status === 200){
-            alert("user logged in!");
-            window.location.href = "/user/book-appointment";
-        } else {
-            alert("user not found!");
+
+    if(role === "Doctor"){
+        try{
+            const response = await fetch(`${url}api/doctors/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: data
+            });
+            if(response.status === 200){
+                alert("Doctor logged in!");
+                const doctor_id = await response.json();
+                window.location.href = "/doctor-info";
+            } else {
+                alert("Doctor not found!");
+                
+            }
             
+        } catch (error) {
+            alert("error has occured");
         }
-        
-    } catch (error) {
-        alert("error has occured");
+    } else {
+        try{
+            const response = await fetch(`${url}api/users/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: data
+            });
+            if(response.status === 200){
+                alert("user logged in!");
+                const user_id = await response.json();
+                window.location.href = "/user-info";
+                
+            } else {
+                alert("user not found!");
+                
+            }
+            
+        } catch (error) {
+            alert("error has occured");
+        }
     }
+    
 }
 
 async function user_info(){
