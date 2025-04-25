@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,8 +18,10 @@ public class PageController {
     private final AffiliateRepository affiliateRepository;
     private final AppointmentRepository appointmentRepository;
     private final BillingRepository billingRepository;
+    private final MessageRepository messageRepository;
 
-    public PageController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository, BillingRepository billingRepository) {
+    public PageController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository, BillingRepository billingRepository, MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
         this.billingRepository = billingRepository;
         this.userRepository = userRepository;
         this.doctorRepository = doctorRepository;
@@ -46,15 +47,15 @@ public class PageController {
 
     @GetMapping("user/book-appointment")
     public String bookAppointment(Model model, HttpSession session) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
         model.addAttribute("doctors", doctorRepository.showDoctors());
         model.addAttribute("affiliates", affiliateRepository.showAffiliates());
         model.addAttribute("specialties", doctorRepository.showSpecialty());
 
-        String email = (String) session.getAttribute("email");
-        Integer user_id = userRepository.getUid(email).orElse(null);
-        if(user_id == null) {
-            return "no-rights";
-        }
+        
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
 
         
@@ -70,7 +71,7 @@ public class PageController {
         return "user-appointment";
     }
 
-    @GetMapping("/user-info")
+    @GetMapping("/user/info")
     public String userInfo(Model model, HttpSession session) {
 
         Integer user_id = (Integer) session.getAttribute("user_id");
@@ -82,7 +83,30 @@ public class PageController {
         return "admin-user-info";
     }
 
-    @GetMapping("/doctor-info")
+    @GetMapping("/user/messages")
+    public String userMessages(Model model, HttpSession session) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
+        List<MessageInfo> messages = messageRepository.showUserRecievedMessage(user_id);
+        
+        model.addAttribute("messages", messages);
+        return "messages";
+    }
+
+    @GetMapping("/user/messages/create")
+    public String createMessage(Model model, HttpSession session) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
+        List<DoctorInfo> doctors = doctorRepository.showDoctors();
+        model.addAttribute("recievers", doctors);
+        return "create-message";
+    }
+
+    @GetMapping("/doctor/info")
     public String doctorInfo(Model model, HttpSession session) {
         Integer doctor_id = (Integer) session.getAttribute("doctor_id");
         if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
@@ -95,5 +119,28 @@ public class PageController {
 
         return "admin-doctor-info";
     }
+
+    @GetMapping("/doctor/messages")
+    public String doctorMessages(Model model, HttpSession session) {
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+        List<MessageInfo> messages = messageRepository.showDoctorRecievedMessage(doctor_id);
+        model.addAttribute("messages", messages);
+        return "messages";
+    }
+
+    @GetMapping("/doctor/messages/create")
+    public String createDoctorMessage(Model model, HttpSession session) {
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+        List<UserInfo> users = userRepository.showUsers();
+        model.addAttribute("recievers", users);
+        return "create-message";
+    }
+
     
 }

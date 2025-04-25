@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+</head>
+<body>
+    <div th:for="message : ${messages}">
+        
+        <p th:text="|From: ${message.sender_id}|">From</p>
+        <p th:text="${message.message}">Message</p>
+
+    </div>
+</body>
+</html>

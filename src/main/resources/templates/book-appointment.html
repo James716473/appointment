@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/book-appointment.css">
     <script src="/js/user_functions.js" defer></script> 
 </head>
 <body>
     <div class="page-section" id="select-hospital">
         <h1>Select Hospital</h1>
+        
         
         <div th:each="affiliate : ${affiliates}">
             <input type="radio"
@@ -17,7 +19,7 @@
                 name="affiliate"
                 th:value="${affiliate.name}"
                 th:id="${affiliate.name}" />
-            <label th:for="${affiliate.name}" th:text="${affiliate.name}"></label>
+            <label class="affiliate__table" th:for="${affiliate.name}" th:text="${affiliate.name}"></label>
             
         </div>
         <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">

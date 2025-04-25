@@ -1,0 +1,22 @@
+.affiliate-radio {
+  display: none;
+}
+
+.affiliate__table {
+  display: inline-block;
+  background-color: #fff;
+  width: 198px;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* This is the key: style the label (box) if its associated input is checked */
+.affiliate-radio:checked + .affiliate__table {
+  background-color: #112D4E;
+  color: #f9f7f7;
+  border-color: #112D4E;
+}
