@@ -40,9 +40,16 @@ public class AppointmentRepository {
     }
 
     public List<AppointmentInfo> findByUserId(Integer user_id) {
-        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE user_id = :user_id")
+        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE user_id = :user_id AND appointment_date > CURDATE() ORDER BY appointment_date ASC, appointment_time ASC")
             .param("user_id", user_id)
             .query(AppointmentInfo.class)
+            .list();
+    }
+
+    public List<DoctorInfo> appointmentDoctorInfo(Integer user_id){
+        return jdbcClient.sql("SELECT doctors.* FROM doctors INNER JOIN appointments on appointments.doctor_id=doctors.doctor_id WHERE appointments.user_id=:user_id AND appointments.appointment_date > CURDATE() ORDER BY appointments.appointment_date ASC, appointments.appointment_time ASC")
+            .param("user_id", user_id)
+            .query(DoctorInfo.class)
             .list();
     }
 }

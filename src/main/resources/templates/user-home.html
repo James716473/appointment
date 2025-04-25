@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="design2ndP.css">
+    <link rel="stylesheet" href="/design2ndP.css">
     <!-- [] = place holder -->
 </head>
 
@@ -13,14 +13,13 @@
     <header class = "headerBox">
         <h2 class = "medikeep">MEDIKEEP</h2>  
         <div class="img">
-            <p class = "username">[Belen, James]</p>
-            <img src="james.png"> 
+            <p class = "username" th:text="|${user.last_name}, ${user.first_name}|">[Belen, James]</p>
         </div>  
     </header>
 
     <div class = "firstBox">
-        <h1 class = "welcome"> Welcome back, [name]</h1>
-        <p class = "sched">Your next scheduled appointment is in [date] </p>
+        <h1 class = "welcome" th:text="|Welcome back, ${user.first_name}|"> Welcome back, [name]</h1>
+        <p class = "sched" th:text="|Your next scheduled appointment is in ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Your next scheduled appointment is in [date] </p>
         <div class = button-rows>
             <form action = "activity/reschedule.html" class = "form1">
                 <input type="submit" value = "Reschedule" class = "reschedButton">
@@ -34,10 +33,10 @@
 
     <div class = "secondBox">
         <h3 class = "upcoming">Upcoming Appointment:</h3>
-        <p>Date & Time: [date & time] <br></p>
-        <p>Doctor: [Dr. Name (Specialty)] <br></p>
-        <p>Location: [Address] <br></p> 
-        <p>Reason: [reason of appointment]<br></p>
+        <p th:text="|Date & Time: ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Date & Time: [date & time] <br></p>
+        <p th:text="|Doctor: Dr ${appointment_doctor_infos[0].last_name} (${appointment_doctor_infos[0].specialty})|">Doctor: [Dr. Name (Specialty)] <br></p>
+        <p th:text="|Location: ${appointment_doctor_infos[0].affiliation}|">Location: [Address] <br></p> 
+        <p th:text="|Reason: ${appointments[0].description}">Reason: [reason of appointment]<br></p>
         <input type ="submit" value = "Chat with doctor" class="chatwith">
     </div>
 

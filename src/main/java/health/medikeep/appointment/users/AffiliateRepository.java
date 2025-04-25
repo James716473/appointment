@@ -30,6 +30,7 @@ public class AffiliateRepository {
             .query(AffiliateInfo.class)
             .list();
     }
+    
 
 
 }

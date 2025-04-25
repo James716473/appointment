@@ -45,6 +45,19 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/user")
+    public String userPage(Model model, HttpSession session) {
+        Integer user_id = (Integer) session.getAttribute("user_id");
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
+        Optional<UserInfo> user = userRepository.findById(user_id);
+        model.addAttribute("appointment_doctor_infos", appointmentRepository.appointmentDoctorInfo(user_id));
+        model.addAttribute("appointments", appointmentRepository.findByUserId(user_id));
+        model.addAttribute("user", user.get());
+        return "user-home";
+    }
+
     @GetMapping("user/book-appointment")
     public String bookAppointment(Model model, HttpSession session) {
         Integer user_id = (Integer) session.getAttribute("user_id");

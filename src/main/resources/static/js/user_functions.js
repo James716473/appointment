@@ -101,7 +101,7 @@ async function verify_user(event){
             if(response.status === 200){
                 alert("user logged in!");
                 const user_id = await response.json();
-                window.location.href = "/user/info";
+                window.location.href = "/user";
                 
             } else {
                 alert("user not found!");
