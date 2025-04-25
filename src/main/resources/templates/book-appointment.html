@@ -5,14 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../static/bookDes.css">
+    <link rel="stylesheet" href="/bookDes.css">
     <title>Document</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="/book-appointment.css">
     <script src="/js/user_functions.js" defer></script> 
-=======
-    <script src="../static/js/user_functions.js" defer></script> 
->>>>>>> practicegit
 </head>
 <body>
     <header class = "headerBox">
@@ -24,7 +20,6 @@
     </header>
     <div class="page-section" id="select-hospital">
         <h1>Select Hospital</h1>
-<<<<<<< HEAD
         
         
         <div th:each="affiliate : ${affiliates}">
@@ -37,8 +32,7 @@
             
         </div>
         <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
-=======
->>>>>>> practicegit
+
     </div>
 
     
@@ -48,7 +42,7 @@
         <div id="specialty-container">
             
         </div>
-        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-hospital')">
+        <input type="button" value="Back"  onclick="toggle_page_section(event, 'select-hospital')">
         <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-doctor', '.service-radio')">
         
     </div>
@@ -69,7 +63,7 @@
             </label>
             
         </div> 
-        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-service')">
+        <input type="button" value="Back"  onclick="toggle_page_section(event, 'select-service')">
         <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-date-time')">
         
     </div>
@@ -78,7 +72,7 @@
         <h1>Select Date & Time</h1>
         <input type="date" class="date-time" id="date" name="date">
         <input type="time" class="date-time" id="time" name="time">
-        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-doctor')">
+        <input type="button" value="Back"  onclick="toggle_page_section(event, 'select-doctor')">
         <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', '.date-time')">
         
     </div>
@@ -87,7 +81,7 @@
         <h1>Reason for appointment</h1>
         <label for="reason"></label>
         <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
-        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-date-time')">
+        <input type="button" value="Back"  onclick="toggle_page_section(event, 'select-date-time')">
         <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'personal-information', '.reason')">
         
     </div>
@@ -111,7 +105,7 @@
                 <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
                 <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
                 <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-                <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment')">
+                <input type="button" value="Back"  onclick="toggle_page_section(event, 'reason-for-appointment')">
                 <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confimation')">
             </div>
         </div>
@@ -173,37 +167,11 @@
         <p>Are you sure you want to book this appointment?</p>
         <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
         <button type="button" id="cancel">Cancel</button>
-        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'personal-information')">
+        <input type="button" value="Back"  onclick="toggle_page_section(event, 'personal-information')">
     </div>
     
     
-    <div class = "booking-box">
-        <div class="boxContainer">
-            <div class="status-box">
-                
-            </div>
     
-            <div class="action-box">
-                <div class="top-action-box">
-                    <p id="titleClinic">Select Clinic</p>
-                    <input type="text" placeholder="Search" class="searchB">
-                </div>
-                
-                <div class="doc-box-container">
-                    <div th:each="affiliate : ${affiliates}">
-                        <input type="radio"
-                            class="affiliate-radio"
-                            name="affiliate"
-                            th:value="${affiliate.name}"
-                            th:id="${affiliate.name}" />
-                        <label th:for="${affiliate.name}" th:text="${affiliate.name}" class="affiliate-label"></label>
-                    </div>
-                </div>
-                    
-            </div>
-        </div>
-        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
-    </div>
 
     <hr style="border: 1px solid #ccc; margin: 20px 80px;">
 
