@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bookDes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/bookDes.css">
     <title>Document</title>
 </head>
 <body>
@@ -17,18 +18,57 @@
 
 
     <div class = "booking-box">
-        <div class="status-box">
-            <label class="tracker-item">
-                <input type="radio" name="page" checked>
-                <span class="dot"></span>
-                <p>Page 1</p>
-              </label>
-            
+        <div class="boxContainer">
+            <div class="status-box">
+                
+            </div>
+    
+            <div class="action-box">
+                <div class="top-action-box">
+                    <p id="titleClinic">Select Clinic</p>
+                    <input type="text" placeholder="Search" class="searchB">
+                </div>
+                
+                <div class="doc-box-container">
+                    <div class="doctor-box">
+                        <p id="name-title">[name]</p>
+                        <p id="add-box">[address]</p>
+                        <input type="submit" value="Email" class="emailB">
+                        <p>[email]</p>
+                    </div>
 
+                    <div class="doctor-box2">
+                        <p id="name-title">[name]</p>
+                        <p id="add-box">[address]</p>
+                        <input type="submit" value="Email" class="emailB">
+                        <p>[email]</p>
+                    </div>
+                </div>
+                    
+            </div>
         </div>
+        <input type="submit" value="Next" class="nextB">
+        </div>
+    
+    <hr style="border: 1px solid #ccc; margin: 20px 80px;">
 
-        <div>
-
+    <div class="footer-container">
+        <div class="left-section">
+            <h3 class="bottomTitle">MediKeep</h3>
+            <div class="logo-container">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </div>
+    
+        <div class="right-section">
+            <ul>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+            </ul>
         </div>
     </div>
 
