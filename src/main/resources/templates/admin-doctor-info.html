@@ -69,7 +69,7 @@
 
             <label for="edit_affiliation">Affiliation: </label>
             <select id="edit_affiliation">
-                <option th:value="${doctor.specialty != null ? doctor.specialty : 'None'}" th:text="${doctor.specialty != null ? doctor.specialty : 'None'}" selected></option>
+                <option th:value="${doctor.affiliation != null ? doctor.affiliation : 'None'}" th:text="${doctor.affiliation != null ? doctor.affiliation : 'None'}" selected></option>
                 <option th:each= "affiliate : ${affiliates}" th:value="${affiliate.name}" th:text="${affiliate.name}"></option>
             </select> <br>
             

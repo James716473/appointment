@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS appointments (
   user_id INT NOT NULL,
   doctor_id INT NOT NULL,
   appointment_date DATE NOT NULL,
+  appointment_time TIME NOT NULL,
   appointment_type VARCHAR(255) NOT NULL,
   billing_id INT NOT NULL,
   description TEXT
@@ -53,10 +54,18 @@ CREATE TABLE IF NOT EXISTS appointments (
 
 CREATE TABLE IF NOT EXISTS billings (
   billing_id INT AUTO_INCREMENT PRIMARY KEY,
-  price DECIMAL(10, 2),
+  price DECIMAL(10, 2) DEFAULT 99999.99,
   status ENUM('Paid', 'Not_Paid') DEFAULT 'Not_Paid',
   date_issued DATE NOT NULL,
   date_paid DATE 
 );
 
+CREATE TABLE IF NOT EXISTS messages (
+  message_id INT AUTO_INCREMENT PRIMARY KEY,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
+  message_type ENUM('u-d', 'd-u') NOT NULL,
+  message TEXT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
 

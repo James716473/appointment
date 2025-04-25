@@ -83,10 +83,13 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> verify_credentials(@RequestBody UserInfo user, HttpSession session) {
-        if (userRepository.verify(user.email(), user.pass())){
+        Optional<Integer> user_id = userRepository.verify(user.email(), user.pass());
+        if (user_id.isPresent()){
+            session.setAttribute("user_id", user_id.get());
             session.setAttribute("email", user.email());
+            session.setAttribute("role", "user");
             System.out.println("Session email set to: " + user.email()); // Debugging line
-            return ResponseEntity.ok("Login successful!"); 
+            return ResponseEntity.ok(user_id.get()); 
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }

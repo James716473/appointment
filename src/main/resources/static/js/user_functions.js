@@ -60,29 +60,59 @@ async function verify_user(event){
     event.preventDefault();
     const email = document.getElementById("email").value;
     const pass = document.getElementById("pass").value;
-    const user_data = JSON.stringify({
+    const role = document.querySelector('input[name=role]:checked').value;
+
+    
+    const data = JSON.stringify({
         email: email,
         pass: pass
     });
-    try{
-        const response = await fetch(`${url}api/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: user_data
-        });
-        if(response.status === 200){
-            alert("user logged in!");
-            window.location.href = "/book-appointment";
-        } else {
-            alert("user not found!");
+
+    if(role === "Doctor"){
+        try{
+            const response = await fetch(`${url}api/doctors/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: data
+            });
+            if(response.status === 200){
+                alert("Doctor logged in!");
+                const doctor_id = await response.json();
+                window.location.href = "/doctor-info";
+            } else {
+                alert("Doctor not found!");
+                
+            }
             
+        } catch (error) {
+            alert("error has occured");
         }
-        
-    } catch (error) {
-        alert("error has occured");
+    } else {
+        try{
+            const response = await fetch(`${url}api/users/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: data
+            });
+            if(response.status === 200){
+                alert("user logged in!");
+                const user_id = await response.json();
+                window.location.href = "/user-info";
+                
+            } else {
+                alert("user not found!");
+                
+            }
+            
+        } catch (error) {
+            alert("error has occured");
+        }
     }
+    
 }
 
 async function user_info(){
@@ -176,8 +206,44 @@ function edit_toggle() {
     }
 }
 
-function toggle_page_section(event, page_section) {
+function toggle_page_section(event, page_section, class_name) {
     event.preventDefault();
+    
+    if (class_name !== undefined) {
+        const inputs = document.querySelectorAll(class_name);
+        let checked = false;
+    if (page_section === 'select-service') {
+        filter_doctors_by_hospital(); // hides doctors now, not yet visible
+        renderSpecialtiesForHospital();
+    }
+    if (page_section === 'select-doctor') {
+        filter_doctors_by_hospital(); // ensure doctors match latest hospital
+        filter_doctors_by_specialty(); // optional: hide by chosen specialty
+    }
+        if(inputs[0].type === "radio"){
+            inputs.forEach(input => {
+                if (input.checked) {
+                    checked = true;
+                }
+            });   
+        } else {
+            checked = true;
+            for (const input of inputs) {
+                if (input.value.trim() === "") {
+                    checked = false;
+                    break;
+                }
+            }
+        }
+
+        if (!checked) {
+            alert("Please input value to proceed.");
+            return;
+        }
+        
+    }
+    
+
     const sections = document.querySelectorAll(".page-section");
     sections.forEach(section => {
         if (section.id === page_section) {
@@ -349,4 +415,127 @@ async function delete_affiliate(event, affiliate_id) {
     } catch (error) {
         alert("An error occurred: " + error.message);
     }
+}
+
+async function book_appointment(event){
+    event.preventDefault();
+    const user_id = document.getElementById("user_id").value;
+    const doctor_id = document.querySelector('input[name=doctor]:checked').value;
+    const appointment_date = document.getElementById("date").value;
+    const appointment_time = document.getElementById("time").value;
+    const appointment_type = document.querySelector('input[name=specialty]:checked').value;
+    const description = document.getElementById("reason").value;
+
+    
+    let billing_id = null;
+
+
+    const date_issued = new Date().toISOString().slice(0, 10);
+
+    try{
+        const response = await fetch(`${url}api/billings/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                date_issued: date_issued
+            })
+        });
+        if(response.ok){
+            billing_id = await response.json();
+            alert("Billing created successfully!");
+        }
+        else {
+            alert("Failed to create billing.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+    
+    console.log(user_id);
+    console.log(doctor_id);
+    console.log(appointment_date);
+    console.log(appointment_time);
+    console.log(appointment_type);
+    console.log(description);
+    console.log(billing_id);
+    
+    appointment_data = JSON.stringify({
+        user_id: user_id,
+        doctor_id: doctor_id,
+        appointment_date: appointment_date,
+        appointment_time: appointment_time,
+        appointment_type: appointment_type,
+        description: description,
+        billing_id: billing_id
+    });
+
+    try{
+        const response = await fetch(`${url}api/appointments/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: appointment_data
+        });
+        if(response.ok){
+            alert("Appointment booked successfully!");
+        } else {
+            alert("Failed to book appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
+function filter_doctors_by_hospital() {
+    const selectedHospital = document.querySelector('input[name=affiliate]:checked').value;
+    document.querySelectorAll('.doctor-radio').forEach(radio => {
+        const belongs = radio.dataset.hospital === selectedHospital;
+        radio.parentElement.style.display = belongs ? '' : 'none';   // hide whole <div>
+        if (!belongs) radio.checked = false;                         // uncheck if hidden
+    });
+}
+
+function filter_doctors_by_specialty() {
+    const spec = document.querySelector('input[name=specialty]:checked')?.value;
+    if (!spec || spec === 'General') return;          // show all for General
+  
+    document.querySelectorAll('.doctor-radio').forEach(radio => {
+        const match = radio.dataset.specialty === spec &&
+                      radio.style.display !== 'none'; // still in hospital
+        radio.parentElement.style.display = match ? '' : 'none';
+        if (!match) radio.checked = false;
+    });
+  }
+
+function renderSpecialtiesForHospital() {
+    const hosp = document.querySelector('input[name=affiliate]:checked').value;
+  
+    // collect distinct specialties from doctors that belong to this hospital
+    const specialties = new Set();
+    document.querySelectorAll('.doctor-radio').forEach(r => {
+      if (r.dataset.hospital === hosp) specialties.add(r.dataset.specialty);
+    });
+  
+    // add a “General” option first
+    const container = document.getElementById('specialty-container');
+    container.innerHTML =
+      `<div>
+         <input class="service-radio" type="radio"
+                name="specialty" id="general" value="General">
+         <label for="general">General</label>
+       </div>`;
+  
+    // append one radio per distinct specialty
+    specialties.forEach(spec => {
+      const safeId = `spec-${spec.replace(/\s+/g,'_')}`;
+      container.insertAdjacentHTML('beforeend', `
+        <div>
+          <input class="service-radio" type="radio"
+                 name="specialty" id="${safeId}" value="${spec}">
+          <label for="${safeId}">${spec}</label>
+        </div>`);
+    });
 }

@@ -24,18 +24,31 @@
 
     <div class="login__form">
         <form onsubmit="verify_user(event)" class = "login__form--wrapper">
+            <div class="radiobutton__role">
+                <label for="Role">Login as:</label><br>
+                <input type="radio" name="role" class="rad-btn" id="user" value="User" checked required>
+                <label for="user" class="doctor">User:</label>
+                <input type="radio" name="role" class="rad-btn" id="doctor" value="Doctor" required>
+                <label for="doctor" class="doctor">Doctor:</label>
+            <br><br>
+            </div>
             <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" class="form__text" required>
+            <input type="text" id="email" name="email" class="form__text" required>
             <br><br>
 
             <label for="password">Password:</label><br>
             <input type="password" id="pass" name="password" class="form__text" required>
             <br><br>
 
+            
+
             <div class="form__submit">
                 <button type="submit" class="login__form--submit">Login</button>
                 <p>Don't have an account? <a href="signup">Sign up</a></p>
             </div>
+
+            
+            
         </form>
     </div>
 

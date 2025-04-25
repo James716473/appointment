@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/admin-dashboard.css">
+    <link rel="stylesheet" href="/admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,11 +35,11 @@
 
             <nav class="vertical-navbar">
                 <ul>
-                <li><a href="admin-user" class="manage__links">User</a></li>
-                <li><a href="admin-doctor" class="manage__links">Doctor</a></li>
-                <li><a href="admin-billings" class="manage__links">Billing</a></li>
-                <li class="active"><a href="admin-all-appointemnts" class="manage__links">Appointment</a></li>
-                <li><a href="admin-affiliates" class="manage__links">Affiliates</a></li>
+                <li class="active"><a href="/admin/users" class="manage__links">User</a></li>
+                <li><a href="/admin/doctors" class="manage__links">Doctor</a></li>
+                <li><a href="/admin/billings" class="manage__links">Billing</a></li>
+                <li><a href="/admin/appointments" class="manage__links">Appointment</a></li>
+                <li><a href="/admin/affiliates" class="manage__links">Affiliates</a></li>
                 </ul>
             </nav>
 
@@ -53,6 +53,7 @@
                             <th>User ID</th>
                             <th>Doctor ID</th>
                             <th>Appointment Date</th>
+                            <th>Appointment Time</th>
                             <th>Appointment Type</th>
                             <th>Billing ID</th>
                             <th>Description</th>
@@ -63,6 +64,7 @@
                             <td th:text="${appointment.user_id}">user id</td>
                             <td th:text="${appointment.doctor_id}">doctor id</td>
                             <td th:text="${appointment.appointment_date}">appointment date</td>
+                            <td th:text="${appointment.appointment_time}">appointment time</td>
                             <td th:text="${appointment.appointment_type}">appointment type</td>
                             <td th:text="${appointment.billing_id}">billing id</td>
                             <td th:text="${appointment.description}">description</td>

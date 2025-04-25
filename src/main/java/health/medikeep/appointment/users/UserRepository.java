@@ -61,12 +61,12 @@ public class UserRepository {
         return updated;
     }
 
-    public boolean verify(String email, String pass){
+    public Optional<Integer> verify(String email, String pass){
         System.out.println("Verifying email: " + email + " with password: " + pass); // Debugging line
-        return jdbcClient.sql("SELECT COUNT(*) FROM users WHERE email = ? AND pass = ?")
+        return jdbcClient.sql("SELECT USER_ID FROM users WHERE email = ? AND pass = ?")
             .params(List.of(email, pass))
             .query(Integer.class)
-            .single() == 1;
+            .optional();
     }
 
     public boolean update(UserInfo user){

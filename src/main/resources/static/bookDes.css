@@ -1,0 +1,76 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.headerBox{
+    background-color: #05668C;
+    padding: 30px;  
+    box-sizing: border-box;  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    color: white;
+}
+.username{
+    font-size: 20px;
+}
+.img{
+    align-items: center;
+    display: flex;
+    gap: 15px;
+}
+img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.booking-box{
+    background-color: #D9D9D9;
+    border-radius: 40px;
+    display: flex;
+    text-align: center;
+    width: 1138px;
+    height: 954px;
+    padding: 1rem 1rem;
+    margin: auto;
+}
+.status-box{
+    background-color: #8CBFCD;
+    width: 264px;
+    height: 814px;
+    display: flex;
+    padding: 1rem 1rem;
+    margin-top: 59px;
+    margin-left: 70px;
+}
+.tracker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.tracker-item input[type="radio"] {
+    display: none;
+}
+
+.tracker-item .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: lightgray;
+    transition: background-color 0.3s;
+}
+
+.tracker-item input[type="radio"]:checked + .dot {
+    background-color: #05668C;
+}
+
+.tracker-item p {
+    font-size: 18px;
+    color: black;
+}
