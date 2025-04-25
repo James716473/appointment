@@ -74,7 +74,7 @@ async function verify_user(event){
         });
         if(response.status === 200){
             alert("user logged in!");
-            window.location.href = "/book-appointment";
+            window.location.href = "/user/book-appointment";
         } else {
             alert("user not found!");
             

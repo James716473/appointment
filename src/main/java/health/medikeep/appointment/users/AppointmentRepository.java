@@ -38,4 +38,11 @@ public class AppointmentRepository {
             .query(AppointmentInfo.class)
             .optional();
     }
+
+    public List<AppointmentInfo> findByUserId(Integer user_id) {
+        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE user_id = :user_id")
+            .param("user_id", user_id)
+            .query(AppointmentInfo.class)
+            .list();
+    }
 }

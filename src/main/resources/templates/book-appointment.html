@@ -10,6 +10,7 @@
 <body>
     <div class="page-section" id="select-hospital">
         <h1>Select Hospital</h1>
+        
         <div th:each="affiliate : ${affiliates}">
             <input type="radio"
                 class="affiliate-radio"
@@ -22,6 +23,7 @@
         <input type="button" value="Next" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
     </div>
 
+    
     <div class="page-section" id="select-service" style="display: none;">
         <h1>Select Service</h1>
 

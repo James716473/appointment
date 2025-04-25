@@ -60,4 +60,12 @@ CREATE TABLE IF NOT EXISTS billings (
   date_paid DATE 
 );
 
+CREATE TABLE IF NOT EXISTS messages (
+  message_id INT AUTO_INCREMENT PRIMARY KEY,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
+  message_type ENUM('u-d', 'd-u') NOT NULL,
+  message TEXT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
 

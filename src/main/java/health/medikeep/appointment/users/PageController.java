@@ -13,11 +13,15 @@ public class PageController {
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
     private final AffiliateRepository affiliateRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final BillingRepository billingRepository;
 
-    public PageController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository) {
+    public PageController(UserRepository userRepository, DoctorRepository doctorRepository, AffiliateRepository affiliateRepository, AppointmentRepository appointmentRepository, BillingRepository billingRepository) {
+        this.billingRepository = billingRepository;
         this.userRepository = userRepository;
         this.doctorRepository = doctorRepository;
         this.affiliateRepository = affiliateRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     @GetMapping("/")
@@ -36,7 +40,7 @@ public class PageController {
         return "login";
     }
 
-    @GetMapping("/book-appointment")
+    @GetMapping("user/book-appointment")
     public String bookAppointment(Model model, HttpSession session) {
         model.addAttribute("doctors", doctorRepository.showDoctors());
         model.addAttribute("affiliates", affiliateRepository.showAffiliates());
@@ -44,10 +48,22 @@ public class PageController {
 
         String email = (String) session.getAttribute("email");
         Integer user_id = userRepository.getUid(email).orElse(null);
+        if(user_id == null) {
+            return "no-rights";
+        }
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
 
         
         return "book-appointment";
+    }
+
+    @GetMapping("user/appointment")
+    public String userAppointment(Model model, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        Integer user_id = userRepository.getUid(email).orElse(null);
+        model.addAttribute("user", userRepository.findById(user_id).orElse(null));
+        model.addAttribute("appointments", appointmentRepository.findByUserId(user_id));
+        return "user-appointment";
     }
     
 }
