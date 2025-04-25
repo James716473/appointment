@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="../static/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,17 +21,22 @@
         <a href="../" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
     </div>
 
-
-    <div class="login__form">
-        <form onsubmit="verify_user(event)" class = "login__form--wrapper">
-            <div class="radiobutton__role">
-                <label for="Role">Login as:</label><br>
-                <input type="radio" name="role" class="rad-btn" id="user" value="User" checked required>
-                <label for="user" class="doctor">User:</label>
-                <input type="radio" name="role" class="rad-btn" id="doctor" value="Doctor" required>
+    <div class="radiobutton__wrapper">
+        <div class="radiobutton__role">
+            <label for="Role">Login as:</label><br>
+            <div class="role__buttons">
+                <input type="radio" name="role" class="rad-btn" id="user" value="User" checked required form="login--form">
+                <label for="user" class="user">User:</label>
+                <input type="radio" name="role" class="rad-btn" id="doctor" value="Doctor" required form="login--form">
                 <label for="doctor" class="doctor">Doctor:</label>
             <br><br>
             </div>
+        </div>
+    </div>
+
+    <div class="login__form">
+        <form onsubmit="verify_user(event)" class = "login__form--wrapper" id="login--form">
+
             <label for="email">Email:</label><br>
             <input type="text" id="email" name="email" class="form__text" required>
             <br><br>

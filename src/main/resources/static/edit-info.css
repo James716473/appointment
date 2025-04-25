@@ -13,7 +13,7 @@ body {
   background-color: #F9F7F7;
 }
 
-.edit__container, .info__container {
+.edit__container, .info__container, .edit__container2 {
   background-color: #DBE2EF;
   height: 96.7vh;
   width: 100%;
@@ -22,6 +22,15 @@ body {
   border-radius: 8px;
   border: 1px solid rgba(63, 114, 175, 0.3);
   line-height: 50px;
+}
+
+.edit__container2 {
+  height: 36.7vh;
+}
+.edit__container2 h1 {
+  font-weight: 700;
+  color: #112D4E;
+  margin-bottom: 0.5rem;
 }
 
 #edit__button, #create__button, #discard__button, #save__button, #back__button {
@@ -39,6 +48,33 @@ body {
   color: #112D4E;
   transition: all 0.3s ease;
   border: 1px solid #112D4E;
+}
+
+#create__button {
+  margin-top: 3rem;
+}
+
+.form__text {
+  width: 400px;
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #24292e;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.8823529412);
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 2px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.form__text:focus {
+  border-color: #0366d6;
+  outline: none;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  transition: all 0.3s ease;
 }
 
 /*# sourceMappingURL=edit-info.css.map */
