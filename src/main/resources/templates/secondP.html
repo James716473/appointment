@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="design2ndP.css">
+    <!-- [] = place holder -->
+</head>
+
+<body>
+    <header class = "headerBox">
+        <h2 class = "medikeep">MEDIKEEP</h2>  
+        <div class="img">
+            <p class = "username">[Belen, James]</p>
+            <img src="james.png"> 
+        </div>  
+    </header>
+
+    <div class = "firstBox">
+        <h1 class = "welcome"> Welcome back, [name]</h1>
+        <p class = "sched">Your next scheduled appointment is in [date] </p>
+        <div class = button-rows>
+            <form action = "activity/reschedule.html" class = "form1">
+                <input type="submit" value = "Reschedule" class = "reschedButton">
+            </form>
+            <form action = "activity/appointments.html" class = "form1"> 
+                <input type="submit" value = "View All Appointments" class="viewAll">
+            </form>
+        </div>
+            
+    </div>
+
+    <div class = "secondBox">
+        <h3 class = "upcoming">Upcoming Appointment:</h3>
+        <p>Date & Time: [date & time] <br></p>
+        <p>Doctor: [Dr. Name (Specialty)] <br></p>
+        <p>Location: [Address] <br></p> 
+        <p>Reason: [reason of appointment]<br></p>
+        <input type ="submit" value = "Chat with doctor" class="chatwith">
+    </div>
+
+    <div class="buttonContainer">
+        <div class="booking">
+            <form action="activity/booking.html">
+                <button class="bookButton">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span>Book Appointment</span>
+                </button>
+            </form>
+        </div>
+    
+        <div class="medicalrecords">
+            <form action="activity/records.html">
+                <button class="recordsButton">
+                    <i class="fa-solid fa-file-medical"></i>
+                    <span>Medical Records</span>
+                </button>
+            </form>
+        </div>
+    
+        <div class="chatdoctors">
+            <form action="activity/chat.html">
+                <button class="chat">
+                    <i class="fa-solid fa-message"></i>
+                    <span>Chat with Doctors</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <hr style="border: 1px solid #ccc; margin: 20px 80px;">
+
+    <div class="footer-container">
+        <div class="left-section">
+            <h3 class="bottomTitle">MediKeep</h3>
+            <div class="logo-container">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </div>
+    
+        <div class="right-section">
+            <ul>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+                <li><a href="">Topic</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
