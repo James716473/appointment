@@ -21,20 +21,19 @@
         <h1 class = "welcome" th:text="|Welcome back, ${user.first_name}|"> Welcome back, [name]</h1>
         <p class = "sched" th:text="|Your next scheduled appointment is in ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Your next scheduled appointment is in [date] </p>
         <div class = button-rows>
-            <form action = "activity/reschedule.html" class = "form1">
-                <input type="submit" value = "Reschedule" class = "reschedButton">
-            </form>
-            <form action = "activity/appointments.html" class = "form1"> 
-                <input type="submit" value = "View All Appointments" class="viewAll">
-            </form>
+            <div class="form1">
+                <input type="button" value = "Reschedule" class = "reschedButton">
+                <input type="submit" value = "View All Appointments" class="viewAll" onclick="location.href='user/appointment'">
+            </div>
+            
         </div>
             
     </div>
 
     <div class = "secondBox">
         <h3 class = "upcoming">Upcoming Appointment:</h3>
-        <p th:text="|Date & Time: ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Date & Time: [date & time] <br></p>
-        <p th:text="|Doctor: Dr ${appointment_doctor_infos[0].last_name} (${appointment_doctor_infos[0].specialty})|">Doctor: [Dr. Name (Specialty)] <br></p>
+        <p th:text="|Date & Time: ${appointments[0  ].appointment_date} at ${appointments[0].appointment_time}|">Date & Time: [date & time] <br></p>
+        <p th:text="|Doctor: Dr. ${appointment_doctor_infos[0].last_name} (${appointments[0].appointment_type})|">Doctor: [Dr. Name (Specialty)] <br></p>
         <p th:text="|Location: ${appointment_doctor_infos[0].affiliation}|">Location: [Address] <br></p> 
         <p th:text="|Reason: ${appointments[0].description}">Reason: [reason of appointment]<br></p>
         <input type ="submit" value = "Chat with doctor" class="chatwith">
@@ -42,7 +41,7 @@
 
     <div class="buttonContainer">
         <div class="booking">
-            <form action="activity/booking.html">
+            <form action="user/book-appointment">
                 <button class="bookButton">
                     <i class="fa-solid fa-calendar"></i>
                     <span>Book Appointment</span>

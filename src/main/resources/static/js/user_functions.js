@@ -481,6 +481,7 @@ async function book_appointment(event){
         });
         if(response.ok){
             alert("Appointment booked successfully!");
+            window.location.href = "/user";
         } else {
             alert("Failed to book appointment.");
         }
