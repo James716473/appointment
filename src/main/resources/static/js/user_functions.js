@@ -1,4 +1,4 @@
-url = "https://foal-engaged-regularly.ngrok-free.app/"
+url = "foal-engaged-regularly.ngrok-free.app/"
 
 async function create_user(event){
     event.preventDefault();

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/bookDes.css">
+    <link rel="stylesheet" href="../static/choose-date.css">
     <title>Document</title>
     <script src="../static/js/user_functions.js" defer></script> 
 
@@ -28,7 +28,7 @@
             <div class="status-box">
                 <div class="steps-container">
                     <div class="step">
-                        <div class="circle active"></div>
+                        <div class="circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Choose a Clinic</strong>
                             <p class="step-descrip">Select a clinic you want to visit</p>
@@ -52,7 +52,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle active"></div>
                         <div class="step-content">
                             <strong class="step-title">Date & Time</strong>
                             <p class="step-descrip">Select your preferred time</p>
@@ -88,23 +88,44 @@
             <div class="action-box">
                 <div class="top-action-box">
                     <div class="page-section" id="select-hospital">
-                        <h1>Select Hospital</h1>
+                        <h1>Schedule your Appointment</h1>
                     </div>
-                    <input type="text" placeholder="Search" class="searchB">
+                    
                 </div>
                 
                 <div class="doc-box-container">
-                    <div th:each="affiliate : ${affiliates}">
-                        <input type="radio"
-                            class="affiliate-radio"
-                            name="affiliate"
-                            th:value="${affiliate.name}"
-                            th:id="${affiliate.name}" />
-                        <label th:for="${affiliate.name}" th:text="${affiliate.name}" class="affiliate-label"></label>
+                    
+                    <div class="calendar-box">
+                        [Calendar]
                     </div>
 
-                </div>
+                    <div class="time-box">
+                        <div class="radio-container">
+                            <label class="radio-label">
+                                <input type="radio" name="time-slot" value="AM" class="radio-input">
+                                <span class="custom-radio">A.M.</span>
+                            </label>
+                            
+                            <label class="radio-label">
+                                <input type="radio" name="time-slot" value="PM" class="radio-input">
+                                <span class="custom-radio">P.M.</span>
+                            </label>
+                        </div>
+                        
+                        <div class="new-radio-container">
+                            <input type="radio" id="time1" name="time" class="new-radio-input">
+                            <label for="time1" class="new-radio-label">8:00-9:30 am</label>
+
+                            <input type="radio" id="time2" name="time" class="new-radio-input">
+                            <label for="time2" class="new-radio-label">10:00-11:30 am</label>
+
+                            <input type="radio" id="time3" name="time" class="new-radio-input">
+                            <label for="time3" class="new-radio-label">11:30 am-12:00 pm</label>
+
+                        </div>
                     
+                    </div>
+                </div>    
             </div>
         </div>
         <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
