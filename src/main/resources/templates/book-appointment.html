@@ -28,7 +28,7 @@
             <div class="status-box">
                 <div class="steps-container">
                     <div class="step">
-                        <div class="circle active"></div>
+                        <div class="circle active" id="select-hospital-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Choose a Clinic</strong>
                             <p class="step-descrip">Select a clinic you want to visit</p>
@@ -36,7 +36,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="select-service-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Choose a Service</strong>
                             <p class="step-descrip">Select what service you want from the doctor</p>
@@ -44,7 +44,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="select-doctor-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Choose your Doctor</strong>
                             <p class="step-descrip">Choose your preferred doctor</p>
@@ -52,7 +52,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="select-date-time-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Date & Time</strong>
                             <p class="step-descrip">Select your preferred time</p>
@@ -60,7 +60,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="reason-for-appointment-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Reason for Appointment</strong>
                             <p class="step-descrip">Upload file and description about your appointment</p>
@@ -68,7 +68,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="personal-information-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Personal Information</strong>
                             <p class="step-descrip">Provide your personal information and details</p>
@@ -76,7 +76,7 @@
                     </div>
             
                     <div class="step">
-                        <div class="circle"></div>
+                        <div class="circle" id="confirmation-circle"></div>
                         <div class="step-content">
                             <strong class="step-title">Confirmation</strong>
                             <p class="step-descrip">Confirm your appointment and details</p>
@@ -200,7 +200,7 @@
                         <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
                         <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
                         <input type="button" value="Back" onclick="toggle_page_section(event, 'reason-for-appointment')">
-                        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confimation')">
+                        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confirmation')">
                     </div>
                 </div>
                 
@@ -256,7 +256,7 @@
                 
             </div>
 
-            <div class="page-section" id="confimation" style="display: none;">
+            <div class="page-section" id="confirmation" style="display: none;">
                 <div class="top-action-box">
                     <h1>Confirmation</h1>
                 </div>

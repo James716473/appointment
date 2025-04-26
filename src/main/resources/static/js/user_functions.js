@@ -212,6 +212,8 @@ function edit_toggle() {
 function toggle_page_section(event, page_section, name) {
     event.preventDefault();
     
+
+
     if (name !== undefined) {
         const inputs = document.querySelectorAll(`[name=${name}]`);
         let checked = false;
@@ -251,8 +253,10 @@ function toggle_page_section(event, page_section, name) {
     sections.forEach(section => {
         if (section.id === page_section) {
             section.style.display = "block";
+            document.getElementById(`${section.id}-circle`).className = "circle active";
         } else {
             section.style.display = "none";
+            document.getElementById(`${section.id}-circle`).className = "circle";
         }
     });
 
