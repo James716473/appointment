@@ -113,7 +113,7 @@ img{
     color: white;
     font-size: 14px;
 }
-.action-box{
+.page-section{
     background-color: white;
     width: 766px;
     height: 764px;
@@ -185,10 +185,18 @@ img{
     justify-content: space-between;
     column-count: 2;
 }
-.affiliate-radio    {
+
+.radio-selection{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+    gap: 10px; /* space between items */
+}
+
+
+.radio   {
     display: none;
 }
-.affiliate-label {
+.radio-label {
     width: 318px;
     height: 208px;
     display: inline-block;
@@ -202,7 +210,7 @@ img{
     margin-top: 25px;
 }
 
-.affiliate-radio:checked + .affiliate-label {
+.radio:checked + .radio-label {
     box-shadow: 0 0 10px rgba(34, 87, 231, 0.4);
     transition: 0.3s ease;
 }

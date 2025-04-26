@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/bookDes.css">
     <title>Document</title>
-    <script src="../static/js/user_functions.js" defer></script> 
+    <script src="/js/user_functions.js" defer></script> 
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -85,163 +85,200 @@
                 </div>
             </div>
     
-            <div class="action-box">
+            <div class="page-section" id="select-hospital">
                 <div class="top-action-box">
-                    <div class="page-section" id="select-hospital">
-                        <h1>Select Hospital</h1>
-                    </div>
+                    <h1>Select Hospital</h1>
                     <input type="text" placeholder="Search" class="searchB">
                 </div>
                 
                 <div class="doc-box-container">
-                    <div th:each="affiliate : ${affiliates}">
-                        <input type="radio"
-                            class="affiliate-radio"
-                            name="affiliate"
-                            th:value="${affiliate.name}"
-                            th:id="${affiliate.name}" />
-                        <label th:for="${affiliate.name}" th:text="${affiliate.name}" class="affiliate-label"></label>
+                    <div class="radio-selection">
+                        
+                    
+                        <div th:each="affiliate : ${affiliates}">
+                            <input type="radio"
+                                class="radio"
+                                name="affiliate"
+                                th:value="${affiliate.name}"
+                                th:id="${affiliate.name}" />
+                            <label th:for="${affiliate.name}" th:text="${affiliate.name}" class="radio-label"></label>
+                        </div>
                     </div>
+                </div>
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-service', 'affiliate')">    
+            </div>
 
+            <div class="page-section" id="select-service" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Select Service</h1>
+                    <input type="text" placeholder="Search" class="searchB">
                 </div>
-                    
-            </div>
-        </div>
-        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-service', '.affiliate-radio')">
 
-        <div class="page-section" id="select-service" style="display: none;">
-            <h1>Select Service</h1>
-    
-            <div id="specialty-container">
-                
-            </div>
-            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
-            <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-doctor', '.service-radio')">
-            
-        </div>
-        <!-- The Doctor Shown should be based on what specialty and hospital they are in-->
-        <div class="page-section" id="select-doctor" style="display: none;">
-            <h1>Select Doctor</h1>
-            <div th:each="doctor : ${doctors}">
-                <input type="radio"
-                    class="doctor-radio"
-                    name="doctor"
-                    th:value="${doctor.doctor_id}"
-                    th:data-hospital="${doctor.affiliation}"
-                    th:data-specialty="${doctor.specialty}"
-                    
-                    th:id="${doctor.doctor_id}" />
-                <label th:for="${doctor.doctor_id}"
-                    th:text="|${doctor.first_name} ${doctor.middle_name} ${doctor.last_name} (${doctor.email})|">
-                </label>
-                
-            </div> 
-            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
-            <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-date-time')">
-            
-        </div>
-    
-        <div class="page-section" id="select-date-time" style="display: none;">
-            <h1>Select Date & Time</h1>
-            <input type="date" class="date-time" id="date" name="date">
-            <input type="time" class="date-time" id="time" name="time">
-            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
-            <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', '.date-time')">
-            
-        </div>
-    
-        <div class="page-section" id="reason-for-appointment" style="display: none;">
-            <h1>Reason for appointment</h1>
-            <label for="reason"></label>
-            <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
-            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
-            <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'personal-information', '.reason')">
-            
-        </div>
-        
-        <div class="page-section" id="personal-information" style="display: none;">
-            <h1>Personal Information</h1>
-            <div id="info">
-                <div class="edit__container">
-                    <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
-                    <input type="hidden" id="user_id" th:value="${user.user_id}">
-                    <p th:text="${user.user_id}">Id: 0</p>
-                    <p id="first_name">First name: [[${user.first_name}]]</p>
-                    <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
-                    <p id="last_name">Last name: [[${user.last_name}]]</p>
-                    <p id="email">Email: [[${user.email}]]</p>
-                    <p id="pass">Password: [[${user.pass}]]</p>
-                    <p id="sex">Sex: [[${user.sex}]]</p>
-                    <p id="birth_date">Birth date: [[${user.birth_date}]]</p>
-                    <p id="contact_number">Contact number: [[${user.contact_number} ?: 'None']]</p>
-                    <p id="medical_history">Medical history: [[${user.medical_history} ?: 'None']]</p>
-                    <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
-                    <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
-                    <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-                    <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment')">
-                    <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confimation')">
+                <div class="doc-box-container">
+                    <div id="specialty-container" class="radio-selection">
+
+                    </div>
                 </div>
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-doctor', 'specialty')">
+                    
             </div>
-            
-            
-            <div id="edit_info" style="display: none;">
-                <div class="info__container">
-                    <p>Id: <span th:text="${user.user_id}"></span></p>
-                    
-                    <label for="edit_first_name">First Name: </label>
-                    <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
                 
-                    <label for="edit_middle_name">Middle Name: </label>
-                    <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
-                
-                    <label for="edit_last_name">Last Name: </label>
-                    <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
-                
-                    <label for="edit_email">Email: </label>
-                    <input type="text" id="edit_email" th:value="${user.email}"><br>
-                
-                    <label for="edit_pass">Password: </label>
-                    <input type="text" id="edit_pass" th:value="${user.pass}"><br>
-                
-                    <label for="edit_sex">Sex:</label>
-                    <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
-                    <label class="male" for="male">Male</label>
-                    
-                    <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
-                    <label class="female" for="female">Female</label><br>
-                
-                    <label for="edit_birth_date">Birth Date: </label>
-                    <input type="date" id="edit_birth_date" th:value="${user.birth_date}"><br>
-                
-                    <label for="edit_contact_number">Contact Number: </label>
-                    <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
-                
-                    <label for="edit_medical_history">Medical History: </label>
-                    <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
-                
-                    <label for="edit_allergies">Allergies: </label>
-                    <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
-                
-                    <label for="edit_family_medical_history">Family Medical History: </label>
-                    <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
-        
-                
-                    <input type="button" id="save__button" th:attr="onclick=|edit_user(event, ${user.user_id})|" value="Save">
-                    <input type="button" id="discard__button" onclick="edit_toggle()" value="Cancel">
-        
+            <!-- The Doctor Shown should be based on what specialty and hospital they are in-->
+            <div class="page-section" id="select-doctor" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Select Doctor</h1>
+                    <input type="text" placeholder="Search" class="searchB">
                 </div>
+                <div class="doc-box-container">
+                    <div class="radio-selection">
+                        <div th:each="doctor : ${doctors}">
+                            <input type="radio"
+                                class="radio"
+                                name="doctor"
+                                th:value="${doctor.doctor_id}"
+                                th:data-hospital="${doctor.affiliation}"
+                                th:data-specialty="${doctor.specialty}"
+                                
+                                th:id="${doctor.doctor_id}" />
+                            <label th:for="${doctor.doctor_id}"
+                                th:text="|${doctor.first_name} ${doctor.middle_name} ${doctor.last_name} (${doctor.email})|" class="radio-label">
+                            </label>
+                            
+                        </div> 
+                    </div>
+                </div>
+                
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-date-time', 'doctor')">
+                
+            </div>    
+           
+            <div class="page-section" id="select-date-time" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Select Date & Time</h1>
+                </div>
+                
+                <input type="date" class="date-time" id="date" name="date-time">
+                <input type="time" class="date-time" id="time" name="date-time">
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', 'date-time')">
+                
             </div>
+
+            <div class="page-section" id="reason-for-appointment" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Reason for appointment</h1>
+                </div>
+                
+                <label for="reason"></label>
+                <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'personal-information', 'reason')">                
+            </div>
+
+            <div class="page-section" id="personal-information" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Personal Information</h1>
+                </div>
+                
+                <div id="info">
+                    <div class="edit__container">
+                        <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
+                        <input type="hidden" id="user_id" th:value="${user.user_id}">
+                        <p th:text="${user.user_id}">Id: 0</p>
+                        <p id="first_name">First name: [[${user.first_name}]]</p>
+                        <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
+                        <p id="last_name">Last name: [[${user.last_name}]]</p>
+                        <p id="email">Email: [[${user.email}]]</p>
+                        <p id="pass">Password: [[${user.pass}]]</p>
+                        <p id="sex">Sex: [[${user.sex}]]</p>
+                        <p id="birth_date">Birth date: [[${user.birth_date}]]</p>
+                        <p id="contact_number">Contact number: [[${user.contact_number} ?: 'None']]</p>
+                        <p id="medical_history">Medical history: [[${user.medical_history} ?: 'None']]</p>
+                        <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
+                        <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
+                        <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
+                        <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment')">
+                        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confimation')">
+                    </div>
+                </div>
+                
+                
+                <div id="edit_info" style="display: none;">
+                    <div class="info__container">
+                        <p>Id: <span th:text="${user.user_id}"></span></p>
+                        
+                        <label for="edit_first_name">First Name: </label>
+                        <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
+                    
+                        <label for="edit_middle_name">Middle Name: </label>
+                        <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
+                    
+                        <label for="edit_last_name">Last Name: </label>
+                        <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
+                    
+                        <label for="edit_email">Email: </label>
+                        <input type="text" id="edit_email" th:value="${user.email}"><br>
+                    
+                        <label for="edit_pass">Password: </label>
+                        <input type="text" id="edit_pass" th:value="${user.pass}"><br>
+                    
+                        <label for="edit_sex">Sex:</label>
+                        <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
+                        <label class="male" for="male">Male</label>
+                        
+                        <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
+                        <label class="female" for="female">Female</label><br>
+                    
+                        <label for="edit_birth_date">Birth Date: </label>
+                        <input type="date" id="edit_birth_date" th:value="${user.birth_date}"><br>
+                    
+                        <label for="edit_contact_number">Contact Number: </label>
+                        <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
+                    
+                        <label for="edit_medical_history">Medical History: </label>
+                        <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
+                    
+                        <label for="edit_allergies">Allergies: </label>
+                        <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
+                    
+                        <label for="edit_family_medical_history">Family Medical History: </label>
+                        <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
             
+                    
+                        <input type="button" id="save__button" th:attr="onclick=|edit_user(event, ${user.user_id})|" value="Save">
+                        <input type="button" id="discard__button" onclick="edit_toggle()" value="Cancel">
             
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <div class="page-section" id="confimation" style="display: none;">
+                <div class="top-action-box">
+                    <h1>Confirmation</h1>
+                </div>
+                
+                <p>Are you sure you want to book this appointment?</p>
+                <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
+                <button type="button" id="cancel">Cancel</button>
+                <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
+            </div>
         </div>
+        
+
+        
+        
     
-        <div class="page-section" id="confimation" style="display: none;">
-            <h1>Confirmation</h1>
-            <p>Are you sure you want to book this appointment?</p>
-            <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
-            <button type="button" id="cancel">Cancel</button>
-            <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
-        </div>
+        
+    
+        
+        
+        
+    
+        
     </div>
 
     <hr style="border: 1px solid #ccc; margin: 20px 80px;">

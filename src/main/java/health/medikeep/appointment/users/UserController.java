@@ -83,6 +83,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> verify_credentials(@RequestBody UserInfo user, HttpSession session) {
+        System.out.println("Verifying email: " + user.email() + " with password: " + user.pass()); // Debugging line
         Optional<Integer> user_id = userRepository.verify(user.email(), user.pass());
         if (user_id.isPresent()){
             session.setAttribute("user_id", user_id.get());
