@@ -180,47 +180,95 @@ img{
     
 }
 .doc-box-container{
+    flex-direction: column;
+    align-items: center;
+}
+.calendar-box{
+    background-color: #D9D9D9;
+    width: 554px;
+    height: 313px;
+    border-radius: 49px;
+    margin: auto;
+    margin-top: 70px;
+    text-align: center;
+}
+.time-box{
+    background-color: #D9D9D9;
+    width: 595px;
+    height: 172px;
+    border-radius: 49px;
+    margin: auto;
+    margin-top: 70px;
+    padding-top: 9px;
+}
+.radio-container {
+    background-color:#BFC0C0;
+    width: 448px;
+    height: 27px;
+    display: flex;
+    margin: auto;
+    border-radius: 49px;
+    margin-top: 10px;
+}
+
+.radio-label {
+    display: flex;
+    cursor: pointer;
+    margin: auto;
+}
+
+.radio-input {
+    display: none; /* Hide default radio button */
+}
+
+.custom-radio {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    column-count: 2;
+    justify-content: center;
+    width: 224px;
+    height: 27px;
+    border-radius: 49px;
+    background-color: #BFC0C0;
+    font-size: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
-.affiliate-radio    {
+
+/* Style when selected */
+.radio-input:checked + .custom-radio {
+    background-color: #9D9D9D; /* Blue for selection */
+    color: black;
+}
+.new-radio-container{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.new-radio-input {
     display: none;
 }
-.affiliate-label {
-    width: 318px;
-    height: 208px;
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 8px;
-    background-color: #D9D9D9;
-    border-radius: 49px;
-    cursor: pointer;
-    font-weight: 500;
-    margin-left: 35px;
-    margin-top: 25px;
-}
-
-.affiliate-radio:checked + .affiliate-label {
-    box-shadow: 0 0 10px rgba(34, 87, 231, 0.4);
-    transition: 0.3s ease;
-}
-.emailB{
-    width: 94px;
-    height: 27px;
+.new-radio-label {
     background-color: #05668C;
-    color: white;
+    width: 160px;
+    height: 50px;
     border-radius: 42px;
-}
-#name-title{
-    font-size: 26px;
-}
-#add-box{
-    font-size: 23px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
+.new-radio-input:checked + .new-radio-label{
+    background-color: #0da5b9;
+}
 
+.new-radio-label:hover {
+    background-color: #0da5b9;
+}
 .footer-container {
     display: flex;
     justify-content: space-between; /* Align left and right sections */

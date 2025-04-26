@@ -3,6 +3,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
+body{
+    font-family: 'Inter', sans-serif;
+}
 .headerBox{
     background-color: #05668C;
     padding: 30px;  
