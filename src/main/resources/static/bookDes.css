@@ -183,13 +183,18 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    column-count: 2;
+    
 }
 
 .radio-selection{
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 equal columns */
-    gap: 10px; /* space between items */
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    gap: 10px;
+    max-height: 670px; /* height limit for vertical scroll */
+    overflow-y: auto; /* vertical scroll only */
+    overflow-x: hidden; /* hide horizontal scroll */
+    padding-right: 10px; /* optional: space for scrollbar */
+    box-sizing: border-box; /* prevents padding from making it wider */
 }
 
 
