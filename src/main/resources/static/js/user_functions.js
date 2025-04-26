@@ -1,4 +1,4 @@
-url = "https://foal-engaged-regularly.ngrok-free.app/"
+url = "localhost:8080/"
 
 async function create_user(event){
     event.preventDefault();
