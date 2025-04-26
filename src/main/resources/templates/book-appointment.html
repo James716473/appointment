@@ -41,6 +41,7 @@
                             th:id="${affiliate.name}" />
                         <label th:for="${affiliate.name}" th:text="${affiliate.name}" class="affiliate-label"></label>
                     </div>
+
                 </div>
                     
             </div>
@@ -53,7 +54,7 @@
             <div id="specialty-container">
                 
             </div>
-            <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-hospital')">
+            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
             <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-doctor', '.service-radio')">
             
         </div>
@@ -74,7 +75,7 @@
                 </label>
                 
             </div> 
-            <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-service')">
+            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
             <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-date-time')">
             
         </div>
@@ -83,7 +84,7 @@
             <h1>Select Date & Time</h1>
             <input type="date" class="date-time" id="date" name="date">
             <input type="time" class="date-time" id="time" name="time">
-            <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-doctor')">
+            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
             <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', '.date-time')">
             
         </div>
@@ -92,7 +93,7 @@
             <h1>Reason for appointment</h1>
             <label for="reason"></label>
             <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
-            <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'select-date-time')">
+            <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
             <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'personal-information', '.reason')">
             
         </div>
@@ -178,7 +179,7 @@
             <p>Are you sure you want to book this appointment?</p>
             <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
             <button type="button" id="cancel">Cancel</button>
-            <input type="button" value="Back" class="nextB" onclick="toggle_page_section(event, 'personal-information')">
+            <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
         </div>
     </div>
 

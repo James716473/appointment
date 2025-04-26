@@ -118,10 +118,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.doc-box-container .affiliate-radio{
-    display: none;
-    
+    column-count: 2;
 }
 .affiliate-radio    {
     display: none;
@@ -136,6 +133,8 @@ img{
     border-radius: 49px;
     cursor: pointer;
     font-weight: 500;
+    margin-left: 35px;
+    margin-top: 25px;
 }
 
 .affiliate-radio:checked + .affiliate-label {
