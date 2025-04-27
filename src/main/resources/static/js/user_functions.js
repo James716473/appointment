@@ -547,3 +547,79 @@ function renderSpecialtiesForHospital() {
         `);
     });
 }
+
+async function send_message(event, id){
+    event.preventDefault();
+
+    const button = event.target; // 'this' can also be used here if you use it within the onclick handler
+    const role = button.dataset.role; // Get the data-role value
+    
+    const sender_id = id;
+    const receiver_id = document.getElementById("recipient").value;
+    const message_type = role === "user" ? "u-d" : "d-u";
+    const message = document.getElementById("message").value;
+
+    const message_data = JSON.stringify({
+        sender_id: sender_id,
+        receiver_id: receiver_id,
+        message_type: message_type,
+        message: message
+    });
+
+    try{
+        response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: message_data
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+            document.getElementById("message").value = "";
+            window.location.reload(); // reload the page to see the new message
+
+        }
+        else {
+            alert("Failed to create message.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+    
+
+    
+}
+
+function filterMessages(id) {
+    const selectedRecipientId = document.getElementById("recipient").value;
+    const allMessages = document.querySelectorAll("#messages-list li"); // Assuming messages are in a list
+    const role = document.getElementById("recipient").dataset.role; // Get the data-role value
+    allMessages.forEach(message => {
+        const senderId = message.getAttribute("data-sender-id");
+        const receiverId = message.getAttribute("data-receiver-id");
+        const messageType = message.getAttribute("data-message-type");
+
+        if(role === "user"){
+            if (selectedRecipientId === "") {
+                message.style.display = "list-item"; // Show all if nothing selected
+            } else if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "u-d") || 
+                (senderId === selectedRecipientId && String(id) === receiverId && messageType === "d-u")) {
+                message.style.display = "list-item"; // Show only matching messages
+            } else {
+                message.style.display = "none"; // Hide others
+            }
+        } else {
+            if (selectedRecipientId === "") {
+                message.style.display = "list-item"; // Show all if nothing selected
+            } else if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "d-u") || 
+                (senderId === selectedRecipientId && String(id) === receiverId && messageType === "u-d")) {
+                message.style.display = "list-item"; // Show only matching messages
+            } else {
+                message.style.display = "none"; // Hide others
+            }
+        }
+        
+    });
+}

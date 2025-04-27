@@ -14,8 +14,8 @@ public class MessageRepository {
     }
 
     public boolean create(MessageInfo message) {
-        return jdbcClient.sql("INSERT INTO MESSAGES(sender_id, reciever_id, message, message_type) values(?, ?, ?, ?)")
-            .params(List.of(message.sender_id(), message.reciever_id(), message.message(), message.message_type()))
+        return jdbcClient.sql("INSERT INTO MESSAGES(sender_id, receiver_id, message, message_type) values(?, ?, ?, ?)")
+            .params(List.of(message.sender_id(), message.receiver_id(), message.message(), message.message_type()))
             .update() == 1;   
     }
 
@@ -33,8 +33,24 @@ public class MessageRepository {
     }
 
     public List<MessageInfo> showUserRecievedMessage(Integer user_id) {
-        return jdbcClient.sql("select * from messages where reciever_id = :reciever_id and message_type='d-u'")
-            .param("reciever_id", user_id)
+        return jdbcClient.sql("select * from messages where receiver_id = :receiver_id and message_type='d-u'")
+            .param("receiver_id", user_id)
+            .query(MessageInfo.class)
+            .list();
+    }
+
+    public List<MessageInfo> showUserMessages(Integer user_id) {
+        // This method is used to show messages between user and doctor
+        return jdbcClient.sql("select * from messages where (sender_id = ? and message_type='u-d') or (receiver_id = ? and message_type='d-u') order by timestamp asc")
+            .params(List.of(user_id, user_id))
+            .query(MessageInfo.class)
+            .list();
+    }
+
+    public List<MessageInfo> showDoctorMessages(Integer doctor_id) {
+        // This method is used to show messages between doctor and user
+        return jdbcClient.sql("select * from messages where (sender_id = ? and message_type='d-u') or (receiver_id = ? and message_type='u-d') order by timestamp asc")
+            .params(List.of(doctor_id, doctor_id))
             .query(MessageInfo.class)
             .list();
     }
@@ -47,7 +63,7 @@ public class MessageRepository {
     }
 
     public List<MessageInfo> showDoctorRecievedMessage(Integer doctor_id) {
-        return jdbcClient.sql("select * from messages where reciever_id = :reciever_id and message_type='u-d'")
+        return jdbcClient.sql("select * from messages where receiver_id = :receiver_id and message_type='u-d'")
             .param("reciever_id", doctor_id)
             .query(MessageInfo.class)
             .list();

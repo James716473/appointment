@@ -102,8 +102,15 @@ public class PageController {
         if (user_id == null || (String) session.getAttribute("role") != "user") {
             return "no-rights";
         }
-        List<MessageInfo> messages = messageRepository.showUserRecievedMessage(user_id);
-        
+        List<MessageInfo> messages = messageRepository.showUserMessages(user_id);
+        List<DoctorInfo> doctors = appointmentRepository.showDoctor(user_id);
+
+        for(DoctorInfo doctor: doctors) {
+            System.out.println(doctor.first_name() + " " + doctor.middle_name() + " " + doctor.last_name());
+        }
+        model.addAttribute("id", user_id);
+        model.addAttribute("role", (String) session.getAttribute("role"));
+        model.addAttribute("doctors", doctors);
         model.addAttribute("messages", messages);
         return "messages";
     }
@@ -139,9 +146,17 @@ public class PageController {
         if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
             return "no-rights";
         }
-        List<MessageInfo> messages = messageRepository.showDoctorRecievedMessage(doctor_id);
+        List<MessageInfo> messages = messageRepository.showDoctorMessages(doctor_id);
+        List<UserInfo> users = appointmentRepository.showUser(doctor_id);
+
+        model.addAttribute("id", doctor_id);
+        model.addAttribute("role", (String) session.getAttribute("role"));
+        model.addAttribute("users", users);
         model.addAttribute("messages", messages);
         return "messages";
+
+       
+        
     }
 
     @GetMapping("/doctor/messages/create")
