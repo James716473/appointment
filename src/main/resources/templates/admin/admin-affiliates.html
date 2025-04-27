@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/admin-dashboard.css">
+    <script src="/js/user_functions.js" defer></script> 
+    <link rel="stylesheet" href="../../static/admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,23 +48,31 @@
 
             <main class="content">
                 <div class="table__container">
-                    <table border="1" class="billings__table">
+                    <table border="1" class="affiliate__table">
                         <tr>
-                            <th>Billing ID</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Date_Issued</th>
-                            <th>Date_Paid</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        
+                        <tr th:each="affiliate : ${affiliates}">
+                            <td th:text="${affiliate.affiliate_id}">0</td>
+                            <td th:text="${affiliate.name}">Generic Hospital</td>
+                            <td th:text="${affiliate.address}">Malolos Bulacan</td>
+                            <td th:text="${affiliate.description}">Lorem Ipsum</td>
+                            <td style="width: 110px;"> 
+                                <input type="button" class="delete__button" th:attr="onclick=|delete_affiliate(event, ${affiliate.affiliate_id})|" value="Delete">
+                
+                            </td>
+                            
                             
                         </tr>
-                        <tr th:each="billing: ${billings}">
-                            <td th:text="${billing.billing_id}">billing_id</td>
-                            <td th:text="${billing.price}">price</td>
-                            <td th:text="${billing.status}">status</td>
-                            <td th:text="${billing.date_issued}">date_issued</td>
-                            <td th:text="${billing.date_paid}">date_paid</td>
-                        </tr>
-                </div>    
+                
+                    </table>
+                </div>
+                <input type="button" class="create__button" onclick="window.location.href='affiliates/create'" value="Create">
             </main>
             
         </div>
@@ -72,5 +81,6 @@
 
     
 
+    
 </body>
 </html>

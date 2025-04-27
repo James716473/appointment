@@ -2,19 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/user_functions.js" defer></script> 
-    <link rel="stylesheet" href="/admin-dashboard.css">
+    <title>Doctor List</title>
+    <script src="js/user_functions.js" defer></script> 
+    <link rel="stylesheet" href="../../static/admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>Document</title>
 </head>
 <body>
-
     <div class="website__container">
-
         <!-- Horizontal Navbar Section -->
         <nav class="navbar">
             <div class="navbar__container">
@@ -44,43 +41,35 @@
                 </ul>
             </nav>
 
-            <!-- Main Section -->
-
             <main class="content">
+                <h1>Doctor List</h1>
+                
                 <div class="table__container">
-                    <table border="1" class="affiliate__table">
+                    <table border="1" class="doctor__table">
                         <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                        
-                        <tr th:each="affiliate : ${affiliates}">
-                            <td th:text="${affiliate.affiliate_id}">0</td>
-                            <td th:text="${affiliate.name}">Generic Hospital</td>
-                            <td th:text="${affiliate.address}">Malolos Bulacan</td>
-                            <td th:text="${affiliate.description}">Lorem Ipsum</td>
-                            <td style="width: 110px;"> 
-                                <input type="button" class="delete__button" th:attr="onclick=|delete_affiliate(event, ${affiliate.affiliate_id})|" value="Delete">
-                
-                            </td>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+
+                            <tr th:each="doctor : ${doctors}">
+                                <td th:text="${doctor.doctor_id}">1</td>
+                                <td th:text="${doctor.first_name}">John</td>
+                                <td th:text="${doctor.last_name}">Doe</td>
+                                <td th:text="${doctor.email}">john@example.com</td>
+                                <td style="width: 226px;">
+                                    <input type="button" th:onclick="'window.location.href=\'/admin/doctor/' + ${doctor.doctor_id} + '\''"id="more__button" value="More Info">
                             
+                                    <input type="button" th:attr="onclick=|delete_doctor(event, ${doctor.doctor_id})|" id="delete__button" value="Delete">
                             
+                                </td>
+                            </tr>
                         </tr>
-                
                     </table>
                 </div>
-                <input type="button" class="create__button" onclick="window.location.href='affiliates/create'" value="Create">
             </main>
-            
         </div>
-
     </div>
-
-    
-
-    
 </body>
 </html>
