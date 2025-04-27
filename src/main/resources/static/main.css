@@ -137,6 +137,11 @@ body {
   border-radius: 15px;
 }
 
+.appointment__img {
+  min-width: 500px;
+  text-align: center;
+}
+
 .main__appointment--heading {
   color: #112D4E;
   font-weight: 700;
