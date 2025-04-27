@@ -6,11 +6,11 @@
     <script src="/js/user_functions.js" defer></script>
     <title>Messages</title>
     <style>
-        .u-d {
+        .left {
             text-align: right;
         }
 
-        .d-u {
+        .right {
             text-align: left;
         }
     </style>
@@ -36,7 +36,7 @@
 
     <div th:if="${messages.size() > 0}">
         <ul id="messages-list">
-            <li th:each="message : ${messages}" th:class="${message.message_type}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
+            <li th:each="message : ${messages}" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'left' : 'right'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
         </ul>
     </div>
     <div th:if="${messages.size() == 0}"> 
