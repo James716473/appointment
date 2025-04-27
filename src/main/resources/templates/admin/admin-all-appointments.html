@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/user_functions.js" defer></script> 
-    <link rel="stylesheet" href="/admin-dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../static/admin-dashboard.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -48,31 +46,29 @@
 
             <main class="content">
                 <div class="table__container">
-                    <table border="1" class="affiliate__table">
+                    <table border="1" class="appointment__table">
                         <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Address</th>
+                            <th>Appointment ID</th>
+                            <th>User ID</th>
+                            <th>Doctor ID</th>
+                            <th>Appointment Date</th>
+                            <th>Appointment Time</th>
+                            <th>Appointment Type</th>
+                            <th>Billing ID</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
-                        
-                        <tr th:each="affiliate : ${affiliates}">
-                            <td th:text="${affiliate.affiliate_id}">0</td>
-                            <td th:text="${affiliate.name}">Generic Hospital</td>
-                            <td th:text="${affiliate.address}">Malolos Bulacan</td>
-                            <td th:text="${affiliate.description}">Lorem Ipsum</td>
-                            <td style="width: 110px;"> 
-                                <input type="button" class="delete__button" th:attr="onclick=|delete_affiliate(event, ${affiliate.affiliate_id})|" value="Delete">
-                
-                            </td>
-                            
-                            
+                        <tr th:each="appointment: ${appointments}">
+                            <td th:text="${appointment.appointment_id}">appointment id</td>
+                            <td th:text="${appointment.user_id}">user id</td>
+                            <td th:text="${appointment.doctor_id}">doctor id</td>
+                            <td th:text="${appointment.appointment_date}">appointment date</td>
+                            <td th:text="${appointment.appointment_time}">appointment time</td>
+                            <td th:text="${appointment.appointment_type}">appointment type</td>
+                            <td th:text="${appointment.billing_id}">billing id</td>
+                            <td th:text="${appointment.description}">description</td>
                         </tr>
-                
-                    </table>
                 </div>
-                <input type="button" class="create__button" onclick="window.location.href='affiliates/create'" value="Create">
             </main>
             
         </div>
@@ -81,6 +77,5 @@
 
     
 
-    
 </body>
 </html>

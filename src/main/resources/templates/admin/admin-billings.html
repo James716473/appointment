@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/admin-dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../static/admin-dashboard.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -47,29 +46,23 @@
 
             <main class="content">
                 <div class="table__container">
-                    <table border="1" class="appointment__table">
+                    <table border="1" class="billings__table">
                         <tr>
-                            <th>Appointment ID</th>
-                            <th>User ID</th>
-                            <th>Doctor ID</th>
-                            <th>Appointment Date</th>
-                            <th>Appointment Time</th>
-                            <th>Appointment Type</th>
                             <th>Billing ID</th>
-                            <th>Description</th>
-                            <th>Action</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Date_Issued</th>
+                            <th>Date_Paid</th>
+                            
                         </tr>
-                        <tr th:each="appointment: ${appointments}">
-                            <td th:text="${appointment.appointment_id}">appointment id</td>
-                            <td th:text="${appointment.user_id}">user id</td>
-                            <td th:text="${appointment.doctor_id}">doctor id</td>
-                            <td th:text="${appointment.appointment_date}">appointment date</td>
-                            <td th:text="${appointment.appointment_time}">appointment time</td>
-                            <td th:text="${appointment.appointment_type}">appointment type</td>
-                            <td th:text="${appointment.billing_id}">billing id</td>
-                            <td th:text="${appointment.description}">description</td>
+                        <tr th:each="billing: ${billings}">
+                            <td th:text="${billing.billing_id}">billing_id</td>
+                            <td th:text="${billing.price}">price</td>
+                            <td th:text="${billing.status}">status</td>
+                            <td th:text="${billing.date_issued}">date_issued</td>
+                            <td th:text="${billing.date_paid}">date_paid</td>
                         </tr>
-                </div>
+                </div>    
             </main>
             
         </div>
