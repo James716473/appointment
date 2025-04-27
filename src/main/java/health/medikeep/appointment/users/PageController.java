@@ -31,18 +31,18 @@ public class PageController {
 
     @GetMapping("/")
     public String landingPage() {
-        return "landing";
+        return "/landing-signup-login/landing";
     }
 
     
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "/landing-signup-login/signup";
     }
 
     @GetMapping("/login")  
     public String login() {
-        return "login";
+        return "/landing-signup-login/login";
     }
 
     @GetMapping("/user")

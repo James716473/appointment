@@ -35,21 +35,21 @@ public class AdminController {
         model.addAttribute("users", users);
         model.addAttribute("doctors", doctors);
         
-        return "admin-all";
+        return "/admin/admin-all";
     }
 
     @GetMapping("/doctors")
     public String showDoctoctors(Model model){
         List<DoctorInfo> doctors = doctorRepository.showDoctors();
         model.addAttribute("doctors", doctors);
-        return "admin-doctor";
+        return "/admin/admin-doctor";
     }
 
     @GetMapping("/users")
     public String showUsers(Model model){
         List<UserInfo> users = userRepository.showUsers();
         model.addAttribute("users", users);
-        return "admin-user";
+        return "/admin/admin-user";
     }
 
     
@@ -58,25 +58,25 @@ public class AdminController {
     public String showAffiliates(Model model){
         List<AffiliateInfo> affiliates = affiliateRepository.showAffiliates();
         model.addAttribute("affiliates", affiliates);
-        return "admin-affiliates";
+        return "/admin/admin-affiliates";
     }
 
     @GetMapping("/affiliates/create")
     public String createAffiliates(){
-        return "admin-affiliate-create";
+        return "/admin/admin-affiliate-create";
     }
 
     @GetMapping("/appointments")
     public String showAppointments(Model model){
         List<AppointmentInfo> appointments = appointmentRepository.showAppointments();
         model.addAttribute("appointments", appointments);
-        return "admin-all-appointments";
+        return "/admin/admin-all-appointments";
     }
 
     @GetMapping("/billings")
     public String showBillings(Model model){
         List<BillingInfo> billings = billingRepository.showBillings();
         model.addAttribute("billings", billings);
-        return "admin-billings";
+        return "/admin/admin-billings";
     }
 }
