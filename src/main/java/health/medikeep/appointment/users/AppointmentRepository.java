@@ -46,6 +46,13 @@ public class AppointmentRepository {
             .list();
     }
 
+    public List<AppointmentInfo> findByDoctorId(Integer doctor_id) {
+        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE doctor_id = :doctor_id AND (appointment_date > CURDATE() OR (appointment_date=CURDATE() AND appointment_time > CURTIME())) ORDER BY appointment_date ASC, appointment_time ASC")
+            .param("doctor_id", doctor_id)
+            .query(AppointmentInfo.class)
+            .list();
+    }
+
     public List<DoctorInfo> showDoctor(Integer user_id){
         return jdbcClient.sql("SELECT distinct doctors.* FROM doctors INNER JOIN appointments on appointments.doctor_id=doctors.doctor_id WHERE appointments.user_id=:user_id")
             .param("user_id", user_id)
@@ -64,6 +71,13 @@ public class AppointmentRepository {
         return jdbcClient.sql("SELECT doctors.* FROM doctors INNER JOIN appointments on appointments.doctor_id=doctors.doctor_id WHERE appointments.user_id=:user_id AND (appointment_date > CURDATE() OR (appointment_date=CURDATE() AND appointment_time > CURTIME())) ORDER BY appointments.appointment_date ASC, appointments.appointment_time ASC")
             .param("user_id", user_id)
             .query(DoctorInfo.class)
+            .list();
+    }
+
+    public List<UserInfo> appointmentUserInfo(Integer doctor_id){
+        return jdbcClient.sql("SELECT users.* FROM users INNER JOIN appointments on appointments.user_id=users.user_id WHERE appointments.doctor_id=:doctor_id AND (appointment_date > CURDATE() OR (appointment_date=CURDATE() AND appointment_time > CURTIME())) ORDER BY appointments.appointment_date ASC, appointments.appointment_time ASC")
+            .param("doctor_id", doctor_id)
+            .query(UserInfo.class)
             .list();
     }
 }

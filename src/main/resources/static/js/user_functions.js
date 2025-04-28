@@ -83,7 +83,7 @@ async function verify_user(event){
             if(response.status === 200){
                 alert("Doctor logged in!");
                 const doctor_id = await response.json();
-                window.location.href = "/doctor/info";
+                window.location.href = "/doctor";
             } else {
                 alert("Doctor not found!");
                 
@@ -602,18 +602,14 @@ function filterMessages(id) {
         const messageType = message.getAttribute("data-message-type");
 
         if(role === "user"){
-            if (selectedRecipientId === "") {
-                message.style.display = "list-item"; // Show all if nothing selected
-            } else if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "u-d") || 
+            if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "u-d") || 
                 (senderId === selectedRecipientId && String(id) === receiverId && messageType === "d-u")) {
                 message.style.display = "list-item"; // Show only matching messages
             } else {
                 message.style.display = "none"; // Hide others
             }
         } else {
-            if (selectedRecipientId === "") {
-                message.style.display = "list-item"; // Show all if nothing selected
-            } else if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "d-u") || 
+            if ((receiverId === selectedRecipientId && String(id) === senderId && messageType === "d-u") || 
                 (senderId === selectedRecipientId && String(id) === receiverId && messageType === "u-d")) {
                 message.style.display = "list-item"; // Show only matching messages
             } else {

@@ -48,4 +48,11 @@ public class BillingRepository {
             .query(BillingInfo.class)
             .optional();
     }
+
+    public BillingInfo findByAppointmentId(Integer appointment_id) {
+        return jdbcClient.sql("SELECT * FROM BILLINGS WHERE billing_id = (SELECT billing_id FROM APPOINTMENTS WHERE appointment_id = :appointment_id)")
+            .param("appointment_id", appointment_id)
+            .query(BillingInfo.class)
+            .single();
+    }
 }

@@ -7,11 +7,11 @@
     <title>Messages</title>
     <style>
         .left {
-            text-align: right;
+            text-align: left;
         }
 
         .right {
-            text-align: left;
+            text-align: right;
         }
     </style>
 </head>
@@ -19,28 +19,36 @@
     <label for="recipient">To: </label>
     <select name="recipient" id="recipient" th:data-role="|${role}|" th:onchange="|filterMessages(${id})|">
         <option value="" th:text="${role == 'doctor' ? 'Select patient' : 'Select doctor'}" selected></option> <!-- default option -->
-        <th:block th:each="recipient : ${role == 'doctor' ? users : doctors}">
+        <th:block th:each="recipient: ${role == 'doctor' ? users : doctors}">
             <option th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
                     th:text="|${recipient.first_name} ${recipient.last_name}|">
             </option>
         </th:block>
     </select>
     <br><br>
-    <label for="message"></label>
-    <input type="text" id="message" name="message" placeholder="Write your message here...">
     
-    <br><br>
-    <input type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">
+    
 
 
 
     <div th:if="${messages.size() > 0}">
         <ul id="messages-list">
-            <li th:each="message : ${messages}" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'left' : 'right'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
+            <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
         </ul>
     </div>
     <div th:if="${messages.size() == 0}"> 
         <p>No messages available.</p>
     </div>
+
+    
+    <div>
+        <label  for="message"></label>
+        <input  type="text" id="message" name="message" placeholder="Write your message here...">
+        <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
+    </div>
+    <label  for="message"></label>
+    <input  type="text" id="message" name="message" placeholder="Write your message here...">
+    <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">
+    <br><br>
 </body>
 </html>

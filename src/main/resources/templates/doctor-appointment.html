@@ -9,7 +9,7 @@
     <table border="1" class="appointment__table">
         <tr>
             <th>Appointment ID</th>
-            <th>Doctor Name</th>
+            <th>Patient Name</th>
             <th>Appointment Date</th>
             <th>Appointment Time</th>
             <th>Appointment Type</th>
@@ -20,7 +20,7 @@
         </tr>
         <tr th:each="appointment, index: ${appointments}">
             <td th:text="${appointment.appointment_id}">appointment id</td>
-            <td th:text="|${doctors[index.index].first_name} ${doctors[index.index].last_name}|"></td>
+            <td th:text="|${users[index.index].first_name} ${users[index.index].last_name}|"></td>
             <td th:text="${appointment.appointment_date}">appointment date</td>
             <td th:text="${appointment.appointment_time}">appointment time</td>
             <td th:text="${appointment.appointment_type}">appointment type</td>

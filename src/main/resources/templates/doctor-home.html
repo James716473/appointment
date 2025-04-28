@@ -17,20 +17,20 @@
 <body>
     <header class = "headerBox">
         <h2>
-            <a class = "medikeep" href="/user">MEDIKEEP</a>
+            <a class = "medikeep" href="/doctor">MEDIKEEP</a>
         </h2>  
         <div class="img">
-            <a class = "username" th:text="|${user.last_name}, ${user.first_name}|" href="/user/info">[Belen, James]</a>
+            <a class = "username" th:text="|${doctor.last_name}, ${doctor.first_name}|" href="/user/info">[Belen, James]</a>
         </div>  
     </header>
 
     <div class = "firstBox">
-        <h1 class = "welcome" th:text="|Welcome back, ${user.first_name}|"> Welcome back, [name]</h1>
+        <h1 class = "welcome" th:text="|Welcome back, ${doctor.first_name}|"> Welcome back, [name]</h1>
         <p class = "sched" th:text="|Your next scheduled appointment is in ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Your next scheduled appointment is in [date] </p>
         <div class = button-rows>
             <div class="form1">
                 <input type="button" value = "Reschedule" class = "reschedButton">
-                <input type="submit" value = "View All Appointments" class="viewAll" onclick="location.href='user/appointment'">
+                <input type="submit" value = "View All Appointments" class="viewAll" onclick="location.href='doctor/appointment'">
             </div>
             
         </div>
@@ -40,10 +40,10 @@
     <div class = "secondBox">
         <h3 class = "upcoming">Upcoming Appointment:</h3>
         <p th:text="|Date & Time: ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Date & Time: [date & time] <br></p>
-        <p th:text="|Doctor: Dr. ${appointment_doctor_infos[0].last_name} (${appointments[0].appointment_type})|">Doctor: [Dr. Name (Specialty)] <br></p>
-        <p th:text="|Location: ${appointment_doctor_infos[0].affiliation}|">Location: [Address] <br></p> 
+        <p th:text="|Patient: ${appointment_user_infos[0].first_name} ${appointment_user_infos[0].last_name}|">Patient: Name<br></p>
+        <p th:text="|Appointment Type: ${appointments[0].appointment_type}|"></p>
         <p th:text="|Reason: ${appointments[0].description}">Reason: [reason of appointment]<br></p>
-        <input type ="submit" value = "Chat with doctor" class="chatwith" onclick="location.href='user/messages'">
+        <input type ="submit" value = "Chat with Patient" class="chatwith" onclick="location.href='doctor/messages'">
     </div>
 
     <div class="buttonContainer">

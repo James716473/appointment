@@ -1,5 +1,6 @@
 package health.medikeep.appointment.users;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,8 +80,19 @@ public class PageController {
     public String userAppointment(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");
         Integer user_id = userRepository.getUid(email).orElse(null);
+        if (user_id == null || (String) session.getAttribute("role") != "user") {
+            return "no-rights";
+        }
+        List<AppointmentInfo> appointments = appointmentRepository.findByUserId(user_id);
+        List<BillingInfo> billings = new ArrayList<>();
+        for(AppointmentInfo appointment: appointments) {
+            billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
+
+        }
+        model.addAttribute("billings", billings);
+        model.addAttribute("doctors", appointmentRepository.appointmentDoctorInfo(user_id));
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
-        model.addAttribute("appointments", appointmentRepository.findByUserId(user_id));
+        model.addAttribute("appointments", appointments);
         return "user-appointment";
     }
 
@@ -93,7 +105,7 @@ public class PageController {
         }
         Optional<UserInfo> user = userRepository.findById(user_id);
         model.addAttribute("user", user.get());
-        return "admin-user-info";
+        return "/admin/admin-user-info";
     }
 
     @GetMapping("/user/messages")
@@ -126,6 +138,21 @@ public class PageController {
         return "create-message";
     }
 
+    @GetMapping("/doctor")
+    public String doctorPage(Model model, HttpSession session) {
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+
+        
+        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
+        model.addAttribute("appointment_user_infos", appointmentRepository.appointmentUserInfo(doctor_id));
+        model.addAttribute("appointments", appointmentRepository.findByDoctorId(doctor_id));
+        model.addAttribute("doctor", doctor.get());
+        return "doctor-home";
+    }
+
     @GetMapping("/doctor/info")
     public String doctorInfo(Model model, HttpSession session) {
         Integer doctor_id = (Integer) session.getAttribute("doctor_id");
@@ -138,6 +165,26 @@ public class PageController {
         model.addAttribute("doctor", doctor.get());
 
         return "admin-doctor-info";
+    }
+
+    @GetMapping("doctor/appointment")
+    public String doctorAppointment(Model model, HttpSession session) {
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
+        List<AppointmentInfo> appointments = appointmentRepository.findByDoctorId(doctor_id);
+        List<BillingInfo> billings = new ArrayList<>();
+        for(AppointmentInfo appointment: appointments) {
+            billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
+
+        }
+        model.addAttribute("billings", billings);
+        model.addAttribute("users", appointmentRepository.appointmentUserInfo(doctor_id));
+        model.addAttribute("doctor", doctor.get());
+        model.addAttribute("appointments", appointments);
+        return "doctor-appointment";
     }
 
     @GetMapping("/doctor/messages")

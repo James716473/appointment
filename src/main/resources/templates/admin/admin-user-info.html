@@ -28,7 +28,7 @@
             <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
             <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
             <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-            <input type="button" id="back__button" onclick="window.location.href='../users'" value="Back"><!-- Need to change the endpoint-->
+            <input type="button" id="back__button" onclick="window.history.back();" value="Back">
         </div>
     </div>
     
