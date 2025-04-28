@@ -557,7 +557,7 @@ async function send_message(event, id){
     const role = button.dataset.role; // Get the data-role value
     
     const sender_id = id;
-    const receiver_id = document.getElementById("recipient").value;
+    const receiver_id = document.querySelector("input[name=recipient]:checked").value;
     const message_type = role === "user" ? "u-d" : "d-u";
     const message = document.getElementById("message").value;
 
