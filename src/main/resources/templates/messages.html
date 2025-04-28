@@ -16,15 +16,19 @@
     </style>
 </head>
 <body>
+    
+
     <label for="recipient">To: </label>
-    <select name="recipient" id="recipient" th:data-role="|${role}|" th:onchange="|filterMessages(${id})|">
-        <option value="" th:text="${role == 'doctor' ? 'Select patient' : 'Select doctor'}" selected></option> <!-- default option -->
-        <th:block th:each="recipient: ${role == 'doctor' ? users : doctors}">
-            <option th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
-                    th:text="|${recipient.first_name} ${recipient.last_name}|">
-            </option>
-        </th:block>
-    </select>
+    <div id="recipient-div" th:data-role="|${role}|">
+        <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
+            <input type="radio" id="recipient-${recipient.id}" name="recipient" 
+                th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
+                th:text="|${recipient.first_name} ${recipient.last_name}|"
+                th:onchange="|filterMessages(${id})|" />
+            <label for="recipient-${recipient.id}" th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
+        </div>
+    </div>
+
     <br><br>
     
     
@@ -46,9 +50,6 @@
         <input  type="text" id="message" name="message" placeholder="Write your message here...">
         <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
     </div>
-    <label  for="message"></label>
-    <input  type="text" id="message" name="message" placeholder="Write your message here...">
-    <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">
-    <br><br>
+   <br><br>
 </body>
 </html>

@@ -224,6 +224,8 @@ function toggle_page_section(event, page_section, name) {
     if (page_section === 'select-doctor') {
         filter_doctors_by_hospital(); // ensure doctors match latest hospital
         filter_doctors_by_specialty(); // optional: hide by chosen specialty
+        
+        
     }
         if(inputs[0].type === "radio"){
             inputs.forEach(input => {
@@ -499,7 +501,7 @@ async function book_appointment(event){
 
 function filter_doctors_by_hospital() {
     const selectedHospital = document.querySelector('input[name=affiliate]:checked').value;
-    document.querySelectorAll('.doctor-radio').forEach(radio => {
+    document.querySelectorAll('input[name="doctor"]').forEach(radio => {
         const belongs = radio.dataset.hospital === selectedHospital;
         radio.parentElement.style.display = belongs ? '' : 'none';   // hide whole <div>
         if (!belongs) radio.checked = false;                         // uncheck if hidden
@@ -510,7 +512,7 @@ function filter_doctors_by_specialty() {
     const spec = document.querySelector('input[name=specialty]:checked')?.value;
     if (!spec || spec === 'General') return;          // show all for General
   
-    document.querySelectorAll('.doctor-radio').forEach(radio => {
+    document.querySelectorAll('input[name="doctor"]').forEach(radio => {
         const match = radio.dataset.specialty === spec &&
                       radio.style.display !== 'none'; // still in hospital
         radio.parentElement.style.display = match ? '' : 'none';
@@ -523,7 +525,7 @@ function renderSpecialtiesForHospital() {
   
     // collect distinct specialties from doctors that belong to this hospital
     const specialties = new Set();
-    document.querySelectorAll('.radio').forEach(r => {
+    document.querySelectorAll('input[name="doctor"]').forEach(r => {
       if (r.dataset.hospital === hosp) specialties.add(r.dataset.specialty);
     });
   
@@ -593,9 +595,9 @@ async function send_message(event, id){
 }
 
 function filterMessages(id) {
-    const selectedRecipientId = document.getElementById("recipient").value;
+    const selectedRecipientId = document.querySelector('input[name=recipient]:checked').value;
     const allMessages = document.querySelectorAll("#messages-list li"); // Assuming messages are in a list
-    const role = document.getElementById("recipient").dataset.role; // Get the data-role value
+    const role = document.getElementById("recipient-div").dataset.role; // Get the data-role value
     allMessages.forEach(message => {
         const senderId = message.getAttribute("data-sender-id");
         const receiverId = message.getAttribute("data-receiver-id");
