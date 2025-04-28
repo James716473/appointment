@@ -4,52 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_functions.js" defer></script>
+    <link rel="stylesheet" href="../static/messaging.css">
+    <link rel="stylesheet" href="../static/navbars.css">
+    <link rel="stylesheet" href="../static/bookDes.css">
     <title>Messages</title>
-    <style>
-        .left {
-            text-align: left;
-        }
-
-        .right {
-            text-align: right;
-        }
-    </style>
 </head>
 <body>
-    
+    <div class="website__container">
 
-    <label for="recipient">To: </label>
-    <div id="recipient-div" th:data-role="|${role}|">
-        <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
-            <input type="radio" id="recipient-${recipient.id}" name="recipient" 
-                th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
-                th:text="|${recipient.first_name} ${recipient.last_name}|"
-                th:onchange="|filterMessages(${id})|" />
-            <label for="recipient-${recipient.id}" th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
+        <header class = "headerBox">
+            <h2 class = "medikeep">MEDIKEEP</h2>  
+            <div class="img">
+                <p class = "username">[Belen, James]</p>
+                <img src="james.png"> 
+            </div>  
+        </header>
+
+
+        <div class="user--chat__container">
+            <nav class="vertical--navbar__chat">
+                <label for="recipient">To: </label>
+                <div id="recipient-div" th:data-role="|${role}|">
+                    <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
+                        <input type="radio" id="recipient-${recipient.id}" name="recipient" 
+                            th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
+                            th:text="|${recipient.first_name} ${recipient.last_name}|"
+                            th:onchange="|filterMessages(${id})|" />
+                        <label for="recipient-${recipient.id}" th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="messaging__container">
+                <div th:if="${messages.size() > 0}">
+                    <ul id="messages-list">
+                        <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
+                    </ul>
+                </div>
+                <div th:if="${messages.size() == 0}"> 
+                    <p>No messages available.</p>
+                </div>
+
+                
+                <div>
+                    <label  for="message"></label>
+                    <input  type="text" id="message" name="message" placeholder="Write your message here...">
+                    <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
+                </div>
+                <br><br>
+            </div>
         </div>
     </div>
-
-    <br><br>
-    
-    
-
-
-
-    <div th:if="${messages.size() > 0}">
-        <ul id="messages-list">
-            <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
-        </ul>
-    </div>
-    <div th:if="${messages.size() == 0}"> 
-        <p>No messages available.</p>
-    </div>
-
-    
-    <div>
-        <label  for="message"></label>
-        <input  type="text" id="message" name="message" placeholder="Write your message here...">
-        <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
-    </div>
-   <br><br>
 </body>
 </html>
