@@ -264,6 +264,28 @@ function toggle_page_section(event, page_section, name) {
 
 }
 
+function toggle_appointment(event, section_id, appointment_id, id) {
+    event.preventDefault();
+    const sections = document.querySelectorAll(".page-section");
+    if(appointment_id !== undefined && section_id === "reschedule") {
+        document.getElementById("resched-appointment-id").value = appointment_id;
+        document.getElementById("resched-id").value = id;
+    } else if (appointment_id !== undefined && section_id === "cancel") {
+        document.getElementById("cancel-appointment-id").value = appointment_id;
+        document.getElementById("cancel-id").value = id;
+    }
+    sections.forEach(section => {
+        if (section.id === section_id) {
+            section.style.display = "block";
+            
+        } else {
+            section.style.display = "none";
+            
+        }
+    });
+
+}
+
 async function edit_user(event, user_id) {
     event.preventDefault();
     
@@ -620,4 +642,254 @@ function filterMessages(id) {
         }
         
     });
+}
+
+async function request_cancel_message(event){
+    event.preventDefault();
+    const reason = document.getElementById("cancel-reason").value;
+    const appointment_id = document.getElementById("cancel-appointment-id").value;
+    
+    response = await fetch(`${url}api/appointments/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            appointment_id: appointment_id,
+        })
+    });
+
+    const appointment = await response.json();
+    console.log(appointment);
+    const message_data = JSON.stringify({
+        sender_id: appointment.user_id,
+        receiver_id: appointment.doctor_id,
+        message_type: "u-d",
+        message: `I would like to cancel my appointment in ${appointment.appointment_date} at ${appointment.appointment_time}. Reason: ${reason}`
+
+    });
+
+    
+    try{
+        response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: message_data
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+            document.getElementById("cancel-reason").value = ""; // clear the input field
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to create message.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+
+        
+}
+
+async function request_reschedule_message(event){
+    event.preventDefault();
+    const reason = document.getElementById("resched-reason").value;
+    const appointment_id = document.getElementById("resched-appointment-id").value;
+    const date = document.getElementById("new-date").value;
+    const time = document.getElementById("new-time").value;
+
+    response = await fetch(`${url}api/appointments/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            appointment_id: appointment_id,
+        })
+    });
+
+    const appointment = await response.json();
+    const message_data = JSON.stringify({
+        sender_id: appointment.user_id,
+        receiver_id: appointment.doctor_id,
+        message_type: "u-d",
+        message: `I would like to reschedule my appointment from ${appointment.appointment_date} at ${appointment.appointment_time} to ${date} at ${time}. Reason: ${reason}`
+
+    });
+
+    try{
+        response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: message_data
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+            document.getElementById("resched-reason").value = ""; // clear the input field
+            document.getElementById("new-date").value = ""; // clear the input field
+            document.getElementById("new-time").value = ""; // clear the input field 
+            // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to create message.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+
+
+}
+
+async function cancel_message(event){
+    event.preventDefault();
+    const reason = document.getElementById("cancel-reason").value;
+    const appointment_id = document.getElementById("cancel-appointment-id").value;
+    
+    response = await fetch(`${url}api/appointments/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            appointment_id: appointment_id,
+        })
+    });
+
+    const appointment = await response.json();
+    console.log(appointment);
+    const message_data = JSON.stringify({
+        sender_id: appointment.doctor_id,
+        receiver_id: appointment.user_id,
+        message_type: "d-u",
+        message: `I canceled our appointment in ${appointment.appointment_date} at ${appointment.appointment_time}. Reason: ${reason}`
+
+    });
+
+    
+    try{
+        response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: message_data
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+            document.getElementById("cancel-reason").value = ""; // clear the input field
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to create message.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+
+    try{
+        response = await fetch(`${url}api/appointments/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                appointment_id: appointment.appointment_id,
+            })
+        });
+        if(response.ok){
+            alert("Appointment deleted successfully!");
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to delete appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
+async function reschedule_message(event){
+    event.preventDefault();
+    const reason = document.getElementById("resched-reason").value;
+    const appointment_id = document.getElementById("resched-appointment-id").value;
+    const date = document.getElementById("new-date").value;
+    const time = document.getElementById("new-time").value;
+
+    response = await fetch(`${url}api/appointments/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            appointment_id: appointment_id,
+        })
+    });
+
+    const appointment = await response.json();
+    const message_data = JSON.stringify({
+        sender_id: appointment.doctor_id,
+        receiver_id: appointment.user_id,
+        message_type: "d-u",
+        message: `I rescheduled our appointment from ${appointment.appointment_date} at ${appointment.appointment_time} to ${date} at ${time}. Reason: ${reason}`
+
+    });
+
+    try{
+        response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: message_data
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+            document.getElementById("resched-reason").value = ""; // clear the input field
+            document.getElementById("new-date").value = ""; // clear the input field
+            document.getElementById("new-time").value = ""; // clear the input field 
+
+            
+        }
+        else {
+            alert("Failed to create message.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+
+    try{
+        response = await fetch(`${url}api/appointments/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                appointment_id: appointment.appointment_id,
+                appointment_date: date,
+                appointment_time: time
+            })
+        });
+        if(response.ok){
+            alert("Appointment updated successfully!");
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to update appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
 }

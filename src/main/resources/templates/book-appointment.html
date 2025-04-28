@@ -307,7 +307,7 @@
     
     <script>
         const today = new Date();
-    
+        today.setDate(today.getDate() + 1); // Set to tomorrow
         // Create a new Date object for the next year
         const nextYear = new Date();
         nextYear.setFullYear(today.getFullYear() + 1);

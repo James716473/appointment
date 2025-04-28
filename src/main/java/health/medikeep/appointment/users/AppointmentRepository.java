@@ -31,7 +31,14 @@ public class AppointmentRepository {
             .param("appointment_id", appointment_id)
             .update() == 1;    
     }
+
+    public boolean update(AppointmentInfo appointment) {
+        return jdbcClient.sql("UPDATE APPOINTMENTS SET appointment_date = ?, appointment_time = ? WHERE appointment_id = ?")
+            .params(List.of(appointment.appointment_date(), appointment.appointment_time(), appointment.appointment_id()))
+            .update() == 1;    
+    }
     
+
     public Optional<AppointmentInfo> findById(Integer appointment_id) {
         return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE appointment_id = :appointment_id")
             .param("appointment_id", appointment_id)

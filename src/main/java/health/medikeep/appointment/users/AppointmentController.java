@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,10 @@ public class AppointmentController {
         return appointmentRepository.showAppointments();
     }
 
+    @PostMapping("/find")
+    public AppointmentInfo findAppointment(@RequestBody AppointmentInfo appointment) {
+        return appointmentRepository.findById(appointment.appointment_id()).orElse(null);
+    }
     
     @PostMapping("/")
     public ResponseEntity<?> createAppointment(@RequestBody AppointmentInfo appointment) {
@@ -31,6 +36,15 @@ public class AppointmentController {
             return ResponseEntity.ok("Appointment Created Successfully");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Appointment Creation Unsuccessful");
+        }
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<?> updateAppointment(@RequestBody AppointmentInfo appointment) {
+        if (appointmentRepository.update(appointment)) {
+            return ResponseEntity.ok("Appointment Updated Successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Appointment Update Unsuccessful");
         }
     }
 
