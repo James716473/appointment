@@ -42,11 +42,11 @@
                 <label for="recipient">To: </label>
                 <div id="recipient-div" th:data-role="|${role}|">
                     <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
-                        <input type="radio" id="recipient-${recipient.id}" name="recipient" 
+                        <input type="radio" class="rad-btn" id="recipient-${recipient.id}" name="recipient" 
                             th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
                             th:text="|${recipient.first_name} ${recipient.last_name}|"
                             th:onchange="|filterMessages(${id})|" />
-                        <label for="recipient-${recipient.id}" th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
+                        <label class="user-doctor-chat" for="recipient-${recipient.id}" th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
                     </div>
                 </div>
             </nav>
