@@ -33,6 +33,7 @@ async function create_user(event){
             });
             if(response.status === 201){
                 alert("user created!");
+                window.location.href = "/";
             }
         } else if(role === "Doctor"){
             const response = await fetch(`${url}api/doctors/`, {
@@ -44,6 +45,7 @@ async function create_user(event){
             });
             if(response.status === 201){
                 alert("user created!");
+                window.location.href = "/";
             }
         }
         
