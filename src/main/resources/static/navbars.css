@@ -48,7 +48,7 @@
   text-align: center;
 }
 
-.navbar__item {
+.navbar__item, .navbar__item--home {
   height: 80px;
 }
 
@@ -93,9 +93,54 @@
   transition: all 0.3s ease;
 }
 
+.navbar__item--home {
+  position: relative;
+}
+
 .navbar__links:hover {
   color: #112D4E;
   transition: all 0.3s ease;
+}
+
+.navbar__home--links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0 1.4rem;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.dropdown__menu {
+  display: none;
+  position: absolute;
+  top: 78%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Only show dropdown when the checkbox is checked */
+#dropdown-toggle:checked ~ .dropdown__menu {
+  display: block;
+}
+
+.dropdown__item {
+  color: #112D4E;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+}
+.dropdown__item:hover {
+  background-color: #F9F7F7;
 }
 
 .vertical-navbar, .vertical--navbar__chat {
