@@ -51,23 +51,27 @@
                 </div>
             </nav>
             
-            <div class="messaging__container">
-                <div th:if="${messages.size() > 0}">
-                    <ul id="messages-list">
-                        <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
-                    </ul>
+            <div class="messaging__container--wrapper">
+                <div class="messaging__container">
+                    <div class="messages--scrollable">
+                        <div th:if="${messages.size() > 0}">
+                            <ul id="messages-list">
+                                <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
+                            </ul>
+                        </div>
+                        <div th:if="${messages.size() == 0}"> 
+                            <p class="no-message">No messages available.</p>
+                        </div>
+                    </div>
+                        
+                        <div class="message--input">
+                            <input  type="text" id="message" name="message" placeholder="Write your message here...">
+                            <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
+                        </div>
+                        
+                        <br><br>
+                    
                 </div>
-                <div th:if="${messages.size() == 0}"> 
-                    <p>No messages available.</p>
-                </div>
-
-                
-                <div>
-                    <label  for="message"></label>
-                    <input  type="text" id="message" name="message" placeholder="Write your message here...">
-                    <input  type="button" value="Send" id="send__button" th:data-role="${role}" th:attr="onclick=|send_message(event, ${id})|">    
-                </div>
-                <br><br>
             </div>
         </div>
     </div>
