@@ -24,10 +24,12 @@ body {
 
 .left {
   text-align: left;
+  font-size: 14px;
 }
 
 .right {
   text-align: right;
+  font-size: 14px;
 }
 
 .messaging__container--wrapper {
