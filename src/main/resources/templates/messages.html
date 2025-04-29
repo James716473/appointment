@@ -18,7 +18,7 @@
         <nav class="navbar">
             <div class="navbar__container">
                 <a href="/" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
-                <ul class="navbar__menu">
+                <ul class="navbar__menu">       
                     <li class="navbar__item--home">
                         <a href="login" class="navbar__home--links">[Belen, James]</a>
                     </li>
@@ -40,7 +40,11 @@
         <div class="user--chat__container">
             <nav class="vertical--navbar__chat">
                 <label for="recipient">To: </label>
+<<<<<<< HEAD
                 <div class="receie"id="recipient-div" th:data-role="|${role}|">
+=======
+                <div class="recievers" id="recipient-div" th:data-role="|${role}|">
+>>>>>>> 2fd900137fc56e84f676982345c4acc8a11ae670
                     <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
                         <input type="radio" class="rad-btn" id="recipient-${recipient.id}" name="recipient" 
                             th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
@@ -50,6 +54,19 @@
                     </div>
                 </div>
             </nav>
+
+            <!-- <label for="recipient">To: </label>
+<div id="recipient-div" th:data-role="|${role}|">
+    <div th:each="recipient : ${role == 'doctor' ? users : doctors}">
+        <input type="radio" class="rad-btn" id="recipient-${recipient.id}" name="recipient" 
+            th:value="${role == 'user' ? recipient.doctor_id : recipient.user_id}" 
+            th:onchange="|filterMessages(${id})|" />
+        
+        <label class="user-doctor-chat" 
+               th:for="|recipient-${recipient.id}|"
+               th:text="|${recipient.first_name} ${recipient.last_name}|"></label><br>
+    </div>
+</div>         line 42 - 51 -->
             
             <div class="messaging__container--wrapper">
                 <div class="messaging__container">
