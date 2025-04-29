@@ -109,10 +109,10 @@ body {
   opacity: 0.8;
 }
 
-.recipient-div .rad-btn {
+.recievers .rad-btn {
   display: none;
 }
-.recipient-div .user-doctor-chat {
+.recievers .user-doctor-chat {
   display: inline-block;
   background-color: #fff;
   width: 198px;
@@ -122,7 +122,7 @@ body {
   border-radius: 5px;
   text-align: center;
 }
-.recipient-div .rad-btn:checked + .user-doctor-chat {
+.recievers .rad-btn:checked + .user-doctor-chat {
   background-color: #112D4E;
   color: #f9f7f7;
   transition: all 0.1s ease;
