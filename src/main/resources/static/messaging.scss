@@ -113,25 +113,23 @@ body {
     opacity: 0.8;
 }
 
-.recievers {
-    .rad-btn {
-        display: none;
-    }
+.rad-btn {
+    display: none;
+}
 
-    .user-doctor-chat {
-        display: inline-block;
-        background-color: #fff;
-        width: 198px;
-        padding: 0.5rem;
-        cursor: pointer;
-        border: 1px solid black;
-        border-radius: 5px;
-        text-align: center;
-    }
+.user-doctor-chat {
+    display: inline-block;
+    background-color: #fff;
+    width: 198px;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
 
-    .rad-btn:checked+.user-doctor-chat {
-        background-color: #112D4E;
-        color: #f9f7f7;
-        transition: all 0.1s ease;
-    }
+.rad-btn:checked + .user-doctor-chat {
+    background-color: #112D4E;
+    color: #f9f7f7;
+    transition: all 0.1s ease;
 }
