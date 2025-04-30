@@ -5,16 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../static/bookDes.css">
+    <link rel="stylesheet" href="../static/navbars.css">
     <title>Document</title>
 </head>
 <body>
-    <header class = "headerBox">
-        <h2 class = "medikeep">MEDIKEEP</h2>  
-        <div class="img">
-            <p class = "username">[Belen, James]</p>
-            <img src="james.png"> 
-        </div>  
-    </header>
+    <!-- Horizontal Navbar Section -->
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="/" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
+                <ul class="navbar__menu">
+                    <li class="navbar__item--home">
+                        <a href="login" class="navbar__home--links">[Belen, James]</a>
+                    </li>
+                    <li class="navbar__item--home">
+                        <input type="checkbox" id="dropdown-toggle" hidden>
+                        <label for="dropdown-toggle" class="navbar__home--links dropdown-toggle">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </label>
+                        
+                        <div class="dropdown__menu">
+                            <a href="logout" class="dropdown__item">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
 
     <div class = "booking-box">

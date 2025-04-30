@@ -116,7 +116,8 @@ public class PageController {
         }
         List<MessageInfo> messages = messageRepository.showUserMessages(user_id);
         List<DoctorInfo> doctors = appointmentRepository.showDoctor(user_id);
-
+     
+        
         for(DoctorInfo doctor: doctors) {
             System.out.println(doctor.first_name() + " " + doctor.middle_name() + " " + doctor.last_name());
         }
@@ -124,6 +125,7 @@ public class PageController {
         model.addAttribute("role", (String) session.getAttribute("role"));
         model.addAttribute("doctors", doctors);
         model.addAttribute("messages", messages);
+        System.out.println(doctors);
         return "messages";
     }
 
@@ -164,7 +166,7 @@ public class PageController {
         model.addAttribute("affiliates", affiliates);
         model.addAttribute("doctor", doctor.get());
 
-        return "admin-doctor-info";
+        return "admin/admin-doctor-info";
     }
 
     @GetMapping("doctor/appointment")
@@ -195,6 +197,7 @@ public class PageController {
         }
         List<MessageInfo> messages = messageRepository.showDoctorMessages(doctor_id);
         List<UserInfo> users = appointmentRepository.showUser(doctor_id);
+
 
         model.addAttribute("id", doctor_id);
         model.addAttribute("role", (String) session.getAttribute("role"));

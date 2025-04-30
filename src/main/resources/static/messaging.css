@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f7f7;
+}
+
+.website__container {
+  width: 100%;
+  height: 100vh;
+}
+
+.user--chat__container {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr;
+}
+
+.left {
+  text-align: left;
+  font-size: 14px;
+}
+
+.right {
+  text-align: right;
+  font-size: 14px;
+}
+
+.messaging__container--wrapper {
+  background-color: #DBE2EF;
+  height: 800px;
+  width: 1600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 2rem;
+  margin-left: 6rem;
+  border-radius: 8px;
+  padding: 1rem;
+  opacity: 90%;
+}
+
+.messaging__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+.messages--scrollable {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding-right: 0.5rem;
+}
+
+.message--input {
+  display: grid;
+  grid-template-columns: 1.9fr 0.1fr;
+  gap: 0.5rem;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+#message {
+  background-color: #f9f7f7;
+  color: #000;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+#message:focus {
+  border-color: #0366d6;
+  outline: none;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  transition: all 0.3s ease;
+}
+
+#send__button {
+  background-color: #112D4E;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#send__button:hover {
+  background-color: #f9f7f7;
+  color: #112D4E;
+  transition: all 0.3s ease;
+  border: 1px solid black;
+}
+
+.no-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  opacity: 0.8;
+}
+
+.rad-btn {
+  display: none;
+}
+
+.user-doctor-chat {
+  display: inline-block;
+  background-color: #fff;
+  width: 198px;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.rad-btn:checked + .user-doctor-chat {
+  background-color: #112D4E;
+  color: #f9f7f7;
+  transition: all 0.1s ease;
+}
+
+/*# sourceMappingURL=messaging.css.map */

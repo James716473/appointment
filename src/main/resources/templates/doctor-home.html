@@ -20,7 +20,7 @@
             <a class = "medikeep" href="/doctor">MEDIKEEP</a>
         </h2>  
         <div class="img">
-            <a class = "username" th:text="|${doctor.last_name}, ${doctor.first_name}|" href="/user/info">[Belen, James]</a>
+            <a class = "username" th:text="|${doctor.last_name}, ${doctor.first_name}|" href="/doctor/info">[Belen, James]</a>
         </div>  
     </header>
 
@@ -58,7 +58,7 @@
     
     
         <div class="chatdoctors">
-            <form action="user/messages">
+            <form action="doctor/messages">
                 <button class="chat">
                     <i class="fa-solid fa-message"></i>
                     <span>Chat with Doctors</span>
