@@ -16,14 +16,27 @@
 </head>
 
 <body>
-    <header class = "headerBox">
-        <h2>
-            <a class = "medikeep" href="/user">MEDIKEEP</a>
-        </h2>  
-        <div class="img">
-            <a class = "username" th:text="|${user.last_name}, ${user.first_name}|" href="/user/info">[Belen, James]</a>
-        </div>  
-    </header>
+    <!-- Horizontal Navbar Section -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a th:href="${role == 'user' ? '/user' : '/doctor'}" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
+            <ul class="navbar__menu">
+                <li class="navbar__item--home">
+                    <a href="/user/info" th:text="|${user.last_name}, ${user.first_name}|" class="navbar__home--links"></a>
+                </li>
+                <li class="navbar__item--home">
+                    <input type="checkbox" id="dropdown-toggle" hidden>
+                    <label for="dropdown-toggle" class="navbar__home--links dropdown-toggle">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </label>
+                    
+                    <div class="dropdown__menu">
+                        <a href="/" class="dropdown__item">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <div class = "firstBox">
         <h1 class = "welcome" th:text="|Welcome back, ${user.first_name}|"> Welcome back, [name]</h1>
