@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/user_functions.js" defer></script> 
     <link rel="stylesheet" href="/admin-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +55,7 @@
                             <th>Status</th>
                             <th>Date_Issued</th>
                             <th>Date_Paid</th>
+                            <th>Action</th>
                             
                         </tr>
                         <tr th:each="billing: ${billings}">
@@ -62,6 +64,10 @@
                             <td th:text="${billing.status}">status</td>
                             <td th:text="${billing.date_issued}">date_issued</td>
                             <td th:text="${billing.date_paid}">date_paid</td>
+                            <td>
+                                <button type="button" th:if="${billing.status.name() == 'Not_Paid'}" th:onclick="|pay_appointment(event, ${billing.billing_id})|">Confirm Payment</button>
+                                <button type="button" th:if="${billing.status.name() == 'Paid'}" th:onclick="|undo_payment(event, ${billing.billing_id})|">Undo Payment</button>
+                            </td>
                         </tr>
                 </div>    
             </main>

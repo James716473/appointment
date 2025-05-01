@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_functions.js" defer></script>
-    <link rel="stylesheet" href="../static/messaging.css">
-    <link rel="stylesheet" href="../static/navbars.css">
-    <link rel="stylesheet" href="../static/bookDes.css">
+    <link rel="stylesheet" href="/messaging.css">
+    <link rel="stylesheet" href="/navbars.css">
+    <link rel="stylesheet" href="/bookDes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Messages</title>
 </head>
@@ -58,14 +58,11 @@
                 <div class="messaging__container">
                     <div class="messages--scrollable">
                         <div th:if="${messages.size() > 0}">
-                            <ul id="ad the messages-list here later">
+                            <ul id="messages-list">
                                 <li th:each="message : ${messages}" style="display: none;" th:class="${(message.message_type == 'u-d' && role == 'user') || (role == 'doctor' && message.message_type == 'd-u') ? 'right' : 'left'}" th:attr="data-sender-id=${message.sender_id}, data-receiver-id=${message.receiver_id}, data-message-type=${message.message_type}" th:text="${message.message}"></li>
                             </ul>
                         </div>
-                            <ul id="messages-list">
-                                <li class="right">Sender</li>
-                                <li class="left">Receiver</li>
-                            </ul>
+                            
                         <div th:if="${messages.size() == 0}"> 
                             <p class="no-message">No messages available.</p>
                         </div>

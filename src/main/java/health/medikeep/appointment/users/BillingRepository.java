@@ -55,4 +55,16 @@ public class BillingRepository {
             .query(BillingInfo.class)
             .single();
     }
+
+    public boolean payBill(Integer billing_id) {
+        return jdbcClient.sql("UPDATE BILLINGS SET status = 'Paid', date_paid = NOW() WHERE billing_id = :billing_id")
+            .param("billing_id", billing_id)
+            .update() == 1;    
+    }
+
+    public boolean undoPayBill(Integer billing_id) {
+        return jdbcClient.sql("UPDATE BILLINGS SET status = 'Not_Paid', date_paid = NULL WHERE billing_id = :billing_id")
+            .param("billing_id", billing_id)
+            .update() == 1;    
+    }
 }

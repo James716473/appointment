@@ -895,3 +895,56 @@ async function reschedule_message(event){
         alert("An error occurred: " + error.message);
     }
 }
+
+async function pay_appointment(event, billing_id){
+    event.preventDefault();
+    
+    try{
+        response = await fetch(`${url}api/billings/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                billing_id: billing_id,
+                status: "Paid"
+            })
+        });
+        if(response.ok){
+            alert("Payment successful!");
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to pay appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
+async function undo_payment(event, billing_id){
+    event.preventDefault();
+    
+    try{
+        response = await fetch(`${url}api/billings/undo`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                billing_id: billing_id,
+            })
+        });
+        if(response.ok){
+            alert("Payment undone!");
+            window.location.reload(); // reload the page to see the new message
+            
+        }
+        else {
+            alert("Failed to undo payment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
