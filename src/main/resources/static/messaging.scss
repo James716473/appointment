@@ -22,14 +22,35 @@ body {
     grid-template-columns: 0.3fr 1.7fr;
   }
 
+  #messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+}
+
+#messages-list li {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
 .left {
+    align-self: flex-start;
+    background-color: #b2b7c1;
     text-align: left;
-    font-size: 14px;
 }
 
 .right {
+    align-self: flex-end;
+    background-color: #112D4E;
     text-align: right;
-    font-size: 14px;
+    color: #f9f7f7;
 }
 
 .messaging__container--wrapper {
