@@ -86,27 +86,32 @@ public class PageController {
         }
         List<AppointmentInfo> appointments = appointmentRepository.findByUserId(user_id);
         List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByUserId(user_id);
+        List<AppointmentInfo> validPastAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<BillingInfo> billings = new ArrayList<>();
         List<BillingInfo> pastBillings = new ArrayList<>();
         List<DoctorInfo> pastAppointmentDoctors = new ArrayList<>();
 
         for(AppointmentInfo appointment: pastAppointments) {
             Optional<DoctorInfo> pastDoctor = doctorRepository.findById(appointment.doctor_id());
+            System.out.println(pastDoctor);
             if (pastDoctor.isEmpty()) {
                 
                 continue; // Skip this iteration if doctor is not found
             }
+            validPastAppointments.add(appointment);
             pastBillings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
             pastAppointmentDoctors.add(pastDoctor.get());
 
         }
+        System.out.println(pastBillings);
+        System.out.println(pastAppointmentDoctors);
         for(AppointmentInfo appointment: appointments) {
             billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
 
         }
         
 
-        model.addAttribute("past_appointments", pastAppointments);
+        model.addAttribute("past_appointments", validPastAppointments);
         model.addAttribute("past_billings", pastBillings);
         model.addAttribute("past_appointment_doctors", pastAppointmentDoctors);
 
@@ -157,7 +162,7 @@ public class PageController {
         model.addAttribute("id", user_id);
         model.addAttribute("role", (String) session.getAttribute("role"));
         model.addAttribute("doctors", doctors);
-        model.addAttribute("messages", messages);
+        model.addAttribute("messages", validMessages);
         System.out.println(doctors);
         return "messages";
     }
@@ -211,6 +216,7 @@ public class PageController {
         Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
         List<AppointmentInfo> appointments = appointmentRepository.findByDoctorId(doctor_id);
         List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByDoctorId(doctor_id);
+        List<AppointmentInfo> validPastAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<BillingInfo> billings = new ArrayList<>();
         List<BillingInfo> pastBillings = new ArrayList<>();
         List<UserInfo> pastAppointmentUsers = new ArrayList<>();
@@ -225,6 +231,7 @@ public class PageController {
                 
                 continue; // Skip this iteration if user is not found
             }
+            validPastAppointments.add(appointment);
             pastBillings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
             pastAppointmentUsers.add(pastUser.get());
 
@@ -232,7 +239,7 @@ public class PageController {
         System.out.println(pastAppointmentUsers);
         
 
-        model.addAttribute("past_appointments", pastAppointments);
+        model.addAttribute("past_appointments", validPastAppointments);
         model.addAttribute("past_billings", pastBillings);
         model.addAttribute("past_appointment_users", pastAppointmentUsers);
 
@@ -265,7 +272,7 @@ public class PageController {
         model.addAttribute("id", doctor_id);
         model.addAttribute("role", (String) session.getAttribute("role"));
         model.addAttribute("users", users);
-        model.addAttribute("messages", messages);
+        model.addAttribute("messages", validMessages);
         return "messages";
 
        
