@@ -646,10 +646,10 @@ function filterMessages(id) {
     });
 }
 
-async function request_cancel_message(event){
+async function request_cancel_message(event, index){
     event.preventDefault();
-    const reason = document.getElementById("cancel-reason").value;
-    const appointment_id = document.getElementById("cancel-appointment-id").value;
+    const reason = document.getElementById(`cancel-reason-${index}`).value;
+    const appointment_id = document.getElementById(`cancel-appointment-id-${index}`).value;
     
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -683,7 +683,7 @@ async function request_cancel_message(event){
         if(response.ok){
             alert("Message created successfully!");
             
-            document.getElementById("cancel-reason").value = ""; // clear the input field
+            document.getElementById(`cancel-reason-${index}`).value = ""; // clear the input field
             window.location.reload(); // reload the page to see the new message
             
         }
@@ -697,12 +697,12 @@ async function request_cancel_message(event){
         
 }
 
-async function request_reschedule_message(event){
+async function request_reschedule_message(event, index){
     event.preventDefault();
-    const reason = document.getElementById("resched-reason").value;
-    const appointment_id = document.getElementById("resched-appointment-id").value;
-    const date = document.getElementById("new-date").value;
-    const time = document.getElementById("new-time").value;
+    const reason = document.getElementById(`resched-reason-${index}`).value;
+    const appointment_id = document.getElementById(`resched-appointment-id-${index}`).value;
+    const date = document.getElementById(`new-date-${index}`).value;
+    const time = document.getElementById(`new-time-${index}`).value;
 
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -734,9 +734,9 @@ async function request_reschedule_message(event){
         if(response.ok){
             alert("Message created successfully!");
             
-            document.getElementById("resched-reason").value = ""; // clear the input field
-            document.getElementById("new-date").value = ""; // clear the input field
-            document.getElementById("new-time").value = ""; // clear the input field 
+            document.getElementById(`resched-reason-${index}`).value = ""; // clear the input field
+            document.getElementById(`new-date-${index}`).value = ""; // clear the input field
+            document.getElementById(`new-time-${index}`).value = ""; // clear the input field 
             // reload the page to see the new message
             
         }
@@ -750,10 +750,10 @@ async function request_reschedule_message(event){
 
 }
 
-async function cancel_message(event){
+async function cancel_message(event, index){
     event.preventDefault();
-    const reason = document.getElementById("cancel-reason").value;
-    const appointment_id = document.getElementById("cancel-appointment-id").value;
+    const reason = document.getElementById(`cancel-reason-${index}`).value;
+    const appointment_id = document.getElementById(`cancel-appointment-id-${index}`).value;
     
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -787,7 +787,7 @@ async function cancel_message(event){
         if(response.ok){
             alert("Message created successfully!");
             
-            document.getElementById("cancel-reason").value = ""; // clear the input field
+            document.getElementById(`cancel-reason-${index}`).value = ""; // clear the input field
             window.location.reload(); // reload the page to see the new message
             
         }
@@ -821,12 +821,12 @@ async function cancel_message(event){
     }
 }
 
-async function reschedule_message(event){
+async function reschedule_message(event, index){
     event.preventDefault();
-    const reason = document.getElementById("resched-reason").value;
-    const appointment_id = document.getElementById("resched-appointment-id").value;
-    const date = document.getElementById("new-date").value;
-    const time = document.getElementById("new-time").value;
+    const reason = document.getElementById(`resched-reason-${index}`).value;
+    const appointment_id = document.getElementById(`resched-appointment-id-${index}`).value;
+    const date = document.getElementById(`new-date-${index}`).value;
+    const time = document.getElementById(`new-time-${index}`).value;
 
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -858,9 +858,9 @@ async function reschedule_message(event){
         if(response.ok){
             alert("Message created successfully!");
             
-            document.getElementById("resched-reason").value = ""; // clear the input field
-            document.getElementById("new-date").value = ""; // clear the input field
-            document.getElementById("new-time").value = ""; // clear the input field 
+            document.getElementById(`resched-reason-${index}`).value = ""; // clear the input field
+            document.getElementById(`new-date-${index}`).value = ""; // clear the input field
+            document.getElementById(`new-time-${index}`).value = ""; // clear the input field 
 
             
         }
