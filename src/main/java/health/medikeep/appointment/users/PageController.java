@@ -1,5 +1,6 @@
 package health.medikeep.appointment.users;
 
+import java.lang.foreign.Linker.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -84,11 +85,33 @@ public class PageController {
             return "no-rights";
         }
         List<AppointmentInfo> appointments = appointmentRepository.findByUserId(user_id);
+        List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByUserId(user_id);
         List<BillingInfo> billings = new ArrayList<>();
+        List<BillingInfo> pastBillings = new ArrayList<>();
+        List<DoctorInfo> pastAppointmentDoctors = new ArrayList<>();
+
+        for(AppointmentInfo appointment: pastAppointments) {
+            Optional<DoctorInfo> pastDoctor = doctorRepository.findById(appointment.doctor_id());
+            if (pastDoctor.isEmpty()) {
+                
+                continue; // Skip this iteration if doctor is not found
+            }
+            pastBillings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
+            pastAppointmentDoctors.add(pastDoctor.get());
+
+        }
         for(AppointmentInfo appointment: appointments) {
             billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
 
         }
+        
+
+        model.addAttribute("past_appointments", pastAppointments);
+        model.addAttribute("past_billings", pastBillings);
+        model.addAttribute("past_appointment_doctors", pastAppointmentDoctors);
+
+
+
         model.addAttribute("billings", billings);
         model.addAttribute("doctors", appointmentRepository.appointmentDoctorInfo(user_id));
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
@@ -114,7 +137,17 @@ public class PageController {
         if (user_id == null || (String) session.getAttribute("role") != "user") {
             return "no-rights";
         }
-        List<MessageInfo> messages = messageRepository.showUserMessages(user_id);
+        List<MessageInfo> messages = messageRepository.showUserMessages(user_id); // kasama dito ung mga deleted doctor which magcacause ng error
+        List<MessageInfo> validMessages = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor 
+        
+
+        for(MessageInfo message: messages) {
+            Optional<DoctorInfo> doctor = doctorRepository.findById(message.receiver_id());
+            if (doctor.isPresent()) {
+                validMessages.add(message);
+            }
+        }
+
         List<DoctorInfo> doctors = appointmentRepository.showDoctor(user_id);
      
         
@@ -177,11 +210,32 @@ public class PageController {
         }
         Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
         List<AppointmentInfo> appointments = appointmentRepository.findByDoctorId(doctor_id);
+        List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByDoctorId(doctor_id);
         List<BillingInfo> billings = new ArrayList<>();
+        List<BillingInfo> pastBillings = new ArrayList<>();
+        List<UserInfo> pastAppointmentUsers = new ArrayList<>();
         for(AppointmentInfo appointment: appointments) {
             billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
 
+        
         }
+        for(AppointmentInfo appointment: pastAppointments) {
+            Optional<UserInfo> pastUser = userRepository.findById(appointment.user_id());
+            if (pastUser.isEmpty()) {
+                
+                continue; // Skip this iteration if user is not found
+            }
+            pastBillings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
+            pastAppointmentUsers.add(pastUser.get());
+
+        }
+        System.out.println(pastAppointmentUsers);
+        
+
+        model.addAttribute("past_appointments", pastAppointments);
+        model.addAttribute("past_billings", pastBillings);
+        model.addAttribute("past_appointment_users", pastAppointmentUsers);
+
         model.addAttribute("billings", billings);
         model.addAttribute("users", appointmentRepository.appointmentUserInfo(doctor_id));
         model.addAttribute("doctor", doctor.get());
@@ -195,7 +249,16 @@ public class PageController {
         if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
             return "no-rights";
         }
-        List<MessageInfo> messages = messageRepository.showDoctorMessages(doctor_id);
+        List<MessageInfo> messages = messageRepository.showUserMessages(doctor_id); // kasama dito ung mga deleted doctor which magcacause ng error
+        List<MessageInfo> validMessages = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor 
+        
+
+        for(MessageInfo message: messages) {
+            Optional<UserInfo> doctor = userRepository.findById(message.receiver_id());
+            if (doctor.isPresent()) {
+                validMessages.add(message);
+            }
+        }
         List<UserInfo> users = appointmentRepository.showUser(doctor_id);
 
 

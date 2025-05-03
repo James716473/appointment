@@ -7,65 +7,104 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="page-section" id="appointments">
-        <table border="1" class="appointment__table">
-            <tr>
-                <th>Appointment ID</th>
-                <th>Patient Name</th>
-                <th>Appointment Date</th>
-                <th>Appointment Time</th>
-                <th>Appointment Type</th>
-                <th>Billing ID</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="appointment, index: ${appointments}">
-                <td th:text="${appointment.appointment_id}">appointment id</td>
-                <td th:text="|${users[index.index].first_name} ${users[index.index].last_name}|"></td>
-                <td th:text="${appointment.appointment_date}">appointment date</td>
-                <td th:text="${appointment.appointment_time}">appointment time</td>
-                <td th:text="${appointment.appointment_type}">appointment type</td>
-                <td th:text="${appointment.billing_id}">billing id</td>
-                <td th:text="${appointment.description}">description</td>
-                <td th:text="${billings[index.index].status}">status</td>
-                <td>
-                    <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule', ${appointment.appointment_id})|">
-                    <input type="button" value="Cancel" th:onclick="|toggle_appointment(event, 'cancel', ${appointment.appointment_id})|">
-                </td>
-            </tr>
-        </table>
+    <div>
+        <div th:if="${appointments.size() == 0}">
+            <h1>You have no appointments</h1>
+        </div>
+        <div th:if="${appointments.size() > 0}" class="page-section" id="appointments">
+            <table border="1" class="appointment__table">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Appointment Type</th>
+                    <th>Billing ID</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="appointment, index: ${appointments}">
+                    <td th:text="${appointment.appointment_id}">appointment id</td>
+                    <td th:text="|${users[index.index].first_name} ${users[index.index].last_name}|"></td>
+                    <td th:text="${appointment.appointment_date}">appointment date</td>
+                    <td th:text="${appointment.appointment_time}">appointment time</td>
+                    <td th:text="${appointment.appointment_type}">appointment type</td>
+                    <td th:text="${appointment.billing_id}">billing id</td>
+                    <td th:text="${appointment.description}">description</td>
+                    <td th:text="${billings[index.index].status}">status</td>
+                    <td>
+                        <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule', ${appointment.appointment_id})|">
+                        <input type="button" value="Cancel" th:onclick="|toggle_appointment(event, 'cancel', ${appointment.appointment_id})|">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    
+        <div class="page-section" id="reschedule" style="display: none;">
+            <h2>Request Reschedule</h2>
+            <form id="request-resched" onsubmit="reschedule_message(event)">
+                
+                <input type="text" id="resched-appointment-id" hidden>
+                <input type="text" id="resched-id" hidden>
+                <label for="new-date">New Date:</label>
+                <input type="date" id="new-date" name="new_date" required><br><br>
+                <label for="new-time">New Time:</label>
+                <input type="time" id="new-time" name="new_time" required><br><br>
+                <label for="resched-reason">Reason for Reschedule:</label><br>
+                <textarea id="resched-reason" name="resched-reason" rows="4" cols="50" required></textarea><br><br>
+                <input type="submit" value="Reschedule Appointment">
+            </form>
+            <input type="button" value="Cancel" onclick="toggle_appointment(event, 'appointments')">
+        </div>
+    
+        <div class="page-section" id="cancel" style="display: none;">
+            <h2>Request Cancel</h2>
+            <form id="cancel-form" onsubmit="cancel_message(event)">
+                <input type="text" id="cancel-appointment-id" hidden>
+                <input type="text" id="cancel-id" hidden>
+                <label for="cancel-reason">Reason for Cancellation:</label><br>
+                <textarea id="cancel-reason" name="cancel-reason" rows="4" cols="50" required></textarea><br><br>
+                <input type="submit" value="Cancel Appointment">
+            </form>
+            <input type="button" value="Cancel" onclick="toggle_appointment(event, 'appointments')">
+        </div>
+    </div>
+
+    <div>
+        <div th:if="${past_appointments.size() == 0}">
+            <h1>You have no past appointments</h1>
+
+        </div>
+        <div th:if="${past_appointments.size() > 0}">
+            <h3>Past Appointments:</h3>
+            <table border="1" class="appointment__table">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Appointment Type</th>
+                    <th>Billing ID</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+                <tr th:each="appointment, index: ${past_appointments}">
+                    <td th:text="${appointment.appointment_id}">appointment id</td>
+                    <td th:text="|${past_appointment_users[index.index].first_name} ${past_appointment_users[index.index].last_name}|"></td>
+                    <td th:text="${appointment.appointment_date}">appointment date</td>
+                    <td th:text="${appointment.appointment_time}">appointment time</td>
+                    <td th:text="${appointment.appointment_type}">appointment type</td>
+                    <td th:text="${appointment.billing_id}">billing id</td>
+                    <td th:text="${appointment.description}">description</td>
+                    <td th:text="${past_billings[index.index].status}">status</td>
+                </tr>
+            </table>
+        </div>
+        
     </div>
     
-
-    <div class="page-section" id="reschedule" style="display: none;">
-        <h2>Request Reschedule</h2>
-        <form id="request-resched" onsubmit="reschedule_message(event)">
-            
-            <input type="text" id="resched-appointment-id" hidden>
-            <input type="text" id="resched-id" hidden>
-            <label for="new-date">New Date:</label>
-            <input type="date" id="new-date" name="new_date" required><br><br>
-            <label for="new-time">New Time:</label>
-            <input type="time" id="new-time" name="new_time" required><br><br>
-            <label for="resched-reason">Reason for Reschedule:</label><br>
-            <textarea id="resched-reason" name="resched-reason" rows="4" cols="50" required></textarea><br><br>
-            <input type="submit" value="Reschedule Appointment">
-        </form>
-        <input type="button" value="Cancel" onclick="toggle_appointment(event, 'appointments')">
-    </div>
-
-    <div class="page-section" id="cancel" style="display: none;">
-        <h2>Request Cancel</h2>
-        <form id="cancel-form" onsubmit="cancel_message(event)">
-            <input type="text" id="cancel-appointment-id" hidden>
-            <input type="text" id="cancel-id" hidden>
-            <label for="cancel-reason">Reason for Cancellation:</label><br>
-            <textarea id="cancel-reason" name="cancel-reason" rows="4" cols="50" required></textarea><br><br>
-            <input type="submit" value="Cancel Appointment">
-        </form>
-        <input type="button" value="Cancel" onclick="toggle_appointment(event, 'appointments')">
-    </div>
 
     <script>
         const today = new Date();

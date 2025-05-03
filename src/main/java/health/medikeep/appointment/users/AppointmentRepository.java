@@ -53,8 +53,22 @@ public class AppointmentRepository {
             .list();
     }
 
+    public List<AppointmentInfo> findPastByUserId(Integer user_id) {
+        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE user_id = :user_id AND (appointment_date < CURDATE() OR (appointment_date=CURDATE() AND appointment_time < CURTIME())) ORDER BY appointment_date DESC, appointment_time DESC")
+            .param("user_id", user_id)
+            .query(AppointmentInfo.class)
+            .list();
+    }
+
     public List<AppointmentInfo> findByDoctorId(Integer doctor_id) {
         return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE doctor_id = :doctor_id AND (appointment_date > CURDATE() OR (appointment_date=CURDATE() AND appointment_time > CURTIME())) ORDER BY appointment_date ASC, appointment_time ASC")
+            .param("doctor_id", doctor_id)
+            .query(AppointmentInfo.class)
+            .list();
+    }
+
+    public List<AppointmentInfo> findPastByDoctorId(Integer doctor_id) {
+        return jdbcClient.sql("SELECT * FROM APPOINTMENTS WHERE doctor_id = :doctor_id AND (appointment_date < CURDATE() OR (appointment_date=CURDATE() AND appointment_time < CURTIME())) ORDER BY appointment_date DESC, appointment_time DESC")
             .param("doctor_id", doctor_id)
             .query(AppointmentInfo.class)
             .list();

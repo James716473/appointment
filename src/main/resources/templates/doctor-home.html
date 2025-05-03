@@ -42,13 +42,7 @@
     <div class = "firstBox">
         <h1 class = "welcome" th:text="|Welcome back, ${doctor.first_name}|"> Welcome back, [name]</h1>
         <p class = "sched" th:text="|Your next scheduled appointment is in ${appointments[0].appointment_date} at ${appointments[0].appointment_time}|">Your next scheduled appointment is in [date] </p>
-        <div class = button-rows>
-            <div class="form1">
-                <input type="button" value = "Reschedule" class = "reschedButton">
-                <input type="submit" value = "View All Appointments" class="viewAll" onclick="location.href='doctor/appointment'">
-            </div>
-            
-        </div>
+       
             
     </div>
 
@@ -58,7 +52,7 @@
         <p th:text="|Patient: ${appointment_user_infos[0].first_name} ${appointment_user_infos[0].last_name}|">Patient: Name<br></p>
         <p th:text="|Appointment Type: ${appointments[0].appointment_type}|"></p>
         <p th:text="|Reason: ${appointments[0].description}">Reason: [reason of appointment]<br></p>
-        <input type ="submit" value = "Chat with Patient" class="chatwith" onclick="location.href='doctor/messages'">
+        
     </div>
 
     <div class="buttonContainer">
@@ -86,7 +80,7 @@
             <form action="doctor/messages">
                 <button class="chat">
                     <i class="fa-solid fa-message"></i>
-                    <span>Chat with Doctors</span>
+                    <span>Chat with Patients</span>
                 </button>
             </form>
         </div>
