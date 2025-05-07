@@ -211,6 +211,28 @@ function edit_toggle() {
     }
 }
 
+async function get_doctor_schedule() {
+    doctor_id = document.querySelector("input[name=doctor]:checked").value;
+    const response = await fetch(`${url}api/doctors/get-doctor-sched/${doctor_id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+        
+    });
+    const hours = await response.json();
+    const select = document.getElementById("time");
+
+    hours.forEach(hour => {
+        const option = document.createElement("option");
+        option.value = hour;
+        option.textContent = hour;
+        select.appendChild(option);
+    });
+
+
+}
+
 function toggle_page_section(event, page_section, name) {
     event.preventDefault();
     
@@ -219,16 +241,20 @@ function toggle_page_section(event, page_section, name) {
     if (name !== undefined) {
         const inputs = document.querySelectorAll(`[name=${name}]`);
         let checked = false;
-    if (page_section === 'select-service') {
-        filter_doctors_by_hospital(); // hides doctors now, not yet visible
-        renderSpecialtiesForHospital();
-    }
-    if (page_section === 'select-doctor') {
-        filter_doctors_by_hospital(); // ensure doctors match latest hospital
-        filter_doctors_by_specialty(); // optional: hide by chosen specialty
-        
-        
-    }
+        if (page_section === 'select-service') {
+            filter_doctors_by_hospital(); // hides doctors now, not yet visible
+            renderSpecialtiesForHospital();
+        }
+        if (page_section === 'select-doctor') {
+            filter_doctors_by_hospital(); // ensure doctors match latest hospital
+            filter_doctors_by_specialty(); // optional: hide by chosen specialty
+            
+            
+        }
+
+        if (page_section === 'select-date-time'){
+            get_doctor_schedule(); // get schedule of selected doctor
+        }
         if(inputs[0].type === "radio"){
             inputs.forEach(input => {
                 if (input.checked) {
@@ -456,7 +482,7 @@ async function book_appointment(event){
     const doctor_id = document.querySelector('input[name=doctor]:checked').value;
     const appointment_date = document.getElementById("date").value;
     const appointment_time = document.getElementById("time").value;
-    const appointment_type = document.querySelector('input[name=specialty]:checked').value;
+    const appointment_type = document.getElementById("time").value;
     const description = document.getElementById("reason").value;
 
     
@@ -517,6 +543,30 @@ async function book_appointment(event){
             window.location.href = "/user";
         } else {
             alert("Failed to book appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+
+    try{
+        const response = await fetch(`${url}api/messages/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sender_id: user_id,
+                receiver_id: doctor_id,
+                message_type: "u-d",
+                message: `I would like to book an appointment on ${appointment_date} at ${appointment_time}. Reason: ${description}`
+            })
+        });
+        if(response.ok){
+            alert("Message created successfully!");
+            
+        }
+        else { 
+            alert("Failed to create message.");
         }
     } catch (error) {
         alert("An error occurred: " + error.message);

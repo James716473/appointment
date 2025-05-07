@@ -1,5 +1,7 @@
 package health.medikeep.appointment.users;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,6 +93,20 @@ public class DoctorController {
         }
     }
 
+    @GetMapping("/get-doctor-sched/{doctor_id}")
+    public List<LocalTime> getDoctorSched(@PathVariable Integer doctor_id) {
+        DoctorInfo doctor = doctorRepository.findById(doctor_id).orElse(null);
+        LocalTime index = doctor.schedule_from();
+        List<LocalTime> schedule = new ArrayList<>();
+        
+        while(index.isBefore(doctor.schedule_to())){
+            schedule.add(index);
+            index = index.plusMinutes(60);
+            
+        }
+        return schedule;
+    }
+    
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/delete")
