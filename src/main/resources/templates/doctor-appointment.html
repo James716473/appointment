@@ -25,7 +25,7 @@
                     <p th:text="|Description: ${appointment.description}|">description</p>
                     <p th:text="|Status: ${billings[index.index].status}|">status</p>
                     <p>
-                        <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule-${appointment.appointment_id}')|">
+                        <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule-${appointment.appointment_id}', ${appointment.appointment_id})|">
                         <input type="button" value="Cancel" th:onclick="|toggle_appointment(event, 'cancel-${appointment.appointment_id}')|">
                     </p>
                 </div>
@@ -35,36 +35,14 @@
                     <form th:id="|request-resched-${index.index}|" th:onsubmit="|reschedule_message(event, ${index.index})|">
                         
                         <input type="text" th:value="${appointment.appointment_id}" th:id="|resched-appointment-id-${index.index}" hidden>
-                        
+                        <input type="text" th:value="${appointment.doctor_id}" th:id="|doctor-id-${appointment.appointment_id}|" hidden>    
+
                         <label for="|new-date-${index.index}|">New Date:</label>
                         <input type="date" class="new-date" th:id="|new-date-${index.index}|" name="|new-date-${index.index}|" required><br><br>
-                        <label for="|new-time-${index.index}|">New Time:</label>
+                        <label for="|new-time-${appointment.appointment_id}|">New Time:</label>
                         
-                        <select class="new-time" th:id="|new-time-${index.index}|" name="|new-time-${index.index}|" required>
-                            <option value="00:00">00:00</option>
-                            <option value="01:00">01:00</option>
-                            <option value="02:00">02:00</option>
-                            <option value="03:00">03:00</option>
-                            <option value="04:00">04:00</option>
-                            <option value="05:00">05:00</option>
-                            <option value="06:00">06:00</option>
-                            <option value="07:00">07:00</option>
-                            <option value="08:00">08:00</option>
-                            <option value="09:00">09:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="14:00">14:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option>
-                            <option value="17:00">17:00</option>
-                            <option value="18:00">18:00</option>
-                            <option value="19:00">19:00</option>
-                            <option value="20:00">20:00</option>
-                            <option value="21:00">21:00</option>
-                            <option value="22:00">22:00</option>
-                            <option value="23:00">23:00</option>
+                        <select class="new-time" th:id="|new-time-${appointment.appointment_id}|" name="|new-time-${appointment.appointment_id}|" required>
+                            
                           </select>
                           <br><br>
                         <label th:for="|resched-reason-${index.index}|">Reason for Reschedule:</label><br>
@@ -140,8 +118,11 @@
         const formattedDate = nextYear.toISOString().split('T')[0];
     
         // Set the min and max attributes
-        document.getElementById("new-date").setAttribute("min", today.toISOString().split('T')[0]); // Today's date as min
-        document.getElementById("new-date").setAttribute("max", formattedDate); // One year from today as max
+        document.querySelectorAll(".new-date").forEach(function(dateInput) {
+            dateInput.setAttribute("min", today.toISOString().split('T')[0]); // Tomorrow's date as min
+            dateInput.setAttribute("max", formattedDate); // One year from today as max
+        });
+        
     </script>
 </body>
 </html>

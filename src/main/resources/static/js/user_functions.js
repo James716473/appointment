@@ -211,8 +211,8 @@ function edit_toggle() {
     }
 }
 
-async function get_doctor_schedule() {
-    doctor_id = document.querySelector("input[name=doctor]:checked").value;
+async function get_doctor_schedule(doctor_id, index) {
+    
     const response = await fetch(`${url}api/doctors/get-doctor-sched/${doctor_id}`, {
         method: "GET",
         headers: {
@@ -221,14 +221,27 @@ async function get_doctor_schedule() {
         
     });
     const hours = await response.json();
-    const select = document.getElementById("time");
+    if(index !== undefined){
+        const select = document.getElementById(`new-time-${index}`);
+        select.innerHTML = ""; // clear previous options
 
-    hours.forEach(hour => {
-        const option = document.createElement("option");
-        option.value = hour;
-        option.textContent = hour;
-        select.appendChild(option);
-    });
+        hours.forEach(hour => {
+            const option = document.createElement("option");
+            option.value = hour;
+            option.textContent = hour;
+            select.appendChild(option);
+        });
+    } else {
+        const select = document.getElementById("time");
+
+        hours.forEach(hour => {
+            const option = document.createElement("option");
+            option.value = hour;
+            option.textContent = hour;
+            select.appendChild(option);
+        });
+    }
+    
 
 
 }
@@ -253,7 +266,8 @@ function toggle_page_section(event, page_section, name) {
         }
 
         if (page_section === 'select-date-time'){
-            get_doctor_schedule(); // get schedule of selected doctor
+            doctor_id = document.querySelector("input[name=doctor]:checked").value;
+            get_doctor_schedule(doctor_id); // get schedule of selected doctor
         }
         if(inputs[0].type === "radio"){
             inputs.forEach(input => {
@@ -295,12 +309,9 @@ function toggle_page_section(event, page_section, name) {
 function toggle_appointment(event, section_id, appointment_id, id) {
     event.preventDefault();
     const sections = document.querySelectorAll(".page-section");
-    if(appointment_id !== undefined && section_id === "reschedule") {
-        document.getElementById("resched-appointment-id").value = appointment_id;
-        document.getElementById("resched-id").value = id;
-    } else if (appointment_id !== undefined && section_id === "cancel") {
-        document.getElementById("cancel-appointment-id").value = appointment_id;
-        document.getElementById("cancel-id").value = id;
+    if(appointment_id !== undefined && section_id === `reschedule-${appointment_id}`){
+        doctor_id = document.getElementById(`doctor-id-${appointment_id}`).value;
+        get_doctor_schedule(doctor_id, appointment_id);
     }
     sections.forEach(section => {
         if (section.id === section_id) {
@@ -558,7 +569,7 @@ async function book_appointment(event){
                 sender_id: user_id,
                 receiver_id: doctor_id,
                 message_type: "u-d",
-                message: `I would like to book an appointment on ${appointment_date} at ${appointment_time}. Reason: ${description}`
+                message: `I booked an appointment on ${appointment_date} at ${appointment_time}. Reason: ${description}`
             })
         });
         if(response.ok){
@@ -752,7 +763,7 @@ async function request_reschedule_message(event, index){
     const reason = document.getElementById(`resched-reason-${index}`).value;
     const appointment_id = document.getElementById(`resched-appointment-id-${index}`).value;
     const date = document.getElementById(`new-date-${index}`).value;
-    const time = document.getElementById(`new-time-${index}`).value;
+    const time = document.getElementById(`new-time-${appointment_id}`).value;
 
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -786,7 +797,7 @@ async function request_reschedule_message(event, index){
             
             document.getElementById(`resched-reason-${index}`).value = ""; // clear the input field
             document.getElementById(`new-date-${index}`).value = ""; // clear the input field
-            document.getElementById(`new-time-${index}`).value = ""; // clear the input field 
+            document.getElementById(`new-time-${appointment_id}`).value = ""; // clear the input field 
             // reload the page to see the new message
             
         }
@@ -876,7 +887,7 @@ async function reschedule_message(event, index){
     const reason = document.getElementById(`resched-reason-${index}`).value;
     const appointment_id = document.getElementById(`resched-appointment-id-${index}`).value;
     const date = document.getElementById(`new-date-${index}`).value;
-    const time = document.getElementById(`new-time-${index}`).value;
+    const time = document.getElementById(`new-time-${appointment_id}`).value;
 
     response = await fetch(`${url}api/appointments/find`, {
         method: "POST",
@@ -910,7 +921,7 @@ async function reschedule_message(event, index){
             
             document.getElementById(`resched-reason-${index}`).value = ""; // clear the input field
             document.getElementById(`new-date-${index}`).value = ""; // clear the input field
-            document.getElementById(`new-time-${index}`).value = ""; // clear the input field 
+            document.getElementById(`new-time-${appointment_id}`).value = ""; // clear the input field 
 
             
         }
