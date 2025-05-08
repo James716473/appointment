@@ -251,14 +251,22 @@ public class PageController {
         }
         Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
         List<AppointmentInfo> appointments = appointmentRepository.findByDoctorId(doctor_id);
+        List<AppointmentInfo> validAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
+        List<UserInfo> appointmentUsers = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByDoctorId(doctor_id);
         List<AppointmentInfo> validPastAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<BillingInfo> billings = new ArrayList<>();
         List<BillingInfo> pastBillings = new ArrayList<>();
         List<UserInfo> pastAppointmentUsers = new ArrayList<>();
         for(AppointmentInfo appointment: appointments) {
+            Optional<UserInfo> user = userRepository.findById(appointment.user_id());
+            if (user.isEmpty()) {
+                
+                continue; // Skip this iteration if user is not found
+            }
+            validAppointments.add(appointment);
             billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
-
+            appointmentUsers.add(user.get());
         
         }
         for(AppointmentInfo appointment: pastAppointments) {
@@ -280,9 +288,9 @@ public class PageController {
         model.addAttribute("past_appointment_users", pastAppointmentUsers);
 
         model.addAttribute("billings", billings);
-        model.addAttribute("users", appointmentRepository.appointmentUserInfo(doctor_id));
+        model.addAttribute("users", appointmentUsers);
         model.addAttribute("doctor", doctor.get());
-        model.addAttribute("appointments", appointments);
+        model.addAttribute("appointments", validAppointments);
         return "doctor-appointment";
     }
 
