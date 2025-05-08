@@ -493,7 +493,7 @@ async function book_appointment(event){
     const doctor_id = document.querySelector('input[name=doctor]:checked').value;
     const appointment_date = document.getElementById("date").value;
     const appointment_time = document.getElementById("time").value;
-    const appointment_type = document.getElementById("time").value;
+    const appointment_type = document.querySelector('input[name=specialty]:checked').value;
     const description = document.getElementById("reason").value;
 
     

@@ -85,6 +85,8 @@ public class PageController {
             return "no-rights";
         }
         List<AppointmentInfo> appointments = appointmentRepository.findByUserId(user_id);
+        List<AppointmentInfo> validAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
+        List<DoctorInfo> appointmentDoctors = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<AppointmentInfo> pastAppointments = appointmentRepository.findPastByUserId(user_id);
         List<AppointmentInfo> validPastAppointments = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor
         List<BillingInfo> billings = new ArrayList<>();
@@ -105,9 +107,16 @@ public class PageController {
         }
         System.out.println(pastBillings);
         System.out.println(pastAppointmentDoctors);
-        for(AppointmentInfo appointment: appointments) {
-            billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
 
+        for(AppointmentInfo appointment: appointments) {
+            Optional<DoctorInfo> doctor = doctorRepository.findById(appointment.doctor_id());
+            if (doctor.isEmpty()) {
+                
+                continue; // Skip this iteration if doctor is not found
+            }
+            validAppointments.add(appointment);
+            billings.add(billingRepository.findByAppointmentId(appointment.appointment_id()));
+            appointmentDoctors.add(doctor.get());
         }
         
 
@@ -118,9 +127,9 @@ public class PageController {
 
 
         model.addAttribute("billings", billings);
-        model.addAttribute("doctors", appointmentRepository.appointmentDoctorInfo(user_id));
+        model.addAttribute("doctors", appointmentDoctors);
         model.addAttribute("user", userRepository.findById(user_id).orElse(null));
-        model.addAttribute("appointments", appointments);
+        model.addAttribute("appointments", validAppointments);
         return "user-appointment";
     }
 

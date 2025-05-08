@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.ui.Model;
@@ -43,6 +44,20 @@ public class AdminController {
         List<DoctorInfo> doctors = doctorRepository.showDoctors();
         model.addAttribute("doctors", doctors);
         return "/admin/admin-doctor";
+    }
+
+    @GetMapping("/doctor/{doctor_id}")
+    public String showDoctor(@PathVariable Integer doctor_id, Model model){
+        DoctorInfo doctor = doctorRepository.findById(doctor_id).orElseThrow(() -> new RuntimeException("Doctor not found"));
+        model.addAttribute("doctor", doctor);
+        return "/admin/admin-doctor-info";
+    }
+
+    @GetMapping("/user/{user_id}")
+    public String showUser(@PathVariable Integer user_id, Model model){
+        UserInfo user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("User not found"));
+        model.addAttribute("user", user);
+        return "/admin/admin-user-info";
     }
 
     @GetMapping("/users")
