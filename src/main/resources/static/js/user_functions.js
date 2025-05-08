@@ -1009,3 +1009,36 @@ async function undo_payment(event, billing_id){
         alert("An error occurred: " + error.message);
     }
 }
+
+async function get_available_time(event){
+    event.preventDefault();
+    const doctor_id  = document.querySelector('input[name=doctor]:checked').value;
+    const appointment_date = document.getElementById("date").value;
+    const data = JSON.stringify({
+        doctor_id: doctor_id,
+        appointment_date: appointment_date
+    });
+    try { 
+        const response = await fetch(`${url}api/doctors/get-available-times`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        });
+        const hours = await response.json();
+        console.log(hours);
+        const select = document.getElementById("time");
+        
+        select.innerHTML = ""; // clear previous options
+        hours.forEach(hour => {
+            const option = document.createElement("option");
+            option.value = hour;
+            option.textContent = hour;
+            select.appendChild(option);
+        });
+
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}

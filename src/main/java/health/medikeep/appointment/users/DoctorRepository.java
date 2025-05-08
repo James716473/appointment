@@ -1,4 +1,6 @@
 package health.medikeep.appointment.users;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,5 +76,13 @@ public class DoctorRepository {
             .params(List.of(email, pass))
             .query(Integer.class)
             .optional();
+    }
+
+    public List<LocalTime> getScheduledTimes(Integer doctor_id, LocalDate appointment_date) {
+        return jdbcClient.sql("SELECT appointment_time FROM appointments WHERE doctor_id = :doctor_id AND appointment_date = :appointment_date")
+            .param("doctor_id", doctor_id)
+            .param("appointment_date", appointment_date)
+            .query(LocalTime.class)
+            .list();
     }
 }

@@ -2,6 +2,9 @@ package health.medikeep.appointment.users;
 
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,4 +104,6 @@ public class AppointmentRepository {
             .query(UserInfo.class)
             .list();
     }
+    
+    
 }

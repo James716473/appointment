@@ -119,6 +119,20 @@ public class DoctorController {
 
     }
 
+    @PostMapping("/get-available-times")
+    public List<LocalTime> getAvailableTimes(@RequestBody AppointmentInfo appointment) {
+        List<LocalTime> scheduledTimes = doctorRepository.getScheduledTimes(appointment.doctor_id(), appointment.appointment_date());
+        DoctorInfo doctor = doctorRepository.findById(appointment.doctor_id()).orElse(null);
+        LocalTime index = doctor.schedule_from();
+        List<LocalTime> availableTimes = new ArrayList<>();
+        while(index.isBefore(doctor.schedule_to())){
+            if(!scheduledTimes.contains(index)){
+                availableTimes.add(index);
+            }
+            index = index.plusMinutes(60);
+        }
+        return availableTimes;
+    }
     
 
     

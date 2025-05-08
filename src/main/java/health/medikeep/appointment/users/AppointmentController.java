@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import java.util.List;
 
 @RestController
@@ -38,6 +40,8 @@ public class AppointmentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Appointment Creation Unsuccessful");
         }
     }
+
+    
 
     @PutMapping("/")
     public ResponseEntity<?> updateAppointment(@RequestBody AppointmentInfo appointment) {
