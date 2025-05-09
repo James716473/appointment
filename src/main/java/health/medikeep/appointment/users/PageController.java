@@ -2,6 +2,7 @@ package health.medikeep.appointment.users;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -156,10 +157,22 @@ public class PageController {
         
 
         for(MessageInfo message: messages) {
-            Optional<DoctorInfo> doctor = doctorRepository.findById(message.receiver_id());
-            if (doctor.isPresent()) {
-                validMessages.add(message);
+            if(message.message_type().equals("d-u") ){
+                Optional<DoctorInfo> doctor = doctorRepository.findById(message.sender_id());
+                if (doctor.isPresent()) {
+                    validMessages.add(message);
+                    
+                
+                }
+            } else {
+                Optional<DoctorInfo> doctor = doctorRepository.findById(message.receiver_id());
+                if (doctor.isPresent()) {
+                    validMessages.add(message);
+                    
+                
+                }
             }
+            
         }
 
         List<DoctorInfo> doctors = appointmentRepository.showDoctor(user_id);
@@ -183,15 +196,29 @@ public class PageController {
         List<MessageInfo> messages = messageRepository.showDoctorMessages(doctor_id); // kasama dito ung mga deleted doctor which magcacause ng error
         List<MessageInfo> validMessages = new ArrayList<>(); //dito mafifilter ung mga message na merong nag eexist na doctor 
         
-
+        
         for(MessageInfo message: messages) {
-            Optional<UserInfo> user = userRepository.findById(message.receiver_id());
-            if (user.isPresent()) {
-                validMessages.add(message);
+           
+            if(message.message_type().equals("u-d") ){
+                Optional<UserInfo> user = userRepository.findById(message.sender_id());
+                if (user.isPresent()) {
+                    validMessages.add(message);
+                    
+                
+                }
+            } else {
+                Optional<UserInfo> user = userRepository.findById(message.receiver_id());
+                if (user.isPresent()) {
+                    validMessages.add(message);
+                
+                }
             }
+             
+            
+
         }
         List<UserInfo> users = appointmentRepository.showUser(doctor_id);
-        System.out.println(messages);
+        
 
         model.addAttribute("id", doctor_id);
         model.addAttribute("role", (String) session.getAttribute("role"));
