@@ -270,6 +270,31 @@ public class PageController {
         return "admin/admin-doctor-info";
     }
 
+    @GetMapping("doctor/schedule")
+    public String doctorSchedule(Model model, HttpSession session){
+        Integer doctor_id = (Integer) session.getAttribute("doctor_id");
+        if (doctor_id == null || (String) session.getAttribute("role") != "doctor") {
+            return "no-rights";
+        }
+        List<AppointmentInfo> appointments = appointmentRepository.findByDoctorId(doctor_id);
+        List<AppointmentInfo> validAppointments = new ArrayList<>();
+
+        for(AppointmentInfo appointment : appointments){
+            Optional<UserInfo> user = userRepository.findById(appointment.user_id());
+            if(user.isPresent()){
+                validAppointments.add(appointment);
+                
+            }
+
+        }
+
+        Optional<DoctorInfo> doctor = doctorRepository.findById(doctor_id);
+        model.addAttribute("doctor", doctor);
+        model.addAttribute("appointments", validAppointments);
+
+        return "doctor-schedule";
+    }
+
     @GetMapping("doctor/appointment")
     public String doctorAppointment(Model model, HttpSession session) {
         Integer doctor_id = (Integer) session.getAttribute("doctor_id");

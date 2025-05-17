@@ -17,22 +17,37 @@
         
         <div th:if="${appointments.size() > 0}">
             <h1>Upcoming Appointment</h1>
-            <div th:each="appointment, index: ${appointments}">
-                <div class="page-section" id="appointments">
-                    <p th:text="|Appointment ID: ${appointment.appointment_id}|">appointment id</p>
-                    <p th:text="|Doctor Name: ${doctors[index.index].first_name} ${doctors[index.index].last_name}|"></p>
-                    <p th:text="|Appointment Date: ${appointment.appointment_date}|">appointment date</p>
-                    <p th:text="|Appointment Time: ${appointment.appointment_time}|">appointment time</p> 
-                    <p th:text="|Appointment Type: ${appointment.appointment_type}|">appointment type</p>
-                    <p th:text="|Billing ID: ${appointment.billing_id}|">billing id</p>
-                    <p th:text="|Description: ${appointment.description}|">description</p>
-                    <p th:text="|Billing Status: ${billings[index.index].status}|">status</p>
-                    <p>
-                        <input type="button" value="Pay">
+            <table border="1" class="appointment__table">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Doctor Name</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Appointment Type</th>
+                    <th>Billing ID</th>
+                    <th>Description</th>
+                    <th>Billing Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="appointment, index: ${appointments}">
+                    <td th:text="${appointment.appointment_id}">appointment id</td>
+                    <td th:text="|${doctors[index.index].first_name} ${doctors[index.index].last_name}|"></td>
+                    <td th:text="${appointment.appointment_date}">appointment date</td>
+                    <td th:text="${appointment.appointment_time}">appointment time</td>
+                    <td th:text="${appointment.appointment_type}">appointment type</td>
+                    <td th:text="${appointment.billing_id}">billing id</td>
+                    <td th:text="${appointment.description}">description</td>
+                    <td th:text="${billings[index.index].status}">status</td>
+                    <td>
+                        <input type="button" value="Pay" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">
                         <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule-${appointment.appointment_id}', ${appointment.appointment_id})|">
                         <input type="button" value="Cancel" th:onclick="|toggle_appointment(event, 'cancel-${appointment.appointment_id}')|">
-                    </p>
-                </div>
+                    </td>
+
+                </tr>
+            </table>
+            <div th:each="appointment, index: ${appointments}">
+                
                 
 
                 <div class="page-section" th:id="|reschedule-${appointment.appointment_id}|" style="display: none;">
@@ -105,11 +120,14 @@
                     <td th:text="${appointment.description}">description</td>
                     <td th:text="${past_billings[index.index].status}">status</td>
                     <td>
-                        <button type="button">Pay</button>
+                        <button type="button" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">Pay</button>
+                        
                     </td>
                 </tr>
     
             </table>
+
+            
         </div>
         
         

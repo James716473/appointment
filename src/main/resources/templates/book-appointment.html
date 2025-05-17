@@ -22,7 +22,7 @@
                 <a href="/" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
                 <ul class="navbar__menu">
                     <li class="navbar__item--home">
-                        <a href="login" class="navbar__home--links">[Belen, James]</a>
+                        <a href="/user/info" th:text="|${user.last_name}, ${user.first_name}|" class="navbar__home--links">[[Belen, James]]</a>
                     </li>
                     <li class="navbar__item--home">
                         <input type="checkbox" id="dropdown-toggle" hidden>
