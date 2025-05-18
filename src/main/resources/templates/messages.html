@@ -20,7 +20,7 @@
                 <a th:href="${role == 'user' ? '/user' : '/doctor'}" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
                 <ul class="navbar__menu">
                     <li class="navbar__item--home">
-                        <a href="./info" class="navbar__home--links">[Belen, James]</a>
+                        <a href="./info" th:text="${role == 'user' ? user.last_name + ', ' + user.first_name : doctor.last_name + ', ' + doctor.first_name}" class="navbar__home--links"></a>
                     </li>
                     <li class="navbar__item--home">
                         <input type="checkbox" id="dropdown-toggle" hidden>

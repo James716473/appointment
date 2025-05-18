@@ -178,9 +178,7 @@ public class PageController {
         List<DoctorInfo> doctors = appointmentRepository.showDoctor(user_id);
      
         
-        
-        model.addAttribute("id", user_id);
-        model.addAttribute("role", (String) session.getAttribute("role"));
+                model.addAttribute("user", userRepository.findById(user_id).orElse(null));        model.addAttribute("id", user_id);        model.addAttribute("role", (String) session.getAttribute("role"));
         model.addAttribute("doctors", doctors);
         model.addAttribute("messages", validMessages);
         System.out.println(validMessages.size());
@@ -220,8 +218,7 @@ public class PageController {
         List<UserInfo> users = appointmentRepository.showUser(doctor_id);
         
 
-        model.addAttribute("id", doctor_id);
-        model.addAttribute("role", (String) session.getAttribute("role"));
+                model.addAttribute("doctor", doctorRepository.findById(doctor_id).orElse(null));        model.addAttribute("id", doctor_id);        model.addAttribute("role", (String) session.getAttribute("role"));
         model.addAttribute("users", users);
         model.addAttribute("messages", validMessages);
         return "messages";
