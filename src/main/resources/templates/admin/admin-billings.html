@@ -15,16 +15,16 @@
 
     <div class="website__container">
 
-        <!-- Horizontal Navbar Section -->
+         <!-- Horizontal Navbar Section -->
         <nav class="navbar">
             <div class="navbar__container">
                 <a href="/" id="navbar__logo"><i class="fa-solid fa-suitcase-medical"></i> MEDIKEEP </a>
                 <ul class="navbar__menu">
                     <li class="navbar__item">
-                        <a href="login" class="navbar__links"><i class="fa-solid fa-user-tie"></i>Admin</a>
+                        <a href="" class="navbar__links"><i class="fa-solid fa-user-tie"></i>Admin</a>
                     </li>
                     <li class="navbar__item">
-                        <a href="signup" class="navbar__links">Logout</a>
+                        <a href="/" class="navbar__links">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -66,8 +66,8 @@
                             <td th:text="${billing.date_issued}">date_issued</td>
                             <td th:text="${billing.date_paid}">date_paid</td>
                             <td>
-                                <button type="button" th:if="${billing.status.name() == 'Not_Paid'}" th:onclick="|pay_appointment(event, ${billing.billing_id})|">Confirm Payment</button>
-                                <button type="button" th:if="${billing.status.name() == 'Paid'}" th:onclick="|undo_payment(event, ${billing.billing_id})|">Undo Payment</button>
+                                <button id="more__button" type="button" th:if="${billing.status.name() == 'Not_Paid'}" th:onclick="|pay_appointment(event, ${billing.billing_id})|">Confirm Payment</button>
+                                <button id="delete__button" type="button" th:if="${billing.status.name() == 'Paid'}" th:onclick="|undo_payment(event, ${billing.billing_id})|">Undo Payment</button>
                             </td>
                         </tr>
                 </div>    

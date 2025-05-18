@@ -1048,3 +1048,32 @@ async function get_available_time(event){
         alert("An error occurred: " + error.message);
     }
 }
+
+async function delete_appointment(event, appointment_id){
+    event.preventDefault();
+
+    if (!confirm(`Are you sure you want to delete appointment with ID ${appointment_id}?`)) {
+        return;
+    }
+
+    const appointment_data = JSON.stringify({ appointment_id: appointment_id });
+
+    try {
+        const response = await fetch(`${url}api/appointments/`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: appointment_data
+        });
+
+        if (response.ok) {
+            alert("Appointment deleted successfully!");
+            location.reload();
+        } else {
+            alert("Failed to delete appointment.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
