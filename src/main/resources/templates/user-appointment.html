@@ -5,6 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/js/user_functions.js" defer></script>
+    <style>
+        .paid-status {
+            color: #28a745;
+            font-weight: bold;
+            background-color: #e8f5e9;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .appointment__table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .appointment__table th {
+            background-color: #05668C;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .appointment__table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .appointment__table tr:nth-child(even) {
+            background-color: #f5f8fa;
+        }
+        
+        .appointment__table tr:hover {
+            background-color: #e8f5f9;
+        }
+        
+        input[type="button"], button {
+            margin-right: 5px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #1787B7;
+            color: white;
+        }
+        
+        input[type="button"]:hover, button:hover {
+            background-color: #05668C;
+        }
+    </style>
 </head>
 <body>
     
@@ -39,7 +90,8 @@
                     <td th:text="${appointment.description}">description</td>
                     <td th:text="${billings[index.index].status}">status</td>
                     <td>
-                        <input type="button" value="Pay" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">
+                        <input type="button" th:if="${billings[index.index].status != 'Paid'}" value="Pay" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">
+                        <span th:if="${billings[index.index].status == 'Paid'}" class="paid-status">✓ Paid</span>
                         <input type="button" value="Reschedule" th:onclick="|toggle_appointment(event, 'reschedule-${appointment.appointment_id}', ${appointment.appointment_id})|">
                         <input type="button" value="Cancel" th:onclick="|toggle_appointment(event, 'cancel-${appointment.appointment_id}')|">
                     </td>
@@ -120,8 +172,8 @@
                     <td th:text="${appointment.description}">description</td>
                     <td th:text="${past_billings[index.index].status}">status</td>
                     <td>
-                        <button type="button" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">Pay</button>
-                        
+                        <button type="button" th:if="${past_billings[index.index].status != 'Paid'}" th:onclick="|pay_appointment(event, ${appointment.billing_id})|">Pay</button>
+                        <span th:if="${past_billings[index.index].status == 'Paid'}" class="paid-status">✓ Paid</span>
                     </td>
                 </tr>
     

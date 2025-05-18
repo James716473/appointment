@@ -134,7 +134,7 @@
 
                     </div>
                 </div>
-                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-hospital')">
+                <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'select-hospital')">
                 <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-doctor', 'specialty')">
                     
             </div>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 
-                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-service')">
+                <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'select-service')">
                 <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'select-date-time', 'doctor')">
                 
             </div>    
@@ -174,14 +174,22 @@
                     <h1>Select Date & Time</h1>
                 </div>
                 
-                <input type="date" class="date-time" id="date" name="date-time" onchange="get_available_time(event)">
-                
-                <select name="date-time" id="time" class="date-time">
+                <div class="date-time-container">
+                    <div class="date-field">
+                        <label for="date">Appointment Date:</label>
+                        <input type="date" class="date-time" id="date" name="date-time" onchange="get_available_time(event)">
+                    </div>
                     
-                </select>
-                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-doctor')">
-                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', 'date-time')">
+                    <div class="time-field">
+                        <label for="time">Available Time Slots:</label>
+                        <select name="date-time" id="time" class="date-time">
+                            <option value="">Please select a date first</option>
+                        </select>
+                    </div>
+                </div>
                 
+                <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'select-doctor')">
+                <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'reason-for-appointment', 'date-time')">
             </div>
 
             <div class="page-section" id="reason-for-appointment" style="display: none;">
@@ -189,9 +197,12 @@
                     <h1>Reason for appointment</h1>
                 </div>
                 
-                <label for="reason"></label>
-                <textarea class="reason" id="reason" name="reason" rows="4" cols="50" placeholder="Write your reason here..."></textarea>
-                <input type="button" value="Back" onclick="toggle_page_section(event, 'select-date-time')">
+                <div class="reason-container">
+                    <label for="reason">Please describe your reason for booking this appointment:</label>
+                    <textarea class="reason" id="reason" name="reason" rows="6" placeholder="Write your reason here..."></textarea>
+                </div>
+                
+                <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'select-date-time')">
                 <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'personal-information', 'reason')">                
             </div>
 
@@ -200,78 +211,139 @@
                     <h1>Personal Information</h1>
                 </div>
                 
-                <div id="info">
-                    <div class="edit__container">
-                        <h1 th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
+                <div id="info" class="personal-info-container">
+                    <div class="user-info-card">
+                        <h1 class="user-name" th:text="${(user.first_name ?: '') + ' ' + (user.middle_name ?: '') + ' ' + (user.last_name ?: '')}">Full Name</h1>
                         <input type="hidden" id="user_id" th:value="${user.user_id}">
-                        <p th:text="${user.user_id}">Id: 0</p>
-                        <p id="first_name">First name: [[${user.first_name}]]</p>
-                        <p id="middle_name">Middle name: [[${user.middle_name}]]</p>
-                        <p id="last_name">Last name: [[${user.last_name}]]</p>
-                        <p id="email">Email: [[${user.email}]]</p>
-                        <p id="pass">Password: [[${user.pass}]]</p>
-                        <p id="sex">Sex: [[${user.sex}]]</p>
-                        <p id="birth_date">Birth date: [[${user.birth_date}]]</p>
-                        <p id="contact_number">Contact number: [[${user.contact_number} ?: 'None']]</p>
-                        <p id="medical_history">Medical history: [[${user.medical_history} ?: 'None']]</p>
-                        <p id="allergies">Allergies: [[${user.allergies} ?: 'None']]</p>
-                        <p id="family_medical_history">Family medical history: [[${user.family_medical_history} ?: 'None']]</p>
-                        <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit">
-                        <input type="button" value="Back" onclick="toggle_page_section(event, 'reason-for-appointment')">
-                        <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confirmation')">
+                        <div class="user-info-row">
+                            <span class="info-label">ID:</span>
+                            <span class="info-value" th:text="${user.user_id}">0</span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">First name:</span>
+                            <span class="info-value" id="first_name" th:text="${user.first_name}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Middle name:</span>
+                            <span class="info-value" id="middle_name" th:text="${user.middle_name}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Last name:</span>
+                            <span class="info-value" id="last_name" th:text="${user.last_name}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value" id="email" th:text="${user.email}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Password:</span>
+                            <span class="info-value" id="pass" th:text="${user.pass}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Sex:</span>
+                            <span class="info-value" id="sex" th:text="${user.sex}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Birth date:</span>
+                            <span class="info-value" id="birth_date" th:text="${user.birth_date}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Contact number:</span>
+                            <span class="info-value" id="contact_number" th:text="${user.contact_number ?: 'None'}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Medical history:</span>
+                            <span class="info-value" id="medical_history" th:text="${user.medical_history ?: 'None'}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Allergies:</span>
+                            <span class="info-value" id="allergies" th:text="${user.allergies ?: 'None'}"></span>
+                        </div>
+                        <div class="user-info-row">
+                            <span class="info-label">Family medical history:</span>
+                            <span class="info-value" id="family_medical_history" th:text="${user.family_medical_history ?: 'None'}"></span>
+                        </div>
+                        <div class="action-buttons">
+                            <input type="button" id="edit__button" onclick="edit_toggle()" value="Edit" class="edit-button">
+                        </div>
                     </div>
+                    <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'reason-for-appointment')">
+                    <input type="button" value="Next" class="nextB" onclick="toggle_page_section(event, 'confirmation')">
                 </div>
                 
+                <div id="edit_info" style="display: none;" class="edit-info-container">
+                    <div class="edit-form">
+                        <div class="form-row">
+                            <span>ID: <span th:text="${user.user_id}"></span></span>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="edit_first_name">First Name:</label>
+                            <input type="text" id="edit_first_name" th:value="${user.first_name}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_middle_name">Middle Name:</label>
+                            <input type="text" id="edit_middle_name" th:value="${user.middle_name}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_last_name">Last Name:</label>
+                            <input type="text" id="edit_last_name" th:value="${user.last_name}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_email">Email:</label>
+                            <input type="text" id="edit_email" th:value="${user.email}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_pass">Password:</label>
+                            <input type="text" id="edit_pass" th:value="${user.pass}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row radio-row">
+                            <label>Sex:</label>
+                            <div class="radio-options">
+                                <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
+                                <label for="male" class="radio-label-inline">Male</label>
+                                
+                                <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
+                                <label for="female" class="radio-label-inline">Female</label>
+                            </div>
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_birth_date">Birth Date:</label>
+                            <input type="date" id="edit_birth_date" th:value="${user.birth_date}" class="form-input date-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_contact_number">Contact Number:</label>
+                            <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_medical_history">Medical History:</label>
+                            <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_allergies">Allergies:</label>
+                            <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}" class="form-input">
+                        </div>
+                    
+                        <div class="form-row">
+                            <label for="edit_family_medical_history">Family Medical History:</label>
+                            <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}" class="form-input">
+                        </div>
                 
-                <div id="edit_info" style="display: none;">
-                    <div class="info__container">
-                        <p>Id: <span th:text="${user.user_id}"></span></p>
-                        
-                        <label for="edit_first_name">First Name: </label>
-                        <input type="text" id="edit_first_name" th:value="${user.first_name}"> <br>
-                    
-                        <label for="edit_middle_name">Middle Name: </label>
-                        <input type="text" id="edit_middle_name" th:value="${user.middle_name}"><br>
-                    
-                        <label for="edit_last_name">Last Name: </label>
-                        <input type="text" id="edit_last_name" th:value="${user.last_name}"><br>
-                    
-                        <label for="edit_email">Email: </label>
-                        <input type="text" id="edit_email" th:value="${user.email}"><br>
-                    
-                        <label for="edit_pass">Password: </label>
-                        <input type="text" id="edit_pass" th:value="${user.pass}"><br>
-                    
-                        <label for="edit_sex">Sex:</label>
-                        <input type="radio" name="edit_sex" class="rad-btn" id="male" value="M" th:checked="${user.sex.name() == 'M'}">
-                        <label class="male" for="male">Male</label>
-                        
-                        <input type="radio" name="edit_sex" class="rad-btn" id="female" value="F" th:checked="${user.sex.name() == 'F'}">
-                        <label class="female" for="female">Female</label><br>
-                    
-                        <label for="edit_birth_date">Birth Date: </label>
-                        <input type="date" id="edit_birth_date" th:value="${user.birth_date}"><br>
-                    
-                        <label for="edit_contact_number">Contact Number: </label>
-                        <input type="text" id="edit_contact_number" th:value="${user.contact_number != null ? user.contact_number : 'None'}"><br>
-                    
-                        <label for="edit_medical_history">Medical History: </label>
-                        <input type="text" id="edit_medical_history" th:value="${user.medical_history != null ? user.medical_history : 'None'}"><br>
-                    
-                        <label for="edit_allergies">Allergies: </label>
-                        <input type="text" id="edit_allergies" th:value="${user.allergies != null ? user.allergies : 'None'}"><br>
-                    
-                        <label for="edit_family_medical_history">Family Medical History: </label>
-                        <input type="text" id="edit_family_medical_history" th:value="${user.family_medical_history != null ? user.family_medical_history : 'None'}"><br>
-            
-                    
-                        <input type="button" id="save__button" th:attr="onclick=|edit_user(event, ${user.user_id})|" value="Save">
-                        <input type="button" id="discard__button" onclick="edit_toggle()" value="Cancel">
-            
+                        <div class="action-buttons">
+                            <input type="button" id="save__button" th:attr="onclick=|edit_user(event, ${user.user_id})|" value="Save" class="save-button">
+                            <input type="button" id="discard__button" onclick="edit_toggle()" value="Cancel" class="cancel-button">
+                        </div>
                     </div>
                 </div>
-                
-                
             </div>
 
             <div class="page-section" id="confirmation" style="display: none;">
@@ -279,10 +351,20 @@
                     <h1>Confirmation</h1>
                 </div>
                 
-                <p>Are you sure you want to book this appointment?</p>
-                <input type="button" id="confirm", value="Confirm" onclick="book_appointment(event)">
-                <button type="button" id="cancel">Cancel</button>
-                <input type="button" value="Back" onclick="toggle_page_section(event, 'personal-information')">
+                <div class="confirmation-container">
+                    <div class="confirmation-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h2>Ready to Book Your Appointment</h2>
+                    <p>Please review your information and confirm your appointment.</p>
+                    
+                    <div class="confirmation-buttons">
+                        <input type="button" id="confirm" value="Confirm Appointment" onclick="book_appointment(event)" class="confirm-button">
+                        <button type="button" id="cancel" class="cancel-button">Cancel Booking</button>
+                    </div>
+                </div>
+                
+                <input type="button" value="Back" class="backB" onclick="toggle_page_section(event, 'personal-information')">
             </div>
         </div>
         

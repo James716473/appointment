@@ -313,16 +313,22 @@ function toggle_appointment(event, section_id, appointment_id, id) {
         doctor_id = document.getElementById(`doctor-id-${appointment_id}`).value;
         get_doctor_schedule(doctor_id, appointment_id);
     }
+    
+    // Show/hide the appropriate sections based on section_id
     sections.forEach(section => {
         if (section.id === section_id) {
             section.style.display = "block";
-            
         } else {
             section.style.display = "none";
-            
         }
     });
-
+    
+    // Special handling for 'appointments' section (the main section)
+    if (section_id === 'appointments') {
+        document.getElementById("past-appointments").style.display = "block";
+    } else {
+        document.getElementById("past-appointments").style.display = "none";
+    }
 }
 
 async function edit_user(event, user_id) {
@@ -614,7 +620,7 @@ function renderSpecialtiesForHospital() {
       if (r.dataset.hospital === hosp) specialties.add(r.dataset.specialty);
     });
   
-    // add a “General” option first
+    // add a "General" option first
     const container = document.getElementById('specialty-container');
     container.innerHTML =
       `

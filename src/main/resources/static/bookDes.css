@@ -157,6 +157,24 @@ a{
     right: 50px;
     bottom: 40px;
 }
+
+.backB {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #05668C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #1787B7;
+    width: 146px;
+    height: 55px;
+    position: absolute;
+    left: 50px;
+    bottom: 40px;
+}
+
 .booking-box {
     position: relative;
 }
@@ -289,4 +307,300 @@ a{
 
 .logo-container i {
     font-size: 30px; /* Adjust logo size */
+}
+
+/* Date and Time Input Styling */
+.date-time-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f5f8fa;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.date-field, .time-field {
+    margin-bottom: 25px;
+}
+
+.date-field label, .time-field label {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #05668C;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.date-time {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #1787B7;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.date-time:focus {
+    border-color: #05668C;
+    box-shadow: 0 0 8px rgba(5, 102, 140, 0.5);
+    outline: none;
+}
+
+input[type="date"].date-time {
+    padding-right: 10px;
+}
+
+select.date-time {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath fill='%23333' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+select.date-time option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Reason for appointment styling */
+.reason-container {
+    width: 80%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f5f8fa;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reason-container label {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #05668C;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+textarea.reason {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    border: 2px solid #1787B7;
+    border-radius: 10px;
+    background-color: white;
+    resize: vertical;
+    min-height: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+textarea.reason:focus {
+    border-color: #05668C;
+    box-shadow: 0 0 8px rgba(5, 102, 140, 0.5);
+    outline: none;
+}
+
+/* Personal Information Styling */
+.personal-info-container {
+    width: 90%;
+    max-width: 650px;
+    margin: 20px auto;
+}
+
+.user-info-card {
+    background-color: #f5f8fa;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.user-name {
+    color: #05668C;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1787B7;
+    padding-bottom: 10px;
+}
+
+.user-info-row {
+    display: flex;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.info-label {
+    width: 200px;
+    font-weight: 500;
+    color: #444;
+}
+
+.info-value {
+    flex: 1;
+    color: #333;
+}
+
+.action-buttons {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.edit-button, .save-button, .cancel-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.edit-button {
+    background-color: #05668C;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #045170;
+}
+
+.save-button {
+    background-color: #28a745;
+    color: white;
+    margin-right: 10px;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #c82333;
+}
+
+/* Edit Form Styling */
+.edit-info-container {
+    width: 90%;
+    max-width: 650px;
+    margin: 20px auto;
+}
+
+.edit-form {
+    background-color: #f5f8fa;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #05668C;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #1787B7;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #05668C;
+    box-shadow: 0 0 5px rgba(5, 102, 140, 0.3);
+}
+
+.radio-row {
+    display: flex;
+    align-items: center;
+}
+
+.radio-options {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.radio-label-inline {
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+.date-input {
+    padding-right: 10px;
+}
+
+/* Confirmation Page Styling */
+.confirmation-container {
+    width: 80%;
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #f5f8fa;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-icon {
+    font-size: 80px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.confirmation-container h2 {
+    color: #05668C;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.confirmation-container p {
+    color: #555;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.confirm-button {
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.confirm-button:hover {
+    background-color: #218838;
 }
