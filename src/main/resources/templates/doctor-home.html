@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/design2ndP.css">
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/navbars.css">
+    <link rel="stylesheet" href="../static//design2ndP.css">
+    <link rel="stylesheet" href="../static/header.css">
+    <link rel="stylesheet" href="../static/navbars.css">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -56,7 +56,7 @@
 
     <div class = "secondBox" th:if="${appointments.size() == 0}">
         <h3 class = "upcoming">Upcoming Appointment:</h3>
-        <p>You have no upcoming appointment</p>
+        <p class="no__appointment">You have no upcoming appointment</p>
        
     </div>
     
