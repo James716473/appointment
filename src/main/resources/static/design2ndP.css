@@ -11,13 +11,10 @@
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Image styles */
@@ -34,10 +31,10 @@ img {
 }
 
 /* Box styles */
-.firstBox, .secondBox {
+.firstBox, .secondBox, .appointment__box {
     margin: var(--standard-margin);
-    height: 329px;
-    padding: 1rem;
+    height: auto;
+    padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius-standard);
@@ -47,9 +44,30 @@ img {
     background-color: var(--light-blue);
 }
 
-.secondBox {
+.secondBox, .appointment__box {
     background-color: var(--secondary-color);
     font-size: 24px;
+}
+
+#past-appointments {
+    background-color: #DBE2EF;
+    height: 800px;
+    width: 1800px;
+    margin: 5rem auto;
+    border-radius: 8px;
+    padding: 1rem 1rem;
+    opacity: 90%;
+}
+
+.page-section {
+    background-color: #DBE2EF;
+    height: auto;
+    width: 100%;
+    opacity: 90%;
+    padding: 3rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(63, 114, 175, 0.3);
+    line-height: 50px;
 }
 
 /* Text styles */
@@ -84,6 +102,24 @@ img {
 .form1 {
     display: inline-block;
     margin-top: auto;
+}
+
+.doctor__btn {
+    margin-top: 0.5rem;
+    background-color: #112D4E;
+    color: #F9F7F7;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    border: 1px solid #112D4E;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.doctor__btn:hover {
+    background-color: #F9F7F7;
+    color: #112D4E;
+    transition: all 0.3s ease;
+    border: 1px solid #112D4E;
 }
 
 /* Common button properties */
@@ -239,4 +275,149 @@ button:hover span {
 
 .logo-container i {
     font-size: 30px;
+}
+
+/* Table styles */
+.table__container {
+    max-height: 600px;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.table__container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table__container table th,
+.table__container table td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.appointment__table {
+    margin-top: 0.5rem;
+}
+
+.new-date,
+.new-date:after,
+.new-date:before,
+.new-time,
+.new-time:after,
+.new-time:before {
+  background-color: rgba(255, 255, 255, 0.8823529412);
+  padding: 0.5rem 1rem;
+  color: black;
+  border: 1px solid #e1e4e8;
+  outline: none;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+.new-date:focus,
+.new-time:focus {
+  border-color: #0366d6;
+  outline: none;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  transition: all 0.3s ease-in;
+}
+
+::-webkit-calendar-picker-indicator {
+  background-color: #DBE2EF;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.resched-reason {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8823529412);
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    font-size: 18px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.resched-reason:focus {
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease-in;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.submit--btn,
+.cancellation-cancel {
+    float: right;
+    margin-top: 1rem;
+    background-color: #112D4E;
+    color: #F9F7F7;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #112D4E;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.submit--btn:hover,
+.cancellation-cancel:hover {
+    background-color: #F9F7F7;
+    color: #112D4E;
+    transition: all 0.3s ease;
+    border: 1px solid #112D4E;
+}
+
+.cancel--btn {
+    float: left;
+    margin-top: 1rem;
+    background-color: #112D4E;
+    color: #F9F7F7;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #112D4E;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cancel--btn:hover {
+    background-color: #F9F7F7;
+    color: #112D4E;
+    transition: all 0.3s ease;
+    border: 1px solid #112D4E;
+}
+
+/* Clear the float to prevent layout issues */
+.page-section::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.cancel-reason {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8823529412);
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    font-size: 18px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.cancel-reason:focus {
+    border-color: #0366d6;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    transition: all 0.3s ease-in;
 }
